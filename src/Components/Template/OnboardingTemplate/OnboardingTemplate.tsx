@@ -6,18 +6,27 @@ import { useState } from "react";
 
 const OnboardingTemplate = () => {
   const [access, setAccess] = useState<string>("signin");
+  const [mobileScreen, setMobileScreen] = useState<string>("slider")
 
   const accessHandler = (evt: string) => {
     setAccess(evt);
   };
 
+  const mobileScreenHandler = (evt: string)=>{
+     setMobileScreen(evt)
+  }
+
+
+
   return (
     <OnboardingTemplateStyle>
       <div className="onboarding__container">
-        <div className="slider">
+        <div className={`slider ${mobileScreen === "slider" ? "shown" : "hidden"}`} >
+          <p className="skip" onClick={()=> mobileScreenHandler("login")}>Skip</p>
           <OnboardingSlider />
         </div>
-        <div className="login">
+        <div className={`login ${mobileScreen === "login" ? "shown" : "hidden"}`} >
+          <p className="previous"  onClick={()=> mobileScreenHandler("slider")}>Previus</p>
           {access === "signin" ? (
             <SignInModal signUp={() => accessHandler("signup")} />
           ) : null}
