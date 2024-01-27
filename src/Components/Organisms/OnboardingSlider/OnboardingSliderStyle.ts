@@ -1,62 +1,72 @@
 import styled from "styled-components";
 
 const OnboardingSliderStyle = styled.div`
-.blur{
-  .left__cover, .right__cover{
-  position: absolute;
-  opacity: 0.2;
+  .slider__group {
+    display: none;
   }
-}
 
-
-
-.slider__group{
-    display: none;
- }
-
-.visible{
+  .visible {
     display: flex;
-}
+  }
 
-
-.slider__group__container{
- display: flex;
- justify-content: center;
- align-items: center;
-
-}
-
-.slider__container{
-    img{
-        width: 300px;
-    }
-}
-
-.direction{
-    width: 30px;
+  .slider__group__container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    .left__cover, .right__cover{
-        background-color: #808080;
-        border-radius: 2px;
-        width: 30px;
-        height: 20px;
-        z-index: 2;
-        display: block;
-    }
-    img{
-        width: 100%;
-        z-index: 1;
-        display: block;
-    }
-}
+    height: 100vh;
+    .dot__group {
+      margin-top: 30px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      .dot {
 
-@media (min-width: 1028px){
- .skip{
-    display: none;
- }
-}
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        border: 1px solid #808080;
+      }
+      .active {
+        background-color: #0097da;
+        border: none;
+      }
+    }
+  }
 
+  .slider__container {
+    img {
+      width: 300px;
+    }
+  }
+
+  .direction__group {
+    cursor: pointer;
+    margin: 20px auto;
+    width: fit-content;
+    background-color: #DFF3FC;
+    padding: 4px 10px;
+    border-radius: 3px;  
+    color:  #0097DA;
+    font-weight: 700;
+    .hidden {
+      display: none;
+    }
+  }
+
+  .direction__group:hover{
+    color: #fff;
+    background-color:  #0097DA;
+  }
+
+  @media (min-width: 1028px) {
+    .skip {
+      display: none;
+    }
+
+    .direction__group {
+      display: none;
+    }
+  }
 `;
 export default OnboardingSliderStyle;

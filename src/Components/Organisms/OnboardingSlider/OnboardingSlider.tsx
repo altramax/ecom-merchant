@@ -1,15 +1,16 @@
 import { useState } from "react";
 import Slider from "../../Molecule/Slider/Slider";
 import OnboardingSliderStyle from "./OnboardingSliderStyle";
-import market from "../../assets/Images/market-login.jpg";
-import community from "../../assets/Images/global-community.jpg";
-import customer_service from "../../assets/Images/customer-care.jpg";
-import left from "../../assets/Icons/arrow-left.svg";
-import right from "../../assets/Icons/arrow-right.svg";
+import market from "../../../assets/Images/market-login.jpg";
+import community from "../../../assets/Images/global-community.jpg";
+import customer_service from "../../../assets/Images/customer-care.jpg";
 
-const OnboardingSlider = () => {
+type sliderControl = {
+  slider: any;
+};
+
+const OnboardingSlider = ({ slider }: sliderControl) => {
   const [selected, setSelected] = useState<number>(0);
-
 
   const fields = [
     {
@@ -29,46 +30,57 @@ const OnboardingSlider = () => {
     },
   ];
 
-  const backwardSelectionHandler = (i: number, arr: any) => {
-    if(i === 0){   
-    }else{
-      setSelected(--i)
-    }
-  };
-
-  const forwardSelectionHandler = (i: number, arr: any) => {
-    if(i === arr.length - 1){   
-    }else{
-      setSelected(++i)
+  const nextImageHandler = (i: number, arr: any) => {
+    if (i === arr.length - 1) {
+    } else {
+      setSelected(++i);
     }
   };
 
   return (
     <OnboardingSliderStyle>
-      <div className='slider__group__container'>
+      <div className="slider__group__container">
         {fields.map((item, i, arr) => {
           return (
             <div
-              className={`slider__group ${ selected === i ? "visible" : null}`}
+              className={`slider__group ${selected === i ? "visible" : null}`}
               key={i}
             >
-              <div className={`direction ${i === 0 ? "blur" : ""}`}>
-                <div className='left__cover'></div>
-                <img
-                  src={left}
-                  alt='left'
-                  onClick={() => backwardSelectionHandler(i, arr)}
-                />
-              </div>
-           
-              <Slider {...item} />
-              <div className={`direction ${i === arr.length - 1 ? "blur" : ""}`}>
-                <div className='right__cover'></div>
-                <img
-                  src={right}
-                  alt='right'
-                  onClick={() => forwardSelectionHandler(i, arr)}
-                />
+              <div>
+                <Slider {...item} />
+                <div className={`direction__group`}>
+                  <p
+                    className={`direction ${selected === 2 ? "hidden" : null}`}
+                    onClick={() => {
+                      nextImageHandler(i, arr);
+                    }}
+                  >
+                    Next
+                  </p>
+                  <p
+                    className={`direction ${selected === 2 ? null : "hidden"}`}
+                    onClick={slider}
+                  >
+                    Get Started
+                  </p>
+                </div>
+                {
+                  <div className="dot__group">
+                    <div
+                      className={`dot ${selected === 0 ? "active" : null}`}
+                      onClick={() => setSelected(0)}
+                    ></div>
+                    <div
+                      className={`dot ${selected === 1 ? "active" : null}`}
+                      onClick={() => setSelected(1)}
+                    ></div>
+                    <div
+                      className={`dot ${selected === 2 ? "active" : null}`}
+                      onClick={() => setSelected(2)}
+                    ></div>
+                  </div>
+                }
+              
               </div>
             </div>
           );

@@ -1,4 +1,4 @@
-import Dashboard from "../Template/DashBoardTemplate/DashboardTemplate";
+import Dashboard from "../Components/Template/DashBoardTemplate/DashboardTemplate";
 
 const PrivateRoutes = [
   {

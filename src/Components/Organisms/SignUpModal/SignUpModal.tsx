@@ -1,10 +1,10 @@
 import SignUpModalStyle from "./SignUpModalStyle";
-import google_Icon from "../../assets/Icons/google.svg";
+import google_Icon from "../../../assets/Icons/google.svg";
 // import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
 // import { createUser, googleLogin } from "../../../Redux/AuthSlice";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import cancle from "../../assets/Icons/cancle.svg";
+import cancle from "../../../assets/Icons/cancle.svg";
 
 type fieldsType = {
   email: string;
