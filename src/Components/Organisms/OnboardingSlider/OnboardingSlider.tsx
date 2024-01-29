@@ -15,18 +15,18 @@ const OnboardingSlider = ({ slider }: sliderControl) => {
   const fields = [
     {
       image: `${market}`,
-      title: "market",
-      text: "this is a market",
+      title: "Market",
+      text: "Join our altra modern market place where your items are seen by over 1 million people globally",
     },
     {
       image: `${community}`,
       title: "community",
-      text: "this is a market",
+      text: "We have a community of dedicated customers all over the world who value our services",
     },
     {
       image: `${customer_service}`,
       title: "customer service",
-      text: "this is a market",
+      text: "Our customer service is one of a kind with 24 hrs availability ",
     },
   ];
 
@@ -80,7 +80,6 @@ const OnboardingSlider = ({ slider }: sliderControl) => {
                     ></div>
                   </div>
                 }
-              
               </div>
             </div>
           );

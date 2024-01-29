@@ -1,5 +1,6 @@
 import styled from "styled-components";
 
+
 const sliderStyle = styled.div`
 .slider__container{
     display: flex;
@@ -8,6 +9,14 @@ const sliderStyle = styled.div`
     align-items: center;
     img{
         width: 400px;
+    }
+}
+
+.slider__text{
+    text-align: center;
+    width: 70%;
+    h3{
+    margin: 0 0 20px 0;
     }
 }
 
