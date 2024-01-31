@@ -5,7 +5,7 @@ type initialStateTye = {
 }
 
 const initialState: initialStateTye = {
-    mode : ""
+    mode : "light"
 }
 
 const ColorSlice = createSlice({
@@ -14,9 +14,12 @@ const ColorSlice = createSlice({
     reducers:{
         lightmode:(state)=>{
            state.mode = "light"
+           console.log("called Light");
         },
         darkmode: (state)=>{
             state.mode = "dark"
+           console.log("called dark");
+
         }
     }
 })

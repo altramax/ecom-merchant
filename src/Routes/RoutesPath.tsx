@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
-import routes from "./PrivateRoutes";
+import routes from "./Routes";
 import PrivateRoute from "../Config/PrivateRoute";
 
-const PrivateRoutesPath = () => {
+const PrivateRoutesPath = (): JSX.Element => {
   return (
     <Routes>
       {routes.map(
@@ -10,6 +10,7 @@ const PrivateRoutesPath = () => {
           route.elements &&
           route.elements.map((route, i) => (
             <Route
+              key={i}
               path={route.path}
               element={
                 <PrivateRoute>

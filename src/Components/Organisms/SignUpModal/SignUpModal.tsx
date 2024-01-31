@@ -1,7 +1,7 @@
 import SignUpModalStyle from "./SignUpModalStyle";
 import google_Icon from "../../../assets/Icons/google.svg";
-// import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
-// import { createUser, googleLogin } from "../../../Redux/AuthSlice";
+import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
+import { createUser, googleLogin } from "../../../Redux/AuthSlice";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import cancle from "../../../assets/Icons/cancle.svg";
@@ -16,8 +16,8 @@ type signupType = {
 };
 
 const SignUpModal = ({ signIn }: signupType): JSX.Element => {
-  // const user = useAppSelector((state) => state.user);
-  // const dispatch = useAppDispatch();
+  const auth = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [fields, setFields] = useState<fieldsType>({
     email: "",
@@ -34,24 +34,26 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
     evt: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     evt.preventDefault();
-    // await dispatch(createUser(fields));
+    await dispatch(createUser(fields));
+    console.log(auth);
+    auth.userId !== null ? navigate("/dashboard") : null;
   };
 
   const createUserWithGoogle = async (
     evt: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     evt.preventDefault();
-    // await dispatch(googleLogin()).then(() => {});
+    await dispatch(googleLogin()).then(() => {});
+    auth.userId !== null ? navigate("/dashboard") : null;
   };
 
   return (
     <SignUpModalStyle>
       <form className={`signup`}>
-        <div className="signin__header__img">
+        {/* <div className="signin__header__img">
           <img onClick={() => navigate(-1)} src={cancle} alt="" />
-        </div>
+        </div> */}
         <div className="signin__header">
-   
           <h2>ONESTORE</h2>
         </div>
         <div className="signup__body">
@@ -77,10 +79,7 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
             />
           </div>
 
-          <button
-            className="button"
-            onClick={createUserWithEmail}
-          >
+          <button className="button" onClick={createUserWithEmail}>
             Signup
           </button>
 
@@ -90,7 +89,10 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
             <div>——————</div>
           </div>
 
-          <div className="signup__body__googlelogin" onClick={createUserWithGoogle}>
+          <div
+            className="signup__body__googlelogin"
+            onClick={createUserWithGoogle}
+          >
             <img src={google_Icon} alt="google Icon" />
             <p>Signup with Google</p>
           </div>

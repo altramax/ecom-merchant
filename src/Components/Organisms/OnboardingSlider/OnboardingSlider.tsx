@@ -4,6 +4,8 @@ import OnboardingSliderStyle from "./OnboardingSliderStyle";
 import market from "../../../assets/Images/market-login.jpg";
 import community from "../../../assets/Images/global-community.jpg";
 import customer_service from "../../../assets/Images/customer-care.jpg";
+import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
+
 
 type sliderControl = {
   slider: any;
@@ -11,6 +13,8 @@ type sliderControl = {
 
 const OnboardingSlider = ({ slider }: sliderControl) => {
   const [selected, setSelected] = useState<number>(0);
+  const dispatch = useAppDispatch();
+  const color = useAppSelector((state)=> state.color);
 
   const fields = [
     {
@@ -37,9 +41,11 @@ const OnboardingSlider = ({ slider }: sliderControl) => {
     }
   };
 
+  console.log(color.mode);
+  
   return (
     <OnboardingSliderStyle>
-      <div className="slider__group__container">
+      <div id={`${color.mode}`} className="slider__group__container">
         {fields.map((item, i, arr) => {
           return (
             <div

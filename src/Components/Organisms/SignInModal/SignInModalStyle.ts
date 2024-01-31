@@ -1,31 +1,31 @@
 import styled from "styled-components";
+import { LightModeColor, DarkModeColor } from "../../Molecule/Colors/Colors";
+import { lightmode } from "../../../Redux/ColorSlice";
 
 const SignInModalStyle = styled.div`
-  animation: show-bg 1s linear forwards;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  // left: 0;
-  // position: fixed;
-  // top: 0;
-  // width: 100vw;
-  // z-index: 50;
-  @keyframes show-bg {
-    0% {
-      background: rgba(0, 0, 0, 0);
-      opacity: 0;
-    }
-    100% {
-      background: rgba(0, 0, 0, 0.8);
-      opacity: 1;
-    }
+  // animation: show-bg 1s linear forwards;
+
+
+  .signin__form{
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
   }
+ 
+  // @keyframes show-bg {
+  //   0% {
+  //     opacity: 0;
+  //   }
+  //   100% {
+  //     opacity: 1;
+  //   }
+  // }
 
   .signin {
     background-color: #fff;
-    width: fit;
+    width: fit-content;
     border-radius: 12px;
     h2 {
       font-size: 20px;
@@ -34,20 +34,20 @@ const SignInModalStyle = styled.div`
     }
   }
 
-  .signin__header__img {
-    display: flex;
-    justify-content: end;
-    padding: 12px;
-    img {
-      margin-left: auto;
-      cursor: pointer;
-    }
-  }
+  // .signin__header__img {
+  //   display: flex;
+  //   justify-content: end;
+  //   padding: 12px;
+  //   img {
+  //     margin-left: auto;
+  //     cursor: pointer;
+  //   }
+  // }
 
   .signin__header {
     display: flex;
     justify-content: center;
-    margin-bottom: 12px;
+    margin: 24px 0 12px 0;
     font-family: "Bruno Ace SC", cursive;
   }
 
@@ -122,9 +122,21 @@ const SignInModalStyle = styled.div`
     }
   }
 
+  #light{
+  
+    background-color: ${LightModeColor.lightblue};
+  
+}
+
+
+
+  #dark{
+   background-color: ${DarkModeColor.black}
+  }
+
   @media (min-width: 1280px) {
     // width: 100vw;
-    padding: 32px;
+    // padding: 32px;
 
     .signin {
       h2 {

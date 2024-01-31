@@ -1,22 +1,12 @@
 import styled from "styled-components";
-import { lightMode, darkMode } from "../../Molecule/Colors/Colors";
+import { LightModeColor, DarkModeColor } from "../../Molecule/Colors/Colors";
 
 const OnboardingSliderStyle = styled.div`
-  #light {
-    .dot {
-      border: 1px solid ${lightMode.Deepblue};
-    }
-  }
-
-  #dark {
-    .dot {
-      border: 1px solid ${darkMode.darkblue};
-    }
-  }
-
-
   .slider__group {
     display: none;
+    // box-shadow: 0 2px 300px #808080;
+    // border-radius: 20px;
+    // padding: 20px;
   }
 
   .visible {
@@ -45,6 +35,7 @@ const OnboardingSliderStyle = styled.div`
         border: none;
       }
     }
+    
   }
 
   .slider__container {
@@ -55,14 +46,12 @@ const OnboardingSliderStyle = styled.div`
 
   .direction__group {
     cursor: pointer;
-    margin: 40px auto ;
+    margin: 40px auto;
     width: fit-content;
     background-color: #dff3fc;
     padding: 4px 10px;
     border-radius: 3px;
-    color: #0097da;
     font-weight: 700;
-    box-shadow: inset 0 0 0 0 #0097da;
     transition: box-shadow 0.6s ease-in-out;
     .hidden {
       display: none;
@@ -70,11 +59,39 @@ const OnboardingSliderStyle = styled.div`
   }
 
   .direction__group:hover {
-    color: #fff;
-    // background-color: #0097da;
-    box-shadow: inset 65px 0 0 0 #0097da;
     transition: box-shadow 0.6s ease-in-out;
   }
+
+  
+
+  #light {
+    .dot {
+      border: 1px solid ${LightModeColor.Deepblue};
+    }
+    .direction__group {
+      color: ${LightModeColor.Deepblue};
+      box-shadow: inset  0 0 0 0 ${LightModeColor.Deepblue};
+    }
+    .direction__group:hover {
+      color: ${LightModeColor.white};
+      box-shadow: inset 65px 0 0 0 ${LightModeColor.Deepblue};
+    }
+  }
+
+  #dark {
+    .dot {
+      border: 1px solid ${DarkModeColor.darkblue};
+    }
+    .direction__group {
+      color: ${DarkModeColor.black};
+    }
+    .direction__group:hover {
+      color: ${DarkModeColor.shallow};
+      box-shadow: inset 65px 0 0 0 ${DarkModeColor.shallow};
+    }
+  }
+
+
 
   @media (min-width: 1028px) {
     .skip {

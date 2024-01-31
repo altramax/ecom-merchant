@@ -1,10 +1,10 @@
-import Dashboard from "../Components/Template/DashBoardTemplate/DashboardTemplate";
+import Dashboard from "../Components/Molecule/Dashboard/Dashboard";
 
 const PrivateRoutes = [
   {
     elements: [
       {
-        path: "/",
+        path: "/dashboard",
         component: Dashboard,
       },
     ],

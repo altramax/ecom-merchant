@@ -18,14 +18,18 @@ const sliderStyle = styled.div`
     h3{
     margin: 0 0 20px 0;
     }
-}
+}   
 
 .hidden{
     display: none;
 }
 
 @media (min-width: 1028px){
-
+    .slider__container{
+        img{
+            width: 600px;
+        }
+    }
 }
 
 `;

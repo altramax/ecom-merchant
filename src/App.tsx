@@ -2,9 +2,11 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import OnboardingTemplate from "./Components/Template/OnboardingTemplate/OnboardingTemplate";
 import PrivateRoutes from "./Config/PrivateRoute";
-import Dashboard from "./Components/Template/DashBoardTemplate/DashboardTemplate";
+import DashboardTemplate from "./Components/Template/DashBoardTemplate/DashboardTemplate";
+// import { useAppSelector} from"./Redux/Hooks";
 
 function App() {
+
   return (
     <Router>
       <Routes>
@@ -13,7 +15,7 @@ function App() {
           path="*"
           element={
             <PrivateRoutes>
-              <Dashboard />
+              <DashboardTemplate />
             </PrivateRoutes>
           }
         />
