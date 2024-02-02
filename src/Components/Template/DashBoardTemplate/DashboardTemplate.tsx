@@ -7,10 +7,8 @@ import { lightmode, darkmode } from "../../../Redux/ColorSlice";
 import { logOut } from "../../../Redux/AuthSlice";
 import NavbarTemplate from "../NavbarTemplate/NavbarTemplate";
 import PrivateRoute from "../../../Routes/RoutesPath";
-import Dashboard from "../../Molecule/Dashboard/Dashboard";
 
 const DashboardTemplate = () => {
-  const [mode, setMode] = useState<string>("light");
   const dispatch = useAppDispatch();
   const color = useAppSelector((state) => state.color);
 
@@ -18,13 +16,17 @@ const DashboardTemplate = () => {
   //   handleNetWorkChange();
   // }, [alert.message, errorMessage.message, cart.cartCount]);
 
-  const setTheme = (theme: string) => {
+  const themeHandler = (theme: string) => {
     if (theme === "light") {
       dispatch(lightmode());
     } else if (theme === "dark") {
       dispatch(darkmode());
     }
   };
+
+  // const modeHandler = (mod : string) =>{
+  //   setMode(mod)
+  // }
 
   // const handleNetWorkChange = () => {
   //   if (alert.message !== "") {
@@ -44,31 +46,37 @@ const DashboardTemplate = () => {
 
   return (
     <DashboardTemplateStyle>
-      <div id={color} className={`theme__button ${mode}`}>
-        <div
-          className="img__container sun"
-          onClick={() => {
-            setMode("dark");
-            setTheme("dark");
-          }}
-        >
-          <img src={sun} alt="" />
+      <div id={color.mode}>
+        <div className={`theme__button ${color.mode}`}>
+          <div
+            className="img__container sun"
+            onClick={() => {
+              // modeHandler("dark");
+              themeHandler("dark");
+            }}
+          >
+            <img src={sun} alt="" />
+          </div>
+          <div
+            className="img__container moon"
+            onClick={() => {
+              // modeHandler("light");
+              themeHandler("light");
+            }}
+          >
+            <img src={moon} alt="" />
+          </div>
         </div>
-        <div
-          className="img__container moon"
-          onClick={() => {
-            setMode("light");
-            setTheme("light");
-          }}
-        >
-          <img src={moon} alt="" />
+        <button onClick={() => dispatch(logOut())}>logout</button>
+
+        <div className="dashboard__template__container">
+          <div className="nav__width">
+            <NavbarTemplate />
+          </div>
+          <div className="route__body">
+            <PrivateRoute />
+          </div>
         </div>
-      </div>
-      <button onClick={() => dispatch(logOut())}>logout</button>
-      <div className="dashboard__template__container">
-        <NavbarTemplate />
-        <PrivateRoute />
-        <Dashboard/>
       </div>
     </DashboardTemplateStyle>
   );
