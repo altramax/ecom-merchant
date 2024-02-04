@@ -2,8 +2,10 @@ import SignInModalStyle from "./SignInModalStyle";
 import google_Icon from "../../../assets/Icons/google.svg";
 import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
 import { useState } from "react";
-import { userLogin, googleLogin} from "../../../Redux/AuthSlice"
+import { userLogin, googleLogin } from "../../../Redux/AuthSlice";
 import { useNavigate } from "react-router-dom";
+import eyes_closed from "../../../assets/Icons/eye_closed.svg";
+import eyes_open from "../../../assets/Icons/eye_open.svg";
 
 type fieldsType = {
   email: string;
@@ -23,6 +25,7 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
     email: "",
     password: "",
   });
+  const [eyes, setEyes] = useState<boolean>(false);
 
   const onchange = async (name: string, value: string) => {
     const fieldsValue: any = Object.assign({}, fields);
@@ -34,8 +37,8 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
     evt: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     evt.preventDefault();
-    await dispatch(userLogin(fields))
-    auth.userId !== null ?  navigate ("/dashboard") : null
+    await dispatch(userLogin(fields));
+    auth.userId !== null ? navigate("/dashboard") : null;
   };
 
   const signInWithGoogle = async (
@@ -44,6 +47,10 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
     evt.preventDefault();
     await dispatch(googleLogin()).then(() => {});
     auth.userId !== null ? navigate("/dashboard") : null;
+  };
+
+  const passwordVisibility = (evt: boolean) => {
+    setEyes(evt);
   };
 
   return (
@@ -64,16 +71,31 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
                   onchange(evt.target.name, evt.target.value);
                 }}
               />
-
-              <input
-                className="input"
-                type="text"
-                placeholder="Password"
-                name="password"
-                onChange={(evt) => {
-                  onchange(evt.target.name, evt.target.value);
-                }}
-              />
+              <div className="password__group">
+                <input
+                  className="input"
+                  type={eyes === true ? "text" : "password"}
+                  placeholder="Password"
+                  name="password"
+                  onChange={(evt) => {
+                    onchange(evt.target.name, evt.target.value);
+                  }}
+                />
+                <div className="eyes__group">
+                  <img
+                    src={eyes_closed}
+                    alt=""
+                    className={eyes === false ? "visible" : "hidden"}
+                    onClick={() => passwordVisibility(true)}
+                  />
+                  <img
+                    src={eyes_open}
+                    alt=""
+                    className={eyes === true ? "visible" : "hidden"}
+                    onClick={() => passwordVisibility(false)}
+                  />
+                </div>
+              </div>
             </div>
 
             <button className="button" onClick={signInWithEmail}>

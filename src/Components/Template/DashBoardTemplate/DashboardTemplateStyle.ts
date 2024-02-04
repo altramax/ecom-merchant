@@ -28,8 +28,9 @@ const DashboardTemplateStyle = styled.div`
 
   .theme__button {
     position: absolute;
-    top: 30px;
-    display: none;
+    bottom: 30px;
+    left: 50px;
+    display: flex;
     justify-content: space-between;
     align-items: center;
     width: 70px;
@@ -78,7 +79,7 @@ const DashboardTemplateStyle = styled.div`
     display: flex;
     justify-content: space-between;
     .nav__width{
-     width: 15%;
+     width: 18%;
     }
     .route__body{
       width: 85%;

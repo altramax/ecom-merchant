@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { LightModeColor, DarkModeColor } from "../../Molecule/Colors/Colors";
-import { lightmode } from "../../../Redux/ColorSlice";
+// import { lightmode } from "../../../Redux/ColorSlice";
 
 const SignInModalStyle = styled.div`
   // animation: show-bg 1s linear forwards;
@@ -12,16 +12,16 @@ const SignInModalStyle = styled.div`
     justify-content: center;
     align-items: center;
     height: 100vh;
+
+    .visible{
+      display: block;
+    }
+    .hidden{
+      display: none;
+    }
   }
- 
-  // @keyframes show-bg {
-  //   0% {
-  //     opacity: 0;
-  //   }
-  //   100% {
-  //     opacity: 1;
-  //   }
-  // }
+
+  .
 
   .signin {
     background-color: #fff;
@@ -120,6 +120,19 @@ const SignInModalStyle = styled.div`
         cursor: pointer;
       }
     }
+  }
+
+  .password__group{
+    display: flex;
+     .eyes__group{
+      cursor: pointer;
+      margin-left: -60px;
+      margin-top: 30px;
+
+      img{
+        width: 20px;
+      }
+     }
   }
 
   #light{

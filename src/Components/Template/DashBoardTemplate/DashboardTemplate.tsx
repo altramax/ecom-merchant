@@ -47,7 +47,12 @@ const DashboardTemplate = () => {
   return (
     <DashboardTemplateStyle>
       <div id={color.mode}>
-        <div className={`theme__button ${color.mode}`}>
+     
+
+        <div className="dashboard__template__container">
+          <div className="nav__width">
+            <NavbarTemplate />
+               <div className={`theme__button ${color.mode}`}>
           <div
             className="img__container sun"
             onClick={() => {
@@ -68,10 +73,6 @@ const DashboardTemplate = () => {
           </div>
         </div>
         <button onClick={() => dispatch(logOut())}>logout</button>
-
-        <div className="dashboard__template__container">
-          <div className="nav__width">
-            <NavbarTemplate />
           </div>
           <div className="route__body">
             <PrivateRoute />
