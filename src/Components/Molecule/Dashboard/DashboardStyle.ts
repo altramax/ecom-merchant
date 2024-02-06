@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const DashboardStyle = styled.div`
-height: 100vh;
+height: 100vh; 
 
 `;
 
