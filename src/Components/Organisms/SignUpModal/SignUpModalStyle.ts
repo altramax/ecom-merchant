@@ -1,28 +1,21 @@
 import styled from "styled-components";
+import { LightModeColor, DarkModeColor } from "../../Molecule/Colors/Colors";
+
 
 const SignUpModalStyle = styled.div`
-animation: show-bg 1s linear forwards;
-box-sizing:border-box;
-display:flex;
-justify-content: center;
-align-items: center;
-height:100vh;
-// left:0;
-// position:fixed;
-// top: 0;
-// width:100vw;
-// z-index:50;
-@keyframes show-bg{
-    0%{
-        background:rgba(0, 0, 0, 0)
-      opacity: 0;
+.signup__form{
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 
-    }
-    100%{
-        background:rgba(0, 0, 0, 0.8);
-      opacity: 1;
-
-    }
+  .visible{
+    display: block;
+  }
+  .hidden{
+    display: none;
+  }
 }
 
   .signup {
@@ -37,22 +30,21 @@ height:100vh;
     }
   }
 
-  .signin__header__img {
-    display: flex;
-    justify-content: end;
-    padding: 12px;
-    img {
-      margin-left: auto;
-      cursor: pointer;
-    }
-  }
+  // .signup__header__img {
+  //   display: flex;
+  //   justify-content: end;
+  //   padding: 12px;
+  //   img {
+  //     margin-left: auto;
+  //     cursor: pointer;
+  //   }
+  // }
   
-  .signin__header {
+  .signup__header {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
 
-    margin-bottom: 12px;
+    margin: 24px 0 12px 0;
     font-family: "Bruno Ace SC", cursive;
   }
 
@@ -142,8 +134,33 @@ height:100vh;
     }
   }
 
+  .password__group{
+    display: flex;
+     .eyes__group{
+      cursor: pointer;
+      margin-left: -60px;
+      margin-top: 30px;
+
+      img{
+        width: 20px;
+      }
+     }
+  }
+
+  #light{
+  
+    background-color: ${LightModeColor.lightblue};
+  
+}
+
+
+
+  #dark{
+   background-color: ${DarkModeColor.black}
+  }
+
   @media (min-width: 1280px) {
-    padding: 32px;
+
 
     .signup {
       h2 {

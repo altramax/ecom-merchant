@@ -8,17 +8,28 @@ const DashboardTemplateStyle = styled.div`
   width: 100vw;
   height: 100vh;
 
+  #light {
+    .nav__width {
+      background-color: ${LightModeColor.lightblue};
+    }
 
-  #light .bot {
-    transition: 0.7s ease-in;
-    background-color: blue;
+    .bot {
+      transition: 0.7s ease-in;
+      background-color: blue;
+    }
   }
 
-  #dark .bot {
-    transition: 0.7s ease-in;
+  #dark {
+    .nav__width {
+      background-color: ${DarkModeColor.shallow};
+    }
+    .bot {
+      transition: 0.7s ease-in;
 
-    background-color: red;
+      background-color: red;
+    }
   }
+
 
   .bot {
     width: 300px;
@@ -74,18 +85,17 @@ const DashboardTemplateStyle = styled.div`
     }
   }
 
-
-  .dashboard__template__container{
+  .dashboard__template__container {
     display: flex;
     justify-content: space-between;
-    .nav__width{
-     width: 18%;
+    .nav__width {
+      width: 18%;
+      height: 100vh;
     }
-    .route__body{
+    .route__body {
       width: 85%;
     }
   }
-
 `;
 
 export default DashboardTemplateStyle;

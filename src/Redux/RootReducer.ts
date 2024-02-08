@@ -1,10 +1,12 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import AuthSlice from "./AuthSlice";
 import ColorSlice from "./ColorSlice";
+import AlertSlice from "./AlertSlice";
 
  const rootReducer:any = combineReducers({
 color: ColorSlice,
-auth: AuthSlice
+auth: AuthSlice,
+alert: AlertSlice
 });
 
 export default rootReducer;

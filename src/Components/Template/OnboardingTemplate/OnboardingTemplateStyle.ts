@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { darkMode,lightMode } from "../../Molecule/Colors/Colors";
+import { DarkModeColor, LightModeColor } from "../../Molecule/Colors/Colors";
+
 
 const OnboardingTemplateStyle = styled.div`
 

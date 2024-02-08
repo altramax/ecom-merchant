@@ -3,8 +3,6 @@ import { LightModeColor, DarkModeColor } from "../../Molecule/Colors/Colors";
 // import { lightmode } from "../../../Redux/ColorSlice";
 
 const SignInModalStyle = styled.div`
-  // animation: show-bg 1s linear forwards;
-
 
   .signin__form{
     box-sizing: border-box;
@@ -21,7 +19,7 @@ const SignInModalStyle = styled.div`
     }
   }
 
-  .
+  
 
   .signin {
     background-color: #fff;
@@ -109,11 +107,10 @@ const SignInModalStyle = styled.div`
       justify-content: center;
       align-items: center;
       gap: 8px;
-      margin: 15px 0;
+      margin: 25px 0;
     }
     .signup {
       margin: 15px 0 25px 0;
-      font-size: 14px;
       font-size: 14px;
       span {
         color: blue;
@@ -148,8 +145,7 @@ const SignInModalStyle = styled.div`
   }
 
   @media (min-width: 1280px) {
-    // width: 100vw;
-    // padding: 32px;
+
 
     .signin {
       h2 {

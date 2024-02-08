@@ -1,7 +1,7 @@
 import SignInModalStyle from "./SignInModalStyle";
 import google_Icon from "../../../assets/Icons/google.svg";
 import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { userLogin, googleLogin } from "../../../Redux/AuthSlice";
 import { useNavigate } from "react-router-dom";
 import eyes_closed from "../../../assets/Icons/eye_closed.svg";
@@ -21,11 +21,22 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
   const auth = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [eyes, setEyes] = useState<boolean>(false);
+
   const [fields, setFields] = useState<fieldsType>({
     email: "",
     password: "",
   });
-  const [eyes, setEyes] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (auth.userId === null) {
+    } else if (auth.userId !== null) {
+      navigate("/dashboard");
+    }
+  }, [auth.userId]);
+
+
+
 
   const onchange = async (name: string, value: string) => {
     const fieldsValue: any = Object.assign({}, fields);
@@ -37,16 +48,15 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
     evt: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     evt.preventDefault();
-    await dispatch(userLogin(fields));
-    auth.userId !== null ? navigate("/dashboard") : null;
+    await dispatch(userLogin(fields)).then(() => {
+    });
   };
 
   const signInWithGoogle = async (
     evt: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     evt.preventDefault();
-    await dispatch(googleLogin()).then(() => {});
-    auth.userId !== null ? navigate("/dashboard") : null;
+    await dispatch(googleLogin())
   };
 
   const passwordVisibility = (evt: boolean) => {

@@ -38,7 +38,6 @@ const DashboardTemplate = () => {
         <div className="dashboard__template__container">
           <div className="nav__width">
             <NavbarTemplate />
-
           </div>
           <div className="route__body">
             <PrivateRoute />
