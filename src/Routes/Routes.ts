@@ -1,4 +1,5 @@
 import Dashboard from "../Components/Molecule/Dashboard/Dashboard";
+import WearHouse from "../Components/Template/WearHouseTemplate/WearHouse";
 
 const PrivateRoutes = [
   {
@@ -6,6 +7,14 @@ const PrivateRoutes = [
       {
         path: "/dashboard",
         component: Dashboard,
+      },
+    ],
+  },
+  {
+    elements: [
+      {
+        path: "/wearhouse",
+        component: WearHouse,
       },
     ],
   },
