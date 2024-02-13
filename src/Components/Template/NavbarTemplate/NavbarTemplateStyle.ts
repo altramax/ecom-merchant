@@ -34,6 +34,7 @@ const NavbarTemplateStyle = styled.div`
    ul{
     li{
         padding: 20px;
+        cursor: pointer;  
     }
     li:hover{
      background-color: red;

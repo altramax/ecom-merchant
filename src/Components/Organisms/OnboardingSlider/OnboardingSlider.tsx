@@ -14,10 +14,10 @@ type sliderControl = {
 const OnboardingSlider = ({ slider }: sliderControl) => {
   const [selected, setSelected] = useState<number>(0);
   const dispatch = useAppDispatch();
-  const color = useAppSelector((state)=> state.color);
+  const color = useAppSelector((state:any)=> state.color);
 
   const fields = [
-    {
+    { 
       image: `${market}`,
       title: "Market",
       text: "Join our altra modern market place where your items are seen by over 1 million people globally",
