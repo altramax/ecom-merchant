@@ -6,6 +6,7 @@ import { userLogin, googleLogin } from "../../../Redux/AuthSlice";
 import { useNavigate } from "react-router-dom";
 import eyes_closed from "../../../assets/Icons/eye_closed.svg";
 import eyes_open from "../../../assets/Icons/eye_open.svg";
+import { clearErrors, otherErrors } from "../../../Redux/AlertSlice";
 
 type fieldsType = {
   email: string;
@@ -19,9 +20,11 @@ type signinType = {
 const SignInModal = ({ signUp }: signinType): JSX.Element => {
   const color = useAppSelector((state) => state.color);
   const auth = useAppSelector((state) => state.auth);
+  // const errorMessage = useAppSelector((state) => state.alert);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [eyes, setEyes] = useState<boolean>(false);
+  const [error, setError] = useState("");
 
   const [fields, setFields] = useState<fieldsType>({
     email: "",
@@ -29,14 +32,31 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
   });
 
   useEffect(() => {
+    // dispatch(clearErrors());
+      // handlerErrorMessage();
+  
     if (auth.userId === null) {
-    } else if (auth.userId !== null) {
+    // } else if (auth.userId !== null && auth.emailVerified === false) {
+    //   dispatch(otherErrors("Please Verify your Email"));
+
+    //   handlerErrorMessage();
+    //   // console.log("useEffect condition");
+    // } else if (
+    //   auth.userId !== null &&
+    //   auth.emailVerified !== false &&
+    //   auth.profileCompleted === true
+    // ) {
+    //   navigate("/onboardingsteps");
+    }
+     else if (
+      auth.userId !== null
+      //  &&
+      // auth.emailVerified !== false &&
+      // auth.profileCompleted !== false
+    ) {
       navigate("/dashboard");
     }
   }, [auth.userId]);
-
-
-
 
   const onchange = async (name: string, value: string) => {
     const fieldsValue: any = Object.assign({}, fields);
@@ -48,24 +68,32 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
     evt: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     evt.preventDefault();
-    await dispatch(userLogin(fields)).then(() => {
-    });
+    await dispatch(userLogin(fields)).then(() => {});
   };
 
   const signInWithGoogle = async (
     evt: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     evt.preventDefault();
-    await dispatch(googleLogin())
+    await dispatch(googleLogin());
   };
 
   const passwordVisibility = (evt: boolean) => {
     setEyes(evt);
   };
 
+  // const handlerErrorMessage = async () => {
+  //   await setError(errorMessage.message);
+  //   setTimeout(() => {
+  //     dispatch(clearErrors());
+  //     setError("");
+  //   }, 2000);
+  // };
+
   return (
     <SignInModalStyle>
       <form id={color.mode} className={`signin__form`}>
+        {error !== "" && <div>{error}</div>}
         <div className="signin">
           <div className="signin__header">
             <h3>Welcome Back</h3>

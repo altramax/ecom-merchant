@@ -3,7 +3,9 @@ import {
   createUserWithEmailAndPassword,
   signInWithPopup,
   signOut,
-  signInWithEmailAndPassword
+  signInWithEmailAndPassword,
+  sendEmailVerification,
+  updateProfile
 } from "firebase/auth";
 import { auth, googleprovider } from "../Config/Config";
 import { successful } from "./AlertSlice";
@@ -11,13 +13,17 @@ import { successful } from "./AlertSlice";
 // Define a type for the slice state
 interface valueState {
   userId: string | null;
-  message: string | null;
+  message: string | null; 
+  emailVerified: boolean;
+  profileCompleted: boolean;
 }
 
 // Define the initial state using that type
 const initialState: valueState = {
   userId: null,
-  message: null
+  message: null,
+  emailVerified: false,
+  profileCompleted: false
 };
 
 type propsType = {
@@ -25,13 +31,19 @@ type propsType = {
   password: string;
 };
 
+type signUptype = {
+  email: string;
+  password: string;
+  storeName: string;
+}
+
 export const createUser = createAsyncThunk(
   "newUser/signin",
-  async (arg: propsType, {dispatch}) => {
-    const { email, password } = arg;
+  async (arg: signUptype, {dispatch}) => {
+    const { email, password, storeName } = arg;
     let user = await createUserWithEmailAndPassword(auth, email, password);
-    dispatch(successful())
-    console.log(user);
+    await updateProfile(auth.currentUser,{displayName: storeName}) .then(()=> sendEmailVerification(user.user))
+    // await   sendEmailVerification(user.user)
     return user;
   }
 );
@@ -39,7 +51,7 @@ export const createUser = createAsyncThunk(
 export const userLogin = createAsyncThunk("email/signin", async(arg: propsType, {dispatch})=>{
   const {email, password} = arg;
   const user = await signInWithEmailAndPassword(auth, email, password);
-  dispatch(successful())
+  // dispatch(successful())
   console.log(user);
   return user
 })
@@ -70,6 +82,8 @@ export const UserAuthSlice = createSlice({
     builder.addCase(createUser.fulfilled, (state, action) => {
       state.userId = action.payload.user.uid;
       state.message = "Request Successful";
+      state.emailVerified = action.payload.user.emailVerified;
+      console.log(action.payload.user.emailVerified);
     });
     builder.addCase(createUser.rejected, (state) => {
       state.userId = null;
@@ -79,6 +93,8 @@ export const UserAuthSlice = createSlice({
       console.log(action);
       state.userId = action.payload.user.uid;
       state.message = "Request Successful";
+      state.emailVerified = action.payload.user.emailVerified;
+      console.log(action.payload.user.emailVerified);
     });
     builder.addCase(userLogin.rejected, (state, action) => {
       console.log(action);
@@ -88,6 +104,8 @@ export const UserAuthSlice = createSlice({
     builder.addCase(googleLogin.fulfilled, (state, action) => {
       state.userId = action.payload.user.uid;
       state.message = "Request Successful";
+      state.emailVerified = action.payload.user.emailVerified;
+      console.log(action.payload.user.emailVerified);
     });
     builder.addCase(googleLogin.rejected, (state) => {
       state.userId = null;
