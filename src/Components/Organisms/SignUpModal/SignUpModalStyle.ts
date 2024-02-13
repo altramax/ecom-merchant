@@ -42,9 +42,12 @@ const SignUpModalStyle = styled.div`
   
   .signup__header {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    // gap: 100px;
 
-    margin: 24px 0 12px 0;
+    margin: 40px 0 0 0;
     font-family: "Bruno Ace SC", cursive;
   }
 
@@ -56,6 +59,11 @@ const SignUpModalStyle = styled.div`
     align-items: center;
     text-align: center;
     padding-top: 20px;
+
+    // .error__meassage{
+    //   color: #ff0000;
+    //   text-decoration: underline;
+    // }
 
     h1 {
       font-size: 50px;
@@ -105,7 +113,7 @@ const SignUpModalStyle = styled.div`
         display: block;
         padding: 10px 65px 10px 8px;
         width: 280px;
-        margin: 24px;
+        margin: 28px;
         font-size: 14px;
         border-outline: none;
         border: none;
@@ -136,11 +144,11 @@ const SignUpModalStyle = styled.div`
 
   .password__group{
     display: flex;
+    margin-top: -28px;
      .eyes__group{
       cursor: pointer;
       margin-left: -60px;
-      margin-top: 30px;
-
+      margin-top: 35px;
       img{
         width: 20px;
       }

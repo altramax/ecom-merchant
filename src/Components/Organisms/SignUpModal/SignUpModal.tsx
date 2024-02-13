@@ -33,8 +33,8 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
   });
 
   useEffect(() => {
-    if (auth.userId === null) {
-    } else if (auth.userId !== null) {
+    if (auth.user === null) {
+    } else if (auth.user !== null) {
       navigate("/dashboard");
     }
   }, [auth.userId]);
@@ -76,6 +76,8 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
             <h3>ONESTORE</h3>
           </div>
           <div className="signup__body">
+            {/* <p className="error__meassage">Weak password</p> */}
+
             <div className="signup__inputs">
             <input
                 className="input"

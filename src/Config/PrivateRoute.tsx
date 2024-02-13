@@ -8,7 +8,7 @@ type privateType = {
 
 const PrivateRoute = ({ children }: privateType) => {
   const state = useAppSelector((state) => state.auth);
-  const auth = state.userId;
+  const auth = state.user !== null ? state.user.userId : null;
   console.log(state);
   return auth !== null ? children : <Navigate to={"/"} />;
 };

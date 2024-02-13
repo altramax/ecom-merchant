@@ -32,31 +32,32 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
   });
 
   useEffect(() => {
+    console.log(auth.message);
     // dispatch(clearErrors());
       // handlerErrorMessage();
-  
-    if (auth.userId === null) {
-    // } else if (auth.userId !== null && auth.emailVerified === false) {
-    //   dispatch(otherErrors("Please Verify your Email"));
+     
+    if (auth.user === null) {
+    } else if (auth.user !== null && auth.emailVerified === false ) {
+      dispatch(otherErrors("Please Verify your Email"));
 
-    //   handlerErrorMessage();
-    //   // console.log("useEffect condition");
-    // } else if (
-    //   auth.userId !== null &&
-    //   auth.emailVerified !== false &&
-    //   auth.profileCompleted === true
-    // ) {
-    //   navigate("/onboardingsteps");
+      // handlerErrorMessage();
+      console.log("verify email");
+    } else if (
+      auth.user !== null &&
+      auth.emailVerified !== false &&
+      auth.profileCompleted === true
+    ) {
+      navigate("/onboardingsteps");
     }
      else if (
-      auth.userId !== null
-      //  &&
-      // auth.emailVerified !== false &&
-      // auth.profileCompleted !== false
+      auth.user !== null
+       &&
+      auth.emailVerified !== false &&
+      auth.profileCompleted !== false
     ) {
       navigate("/dashboard");
     }
-  }, [auth.userId]);
+  }, [auth.user, auth.message]);
 
   const onchange = async (name: string, value: string) => {
     const fieldsValue: any = Object.assign({}, fields);
