@@ -4,7 +4,7 @@ import moon from "../../../assets/Icons/moon.svg";
 import sun from "../../../assets/Icons/sun.svg";
 import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
 import { lightmode, darkmode } from "../../../Redux/ColorSlice";
-import { logOut, resetErrorMessage } from "../../../Redux/AuthSlice";
+import { logOut, resetMessage } from "../../../Redux/AuthSlice";
 import { otherErrors } from "../../../Redux/AlertSlice";
 import { Link } from "react-router-dom";
 import dashbordIconlight from "../../../assets/Icons/dashboard-icon.svg";
@@ -53,7 +53,7 @@ const NavbarTemplate = () => {
       setErrorResponse(true);
       setTimeout(() => {
         setErrorResponse(false);
-        dispatch(resetErrorMessage());
+        dispatch(resetMessage());
       }, 3000);
     }
   };

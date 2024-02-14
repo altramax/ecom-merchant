@@ -20,7 +20,7 @@ interface valueState {
 // Define the initial state using that type
 const initialState: valueState = {
   user: null,
-  message: undefined,
+  message: "",
   profileCompleted: false,
 };
 
@@ -78,8 +78,8 @@ export const UserAuthSlice = createSlice({
   name: "UserAuth",
   initialState,
   reducers: {
-    resetErrorMessage: (state) => {
-      state.message = undefined;
+    resetMessage: (state) => {
+      state.message = "";
     },
   },
   extraReducers: (builder) => {
@@ -124,5 +124,5 @@ export const UserAuthSlice = createSlice({
   },
 });
 
-export const { resetErrorMessage } = UserAuthSlice.actions;
+export const { resetMessage } = UserAuthSlice.actions;
 export default UserAuthSlice.reducer;

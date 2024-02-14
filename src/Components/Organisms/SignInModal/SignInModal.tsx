@@ -2,7 +2,7 @@ import SignInModalStyle from "./SignInModalStyle";
 import google_Icon from "../../../assets/Icons/google.svg";
 import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
 import { useEffect, useState } from "react";
-import { userLogin, googleLogin } from "../../../Redux/AuthSlice";
+import { userLogin, googleLogin, resetMessage } from "../../../Redux/AuthSlice";
 import { useNavigate } from "react-router-dom";
 import eyes_closed from "../../../assets/Icons/eye_closed.svg";
 import eyes_open from "../../../assets/Icons/eye_open.svg";
@@ -20,11 +20,12 @@ type signinType = {
 const SignInModal = ({ signUp }: signinType): JSX.Element => {
   const color = useAppSelector((state) => state.color);
   const auth = useAppSelector((state) => state.auth);
-  // const errorMessage = useAppSelector((state) => state.alert);
+  const errorMessage = useAppSelector((state) => state.alert);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [eyes, setEyes] = useState<boolean>(false);
-  const [error, setError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const [fields, setFields] = useState<fieldsType>({
     email: "",
@@ -32,12 +33,12 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
   });
 
   useEffect(() => {
-    console.log(auth.message);
-    // dispatch(clearErrors());
-      // handlerErrorMessage();
-     
+   
+    dispatch(resetMessage());
+    handlerErrorMessage();
+
     if (auth.user === null) {
-    } else if (auth.user !== null && auth.emailVerified === false ) {
+    } else if (auth.user !== null && auth.emailVerified === false) {
       dispatch(otherErrors("Please Verify your Email"));
 
       // handlerErrorMessage();
@@ -48,10 +49,8 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
       auth.profileCompleted === true
     ) {
       navigate("/onboardingsteps");
-    }
-     else if (
-      auth.user !== null
-       &&
+    } else if (
+      auth.user !== null &&
       auth.emailVerified !== false &&
       auth.profileCompleted !== false
     ) {
@@ -83,33 +82,42 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
     setEyes(evt);
   };
 
-  // const handlerErrorMessage = async () => {
-  //   await setError(errorMessage.message);
-  //   setTimeout(() => {
-  //     dispatch(clearErrors());
-  //     setError("");
-  //   }, 2000);
-  // };
+  const handlerErrorMessage = async () => {
+    console.log(auth.message);
+    if(auth.message.includes("email")){
+      console.log("enter email");
+      setEmailError(auth.message)
+    
+    }else if(auth.message.includes("password") || auth.message.includes("invalid") ){
+      console.log("enter password");
+      console.log(auth.message);
+      setPasswordError(auth.message)
+    } 
+  };
 
   return (
     <SignInModalStyle>
       <form id={color.mode} className={`signin__form`}>
-        {error !== "" && <div>{error}</div>}
         <div className="signin">
           <div className="signin__header">
             <h3>Welcome Back</h3>
           </div>
           <div className="signin__body">
             <div className="signin__inputs">
-              <input
-                className="input"
-                type="text"
-                placeholder="Your Email"
-                name="email"
-                onChange={(evt) => {
-                  onchange(evt.target.name, evt.target.value);
-                }}
-              />
+              <div>
+                <input
+                  className="input"
+                  type="text"
+                  placeholder="Your Email"
+                  name="email"
+                  onChange={(evt) => {
+                    onchange(evt.target.name, evt.target.value);
+                  }}
+                />
+                {emailError !== "" && <small>{emailError}</small>}
+              </div>
+
+
               <div className="password__group">
                 <input
                   className="input"
@@ -120,6 +128,7 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
                     onchange(evt.target.name, evt.target.value);
                   }}
                 />
+                {passwordError !== "" && <small>{passwordError}</small>}
                 <div className="eyes__group">
                   <img
                     src={eyes_closed}
