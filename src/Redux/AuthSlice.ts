@@ -3,21 +3,25 @@ import {
   createUserWithEmailAndPassword,
   signInWithPopup,
   signOut,
-  signInWithEmailAndPassword
+  signInWithEmailAndPassword,
+  sendEmailVerification,
+  updateProfile,
 } from "firebase/auth";
 import { auth, googleprovider } from "../Config/Config";
 import { successful } from "./AlertSlice";
 
 // Define a type for the slice state
 interface valueState {
-  userId: string | null;
-  message: string | null;
+  user: any;
+  message: string | undefined;
+  profileCompleted: boolean;
 }
 
 // Define the initial state using that type
 const initialState: valueState = {
-  userId: null,
-  message: null
+  user: null,
+  message: undefined,
+  profileCompleted: false,
 };
 
 type propsType = {
@@ -25,80 +29,96 @@ type propsType = {
   password: string;
 };
 
+type signUptype = {
+  email: string;
+  password: string;
+  storeName: string;
+};
+
 export const createUser = createAsyncThunk(
   "newUser/signin",
-  async (arg: propsType, {dispatch}) => {
-    const { email, password } = arg;
+  async (arg: signUptype, { dispatch }) => {
+    const { email, password, storeName } = arg;
     let user = await createUserWithEmailAndPassword(auth, email, password);
-    dispatch(successful())
+    await updateProfile(auth.currentUser, { displayName: storeName }).then(() =>
+      sendEmailVerification(user.user)
+    );
+    return user;
+  }
+);
+
+export const userLogin = createAsyncThunk(
+  "email/signin",
+  async (arg: propsType, { dispatch }) => {
+    const { email, password } = arg;
+    const user = await signInWithEmailAndPassword(auth, email, password);
+    // dispatch(successful())
     console.log(user);
     return user;
   }
 );
 
-export const userLogin = createAsyncThunk("email/signin", async(arg: propsType, {dispatch})=>{
-  const {email, password} = arg;
-  const user = await signInWithEmailAndPassword(auth, email, password);
-  dispatch(successful())
-  console.log(user);
-  return user
-})
+export const googleLogin = createAsyncThunk(
+  "google/sigin",
+  async (arg, { dispatch }) => {
+    let user = await signInWithPopup(auth, googleprovider);
+    console.log(user);
+    // dispatch(successful())
+    return user;
+  }
+);
 
-export const googleLogin = createAsyncThunk("google/sigin", async(arg, {dispatch})=>{
-  let user = await signInWithPopup(auth, googleprovider);
-  dispatch(successful())
-  return user
-})
-
-export const logOut = createAsyncThunk("Signout", async(arg,{dispatch})=>{
+export const logOut = createAsyncThunk("Signout", async (arg, { dispatch }) => {
   let user = await signOut(auth);
-  dispatch(successful())
-  return user
-})
-
-
+  dispatch(successful());
+  return user;
+});
 
 export const UserAuthSlice = createSlice({
   name: "UserAuth",
   initialState,
   reducers: {
-    resetErrorMessage : (state)=>{
-      state.message = null
-    }
+    resetErrorMessage: (state) => {
+      state.message = undefined;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(createUser.fulfilled, (state, action) => {
-      state.userId = action.payload.user.uid;
+      state.user = action.payload.user;
       state.message = "Request Successful";
     });
-    builder.addCase(createUser.rejected, (state) => {
-      state.userId = null;
-      state.message = "Request Failed";
+
+    builder.addCase(createUser.rejected, (state, action) => {
+      state.user = null;
+      state.message = action.error.message?.split("/")[1].split(")")[0];
     });
+
     builder.addCase(userLogin.fulfilled, (state, action) => {
       console.log(action);
-      state.userId = action.payload.user.uid;
+      state.user = action.payload.user;
       state.message = "Request Successful";
+     state.profileCompleted = true
     });
     builder.addCase(userLogin.rejected, (state, action) => {
       console.log(action);
-      state.userId = null;
-      state.message = "Request Failed";
+      state.user = null;
+      state.message = action.error.message?.split("/")[1].split(")")[0];
     });
+
     builder.addCase(googleLogin.fulfilled, (state, action) => {
-      state.userId = action.payload.user.uid;
+      state.user = action.payload.user;
       state.message = "Request Successful";
     });
     builder.addCase(googleLogin.rejected, (state) => {
-      state.userId = null;
+      state.user = null;
       state.message = "Request Failed";
     });
     builder.addCase(logOut.fulfilled, (state) => {
-      state.userId = null;
+      state.user = null;
       state.message = "";
     });
     builder.addCase(logOut.rejected, (state) => {
-      state.userId = null;
+      state.user = null;
       state.message = "Request Failed";
     });
   },

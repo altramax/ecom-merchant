@@ -23,10 +23,13 @@ const AlertSlice = createSlice({
         },
         otherErrors : (state, action) =>{
             state.message = action.payload
+        },
+        clearErrors : (state) =>{
+            state.message = ""
         }
     }
 });
 
-export const { successful, failed, networkError, otherErrors} = AlertSlice.actions;
+export const { successful, failed, networkError, otherErrors, clearErrors} = AlertSlice.actions;
 export default AlertSlice.reducer;
 

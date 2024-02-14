@@ -6,10 +6,12 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import eyes_closed from "../../../assets/Icons/eye_closed.svg";
 import eyes_open from "../../../assets/Icons/eye_open.svg";
+// import { sendEmailVerification } from "firebase/auth";
 
 type fieldsType = {
   email: string;
   password: string;
+  storeName: string;
 };
 
 type signupType = {
@@ -27,11 +29,12 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
   const [fields, setFields] = useState<fieldsType>({
     email: "",
     password: "",
+    storeName: "",
   });
 
   useEffect(() => {
-    if (auth.userId === null) {
-    } else if (auth.userId !== null) {
+    if (auth.user === null) {
+    } else if (auth.user !== null) {
       navigate("/dashboard");
     }
   }, [auth.userId]);
@@ -61,6 +64,10 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
     setEyes(evt);
   };
 
+  // const emailVerificationhandler = ()=>{
+  //   sendEmailVerification(auth.currentUser)
+  // }
+
   return (
     <SignUpModalStyle>
       <form id={color.mode} className={`signup__form`}>
@@ -69,7 +76,18 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
             <h3>ONESTORE</h3>
           </div>
           <div className="signup__body">
+            {/* <p className="error__meassage">Weak password</p> */}
+
             <div className="signup__inputs">
+            <input
+                className="input"
+                type="text"
+                placeholder="Store Name"
+                name="storeName"
+                onChange={(evt) => {
+                  onchange(evt.target.name, evt.target.value);
+                }}
+              />
               <input
                 className="input"
                 type="text"
