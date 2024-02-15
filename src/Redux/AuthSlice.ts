@@ -78,7 +78,7 @@ export const UserAuthSlice = createSlice({
   name: "UserAuth",
   initialState,
   reducers: {
-    resetMessage: (state) => {
+    resetAuthMessage: (state) => {
       state.message = "";
     },
   },
@@ -94,13 +94,18 @@ export const UserAuthSlice = createSlice({
     });
 
     builder.addCase(userLogin.fulfilled, (state, action) => {
-      console.log(action);
-      state.user = action.payload.user;
-      state.message = "Request Successful";
-     state.profileCompleted = true
+      state.profileCompleted = true;
+      if (action.payload.user.emailVerified === true) {
+        state.user = action.payload.user;
+        state.message = "Request Successful";
+      } else if (action.payload.user.emailVerified === false) {
+        state.user = null;
+        state.message = "Please Verify Your Email";
+      }
     });
+
     builder.addCase(userLogin.rejected, (state, action) => {
-      console.log(action);
+      console.log(action.error);
       state.user = null;
       state.message = action.error.message?.split("/")[1].split(")")[0];
     });
@@ -109,14 +114,17 @@ export const UserAuthSlice = createSlice({
       state.user = action.payload.user;
       state.message = "Request Successful";
     });
+
     builder.addCase(googleLogin.rejected, (state) => {
       state.user = null;
       state.message = "Request Failed";
     });
+
     builder.addCase(logOut.fulfilled, (state) => {
       state.user = null;
       state.message = "";
     });
+
     builder.addCase(logOut.rejected, (state) => {
       state.user = null;
       state.message = "Request Failed";
@@ -124,5 +132,5 @@ export const UserAuthSlice = createSlice({
   },
 });
 
-export const { resetMessage } = UserAuthSlice.actions;
+export const { resetAuthMessage } = UserAuthSlice.actions;
 export default UserAuthSlice.reducer;

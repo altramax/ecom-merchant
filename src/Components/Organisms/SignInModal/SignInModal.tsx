@@ -2,7 +2,11 @@ import SignInModalStyle from "./SignInModalStyle";
 import google_Icon from "../../../assets/Icons/google.svg";
 import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
 import { useEffect, useState } from "react";
-import { userLogin, googleLogin, resetMessage } from "../../../Redux/AuthSlice";
+import {
+  userLogin,
+  googleLogin,
+  resetAuthMessage,
+} from "../../../Redux/AuthSlice";
 import { useNavigate } from "react-router-dom";
 import eyes_closed from "../../../assets/Icons/eye_closed.svg";
 import eyes_open from "../../../assets/Icons/eye_open.svg";
@@ -33,30 +37,28 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
   });
 
   useEffect(() => {
-    dispatch(resetMessage());
     handlerErrorMessage();
+      //   dispatch(resetAuthMessage());
 
     if (auth.user === null) {
-    } else if (auth.user !== null && auth.user.emailVerified === false) {
-      setEmailError("Please Verify your Email");
+      // setEmailError(auth.message);
+    }
+    // else if (auth.user !== null) {
+    //   console.log(auth);
+    // setEmailError("Please Verify your Email");
 
-      // handlerErrorMessage();
-      console.log("verify email");
+    // handlerErrorMessage();
+    // console.log("verify email");
     // } else if (
     //   auth.user !== null &&
     //   auth.user.emailVerified !== false &&
     //   auth.profileCompleted === false
     // ) {
     //   navigate("/onboardingsteps");
-    } else if (
-      auth.user !== null &&
-      auth.user.emailVerified !== false &&
-      auth.profileCompleted !== true
-    ) {
-      console.log("failed checks");
+    else if (auth.user !== null && auth.profileCompleted === true) {
       navigate("/dashboard");
     }
-  }, [auth.user, auth.message]);
+  }, [auth.user]);
 
   const onchange = async (name: string, value: string) => {
     const fieldsValue: any = Object.assign({}, fields);
@@ -84,9 +86,14 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
 
   const handlerErrorMessage = async () => {
     console.log(auth.message);
+    setEmailError("");
+    setPasswordError("");
     if (auth.message.includes("email")) {
       console.log("enter email");
       setEmailError(auth.message);
+      setTimeout(() => {
+        dispatch(resetAuthMessage());
+      }, 3000);
     } else if (
       auth.message.includes("password") ||
       auth.message.includes("credential")
@@ -94,24 +101,29 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
       console.log("enter password");
       console.log(auth.message);
       setPasswordError(auth.message);
+      setTimeout(() => {
+        dispatch(resetAuthMessage());
+      }, 3000);
     }
   };
+
+  console.log(emailError);
 
   return (
     <SignInModalStyle>
       <form id={color.mode} className={`signin__form`}>
-        <div className='signin'>
-          <div className='signin__header'>
+        <div className="signin">
+          <div className="signin__header">
             <h3>Welcome Back</h3>
           </div>
-          <div className='signin__body'>
-            <div className='signin__inputs'>
+          <div className="signin__body">
+            <div className="signin__inputs">
               <div>
                 <input
-                  className='input'
-                  type='text'
-                  placeholder='Your Email'
-                  name='email'
+                  className="input"
+                  type="text"
+                  placeholder="Your Email"
+                  name="email"
                   onChange={(evt) => {
                     onchange(evt.target.name, evt.target.value);
                   }}
@@ -119,27 +131,27 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
                 {emailError !== "" && <small>{emailError}</small>}
               </div>
 
-              <div className='password__group'>
+              <div className="password__group">
                 <input
-                  className='input'
+                  className="input"
                   type={eyes === true ? "text" : "password"}
-                  placeholder='Password'
-                  name='password'
+                  placeholder="Password"
+                  name="password"
                   onChange={(evt) => {
                     onchange(evt.target.name, evt.target.value);
                   }}
                 />
                 {passwordError !== "" && <small>{passwordError}</small>}
-                <div className='eyes__group'>
+                <div className="eyes__group">
                   <img
                     src={eyes_closed}
-                    alt=''
+                    alt=""
                     className={eyes === false ? "visible" : "hidden"}
                     onClick={() => passwordVisibility(true)}
                   />
                   <img
                     src={eyes_open}
-                    alt=''
+                    alt=""
                     className={eyes === true ? "visible" : "hidden"}
                     onClick={() => passwordVisibility(false)}
                   />
@@ -147,25 +159,25 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
               </div>
             </div>
 
-            <button className='button' onClick={signInWithEmail}>
+            <button className="button" onClick={signInWithEmail}>
               Signin
             </button>
 
-            <div className='signin__dash'>
+            <div className="signin__dash">
               <div>——————</div>
               <p>or</p>
               <div>——————</div>
             </div>
 
             <div
-              className='signin__body__googlelogin'
+              className="signin__body__googlelogin"
               onClick={signInWithGoogle}
             >
-              <img src={google_Icon} alt='google Icon' />
+              <img src={google_Icon} alt="google Icon" />
               <p>Signin with Google</p>
             </div>
 
-            <p className='signup'>
+            <p className="signup">
               Don't have an account ? <span onClick={signUp}> Signup</span>
             </p>
           </div>
