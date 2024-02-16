@@ -37,18 +37,12 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
   });
 
   useEffect(() => {
-    handlerErrorMessage();
-      //   dispatch(resetAuthMessage());
+    window.addEventListener("beforeunload", resetErrorMesageHandler);
 
     if (auth.user === null) {
-      // setEmailError(auth.message);
+      handlerErrorMessage();
+      console.log(auth.message);
     }
-    // else if (auth.user !== null) {
-    //   console.log(auth);
-    // setEmailError("Please Verify your Email");
-
-    // handlerErrorMessage();
-    // console.log("verify email");
     // } else if (
     //   auth.user !== null &&
     //   auth.user.emailVerified !== false &&
@@ -57,8 +51,9 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
     //   navigate("/onboardingsteps");
     else if (auth.user !== null && auth.profileCompleted === true) {
       navigate("/dashboard");
+      console.log(auth.user);
     }
-  }, [auth.user]);
+  }, [auth.user, auth.message]);
 
   const onchange = async (name: string, value: string) => {
     const fieldsValue: any = Object.assign({}, fields);
@@ -71,6 +66,7 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
   ) => {
     evt.preventDefault();
     await dispatch(userLogin(fields)).then(() => {});
+    // handlerErrorMessage();
   };
 
   const signInWithGoogle = async (
@@ -84,16 +80,15 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
     setEyes(evt);
   };
 
+  const resetErrorMesageHandler = (evt: any) => {
+    dispatch(resetAuthMessage());
+    console.log("triggered");
+  };
+
   const handlerErrorMessage = async () => {
-    console.log(auth.message);
-    setEmailError("");
-    setPasswordError("");
     if (auth.message.includes("email")) {
       console.log("enter email");
       setEmailError(auth.message);
-      setTimeout(() => {
-        dispatch(resetAuthMessage());
-      }, 3000);
     } else if (
       auth.message.includes("password") ||
       auth.message.includes("credential")
@@ -101,13 +96,17 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
       console.log("enter password");
       console.log(auth.message);
       setPasswordError(auth.message);
-      setTimeout(() => {
-        dispatch(resetAuthMessage());
-      }, 3000);
+    }
+    
+    if(auth.message.includes("email") === false){
+      setEmailError("")
+    }else if(auth.message.includes("password") === false ||
+    auth.message.includes("credential") === false){
+      setPasswordError("")
     }
   };
 
-  console.log(emailError);
+  console.log(auth.message);
 
   return (
     <SignInModalStyle>
@@ -118,7 +117,7 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
           </div>
           <div className="signin__body">
             <div className="signin__inputs">
-              <div>
+              <div className="input__group">
                 <input
                   className="input"
                   type="text"
@@ -128,20 +127,22 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
                     onchange(evt.target.name, evt.target.value);
                   }}
                 />
-                {emailError !== "" && <small>{emailError}</small>}
+                {emailError !== "" && <small className="small">{emailError}</small>}
               </div>
 
               <div className="password__group">
-                <input
-                  className="input"
-                  type={eyes === true ? "text" : "password"}
-                  placeholder="Password"
-                  name="password"
-                  onChange={(evt) => {
-                    onchange(evt.target.name, evt.target.value);
-                  }}
-                />
-                {passwordError !== "" && <small>{passwordError}</small>}
+                <div className="input__group">
+                  <input
+                    className="input"
+                    type={eyes === true ? "text" : "password"}
+                    placeholder="Password"
+                    name="password"
+                    onChange={(evt) => {
+                      onchange(evt.target.name, evt.target.value);
+                    }}
+                  />
+                  {passwordError !== "" && <small className="small">{passwordError}</small>}
+                </div>
                 <div className="eyes__group">
                   <img
                     src={eyes_closed}

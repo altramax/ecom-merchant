@@ -15,6 +15,7 @@ interface valueState {
   user: any;
   message: string | undefined;
   profileCompleted: boolean;
+  holdAuth: any;
 }
 
 // Define the initial state using that type
@@ -22,6 +23,7 @@ const initialState: valueState = {
   user: null,
   message: "",
   profileCompleted: false,
+  holdAuth: null
 };
 
 type propsType = {
@@ -81,11 +83,21 @@ export const UserAuthSlice = createSlice({
     resetAuthMessage: (state) => {
       state.message = "";
     },
+    tempAuth:(state) => {
+      state.user = state.holdAuth;
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(createUser.fulfilled, (state, action) => {
-      state.user = action.payload.user;
-      state.message = "Request Successful";
+      state.profileCompleted = true;
+      if (action.payload.user.emailVerified === true) {
+        state.user = action.payload.user;
+        state.message = "Request Successful";
+      } else if (action.payload.user.emailVerified === false) {
+        state.user = null;
+        state.holdAuth = action.payload.user;
+        state.message = "Please verify your email";
+      }
     });
 
     builder.addCase(createUser.rejected, (state, action) => {
@@ -100,7 +112,7 @@ export const UserAuthSlice = createSlice({
         state.message = "Request Successful";
       } else if (action.payload.user.emailVerified === false) {
         state.user = null;
-        state.message = "Please Verify Your Email";
+        state.message = "Please verify your email";
       }
     });
 
@@ -132,5 +144,5 @@ export const UserAuthSlice = createSlice({
   },
 });
 
-export const { resetAuthMessage } = UserAuthSlice.actions;
+export const { resetAuthMessage, tempAuth } = UserAuthSlice.actions;
 export default UserAuthSlice.reducer;

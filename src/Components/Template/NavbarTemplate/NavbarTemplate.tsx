@@ -121,7 +121,7 @@ const NavbarTemplate = () => {
           </div>
 
 
-          {/* <div className={`theme__button ${color.mode}`}>
+          <div className={`theme__button ${color.mode}`}>
             <div
               className="img__container sun"
               onClick={() => {
@@ -140,7 +140,7 @@ const NavbarTemplate = () => {
             >
               <img src={moon} alt="" />
             </div>
-          </div> */}
+          </div>
           <button className="logout" onClick={() => dispatch(logOut())}>
             logout
           </button>

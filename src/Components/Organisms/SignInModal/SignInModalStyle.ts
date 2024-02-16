@@ -58,18 +58,30 @@ const SignInModalStyle = styled.div`
     padding-top: 20px;
 
     .signin__inputs {
+      .input__group{
+        margin: 24px;
+        .small{
+          text-align: start;
+          display: block;
+          margin: 5px 0;
+          color: #ff0000;
+        }
+      }
       .input {
         display: block;
         padding: 10px 65px 10px 8px;
         width: 280px;
-        margin: 24px;
         font-size: 14px;
       
         border-outline: none;
         border: none;
         border-bottom: 1px solid grey;
       }
+
+    
     }
+
+
     .button {
       padding: 12px 65px;
       width: 280px;
@@ -121,6 +133,11 @@ const SignInModalStyle = styled.div`
 
   .password__group{
     display: flex;
+
+    // small{
+    //   position: absolute;
+    // }
+
      .eyes__group{
       cursor: pointer;
       margin-left: -60px;

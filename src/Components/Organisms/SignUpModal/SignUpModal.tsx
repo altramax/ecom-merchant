@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import eyes_closed from "../../../assets/Icons/eye_closed.svg";
 import eyes_open from "../../../assets/Icons/eye_open.svg";
-// import { sendEmailVerification } from "firebase/auth";
+import VerifyEmailModal from "../VerifyEmailModal/VerifyEmailModal";
 
 type fieldsType = {
   email: string;
@@ -25,6 +25,7 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [eyes, setEyes] = useState<boolean>(false);
+  const [verifyEmail, setVerifyEmail] = useState(false)
 
   const [fields, setFields] = useState<fieldsType>({
     email: "",
@@ -37,7 +38,7 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
     } else if (auth.user !== null) {
       navigate("/dashboard");
     }
-  }, [auth.userId]);
+  }, [auth.user]);
 
   const onchange = async (name: string, value: string) => {
     const fieldsValue: any = Object.assign({}, fields);
@@ -50,7 +51,7 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
   ) => {
     evt.preventDefault();
     await dispatch(createUser(fields));
-    // console.log(auth);
+    await handlerEmailVerificaton(evt);
   };
 
   const createUserWithGoogle = async (
@@ -64,12 +65,23 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
     setEyes(evt);
   };
 
-  // const emailVerificationhandler = ()=>{
-  //   sendEmailVerification(auth.currentUser)
-  // }
+ 
+
+  const handlerEmailVerificaton = (evt:any)=>{
+    evt.preventDefault();
+    setVerifyEmail(true)
+  }
+
+  const renderVerifyEmailModal = ()=>{
+    if (verifyEmail){
+       return <VerifyEmailModal/>
+    }
+  }
+
 
   return (
     <SignUpModalStyle>
+      {renderVerifyEmailModal()}
       <form id={color.mode} className={`signup__form`}>
         <div className="signup">
           <div className="signup__header">

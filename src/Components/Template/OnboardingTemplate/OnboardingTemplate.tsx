@@ -24,8 +24,8 @@ const OnboardingTemplate = () => {
 
   return (
     <OnboardingTemplateStyle>
+      
       <div className="onboarding__container">
-
         <div className={`slider ${mobileScreen === "slider" ? "shown" : "hidden"}`} >
           <p className="skip" onClick={()=> mobileScreenHandler("login")}>Skip</p>
           <OnboardingSlider slider={()=>mobileScreenHandler("login")}/>
