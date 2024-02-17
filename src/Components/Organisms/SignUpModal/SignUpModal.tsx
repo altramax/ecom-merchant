@@ -1,7 +1,11 @@
 import SignUpModalStyle from "./SignUpModalStyle";
 import google_Icon from "../../../assets/Icons/google.svg";
 import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
-import { createUser, googleLogin } from "../../../Redux/AuthSlice";
+import {
+  createUser,
+  googleLogin,
+  resetAuthMessage,
+} from "../../../Redux/AuthSlice";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import eyes_closed from "../../../assets/Icons/eye_closed.svg";
@@ -20,13 +24,14 @@ type signupType = {
 
 const SignUpModal = ({ signIn }: signupType): JSX.Element => {
   const color = useAppSelector((state) => state.color);
-
   const auth = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [eyes, setEyes] = useState<boolean>(false);
-  const [verifyEmail, setVerifyEmail] = useState(false)
-
+  const [verifyEmail, setVerifyEmail] = useState(false);
+  const [emailError, setEmailError] = useState("");
+  const [storeNameError, setStoreNameError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const [fields, setFields] = useState<fieldsType>({
     email: "",
     password: "",
@@ -34,11 +39,12 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
   });
 
   useEffect(() => {
-    if (auth.user === null) {
-    } else if (auth.user !== null) {
-      navigate("/dashboard");
+    // window.addEventListener("beforeunload", resetErrorMesageHandler);
+
+    if (auth.user === null && auth.performedAction === "signup") {
+      handlerErrorMessage();
     }
-  }, [auth.user]);
+  }, [auth.user, auth.message]);
 
   const onchange = async (name: string, value: string) => {
     const fieldsValue: any = Object.assign({}, fields);
@@ -50,8 +56,7 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
     evt: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     evt.preventDefault();
-    await dispatch(createUser(fields));
-    await handlerEmailVerificaton(evt);
+    await dispatch(createUser(fields)).then(() => handlerErrorMessage());
   };
 
   const createUserWithGoogle = async (
@@ -65,19 +70,45 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
     setEyes(evt);
   };
 
- 
+  const handlerEmailVerificaton = () => {
+    // evt.preventDefault();
+    setVerifyEmail(true);
+  };
 
-  const handlerEmailVerificaton = (evt:any)=>{
-    evt.preventDefault();
-    setVerifyEmail(true)
-  }
-
-  const renderVerifyEmailModal = ()=>{
-    if (verifyEmail){
-       return <VerifyEmailModal/>
+  const renderVerifyEmailModal = () => {
+    if (verifyEmail) {
+      return <VerifyEmailModal />;
     }
-  }
+  };
 
+  // const resetErrorMesageHandler = (evt: any) => {
+  //   dispatch(resetAuthMessage());
+  //   console.log("triggered");
+  // };
+
+  const handlerErrorMessage = async () => {
+    if (auth.message.includes("email")) {
+      setEmailError(auth.message);
+      console.log("enter email", auth.message);
+    } else if (
+      auth.message.includes("password") ||
+      auth.message.includes("credential")
+    ) {
+      console.log("enter password",auth.message);
+      setPasswordError(auth.message);
+    } else if (auth.message.includes("verify")) {
+      await handlerEmailVerificaton();
+    }
+
+    if (auth.message.includes("email") === false) {
+      setEmailError("");
+    } else if (
+      auth.message.includes("password") === false ||
+      auth.message.includes("credential") === false
+    ) {
+      setPasswordError("");
+    }
+  };
 
   return (
     <SignUpModalStyle>
@@ -85,13 +116,12 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
       <form id={color.mode} className={`signup__form`}>
         <div className="signup">
           <div className="signup__header">
-            <h3>ONESTORE</h3>
+            <h3>ONE WearHouse</h3>
           </div>
           <div className="signup__body">
-            {/* <p className="error__meassage">Weak password</p> */}
-
             <div className="signup__inputs">
-            <input
+              <div className="input__group">
+              <input
                 className="input"
                 type="text"
                 placeholder="Store Name"
@@ -100,26 +130,42 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
                   onchange(evt.target.name, evt.target.value);
                 }}
               />
-              <input
-                className="input"
-                type="text"
-                placeholder="Email"
-                name="email"
-                onChange={(evt) => {
-                  onchange(evt.target.name, evt.target.value);
-                }}
-              />
+                {storeNameError !== "" && (
+                  <small className="small">{storeNameError}</small>
+                )}
+              </div>
 
-              <div className="password__group">
+              <div className="input__group">
                 <input
                   className="input"
-                  type={eyes === true ? "text" : "password"}
-                  placeholder="Password"
-                  name="password"
+                  type="text"
+                  placeholder="Email"
+                  name="email"
                   onChange={(evt) => {
                     onchange(evt.target.name, evt.target.value);
                   }}
                 />
+                {emailError !== "" && (
+                  <small className="small">{emailError}</small>
+                )}
+              </div>
+
+              <div className="password__group">
+                <div className="input__group">
+                  <input
+                    className="input"
+                    type={eyes === true ? "text" : "password"}
+                    placeholder="Password"
+                    name="password"
+                    onChange={(evt) => {
+                      onchange(evt.target.name, evt.target.value);
+                    }}
+                  />
+                  {passwordError !== "" && (
+                    <small className="small">{passwordError}</small>
+                  )}
+                </div>
+
                 <div className="eyes__group">
                   <img
                     src={eyes_closed}

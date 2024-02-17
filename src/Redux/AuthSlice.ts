@@ -16,6 +16,7 @@ interface valueState {
   message: string | undefined;
   profileCompleted: boolean;
   holdAuth: any;
+  performedAction: string;
 }
 
 // Define the initial state using that type
@@ -23,7 +24,8 @@ const initialState: valueState = {
   user: null,
   message: "",
   profileCompleted: false,
-  holdAuth: null
+  holdAuth: null,
+  performedAction: "",
 };
 
 type propsType = {
@@ -54,7 +56,6 @@ export const userLogin = createAsyncThunk(
   async (arg: propsType, { dispatch }) => {
     const { email, password } = arg;
     const user = await signInWithEmailAndPassword(auth, email, password);
-    // dispatch(successful())
     console.log(user);
     return user;
   }
@@ -65,7 +66,6 @@ export const googleLogin = createAsyncThunk(
   async (arg, { dispatch }) => {
     let user = await signInWithPopup(auth, googleprovider);
     console.log(user);
-    // dispatch(successful())
     return user;
   }
 );
@@ -83,13 +83,14 @@ export const UserAuthSlice = createSlice({
     resetAuthMessage: (state) => {
       state.message = "";
     },
-    tempAuth:(state) => {
+    tempAuth: (state) => {
       state.user = state.holdAuth;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(createUser.fulfilled, (state, action) => {
       state.profileCompleted = true;
+      state.performedAction = "signup"
       if (action.payload.user.emailVerified === true) {
         state.user = action.payload.user;
         state.message = "Request Successful";
@@ -101,12 +102,14 @@ export const UserAuthSlice = createSlice({
     });
 
     builder.addCase(createUser.rejected, (state, action) => {
+      state.performedAction = "signup"
       state.user = null;
       state.message = action.error.message?.split("/")[1].split(")")[0];
     });
 
     builder.addCase(userLogin.fulfilled, (state, action) => {
       state.profileCompleted = true;
+      state.performedAction = "signin"
       if (action.payload.user.emailVerified === true) {
         state.user = action.payload.user;
         state.message = "Request Successful";
@@ -117,9 +120,9 @@ export const UserAuthSlice = createSlice({
     });
 
     builder.addCase(userLogin.rejected, (state, action) => {
-      console.log(action.error);
       state.user = null;
       state.message = action.error.message?.split("/")[1].split(")")[0];
+      state.performedAction = "signin"
     });
 
     builder.addCase(googleLogin.fulfilled, (state, action) => {

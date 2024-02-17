@@ -10,7 +10,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import eyes_closed from "../../../assets/Icons/eye_closed.svg";
 import eyes_open from "../../../assets/Icons/eye_open.svg";
-import { clearErrors, otherErrors } from "../../../Redux/AlertSlice";
+// import { clearErrors, otherErrors } from "../../../Redux/AlertSlice";
 
 type fieldsType = {
   email: string;
@@ -39,7 +39,7 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
   useEffect(() => {
     window.addEventListener("beforeunload", resetErrorMesageHandler);
 
-    if (auth.user === null) {
+    if (auth.user === null && auth.performedAction === "signin") {
       handlerErrorMessage();
       console.log(auth.message);
     }
@@ -49,7 +49,7 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
     //   auth.profileCompleted === false
     // ) {
     //   navigate("/onboardingsteps");
-    else if (auth.user !== null && auth.profileCompleted === true) {
+    else if (auth.user !== null && auth.profileCompleted === true && auth.performedAction === "signin") {
       navigate("/dashboard");
       console.log(auth.user);
     }
@@ -65,7 +65,7 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
     evt: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     evt.preventDefault();
-    await dispatch(userLogin(fields)).then(() => {});
+    await dispatch(userLogin(fields)).then(() => {}).then(()=>handlerErrorMessage());
     // handlerErrorMessage();
   };
 

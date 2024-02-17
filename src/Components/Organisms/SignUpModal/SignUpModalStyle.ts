@@ -109,11 +109,20 @@ const SignUpModalStyle = styled.div`
     }
 
     .signup__inputs {
+      .input__group{
+        margin: 24px;
+        .small{
+          text-align: start;
+          display: block;
+          margin: 5px 0;
+          color: #ff0000;
+        }
+      }
       .input {
         display: block;
         padding: 10px 65px 10px 8px;
         width: 280px;
-        margin: 28px;
+        // margin: 28px;
         font-size: 14px;
         border-outline: none;
         border: none;
@@ -132,6 +141,7 @@ const SignUpModalStyle = styled.div`
       cursor: pointer;
 
     }
+
     .signin {
       margin: 20px 0;
       font-size: 14px;
