@@ -6,13 +6,17 @@ const VerifyEmailModalStyle = styled.div`
     left: 0;
     top: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 50px;
     width: 100vw;
     height: 100vh;
     background-color: #808080;
     color: #fff;
-
+ button{
+  cursor: pointer;
+ }
 
 }
 

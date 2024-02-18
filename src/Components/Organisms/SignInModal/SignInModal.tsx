@@ -10,7 +10,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import eyes_closed from "../../../assets/Icons/eye_closed.svg";
 import eyes_open from "../../../assets/Icons/eye_open.svg";
-// import { clearErrors, otherErrors } from "../../../Redux/AlertSlice";
+import loading from "../../../assets/Icons/loading.svg"
 
 type fieldsType = {
   email: string;
@@ -39,9 +39,9 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
   useEffect(() => {
     window.addEventListener("beforeunload", resetErrorMesageHandler);
 
-    if (auth.user === null && auth.performedAction === "signin") {
-      handlerErrorMessage();
-      console.log(auth.message);
+    if (auth.user !== null && auth.profileCompleted === true) {
+      navigate("/dashboard");
+      console.log(auth.user);
     }
     // } else if (
     //   auth.user !== null &&
@@ -49,9 +49,9 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
     //   auth.profileCompleted === false
     // ) {
     //   navigate("/onboardingsteps");
-    else if (auth.user !== null && auth.profileCompleted === true && auth.performedAction === "signin") {
-      navigate("/dashboard");
-      console.log(auth.user);
+    else if (auth.user === null && auth.performedAction === "signin") {
+      handlerErrorMessage();
+      console.log(auth.message);
     }
   }, [auth.user, auth.message]);
 
@@ -111,6 +111,7 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
   return (
     <SignInModalStyle>
       <form id={color.mode} className={`signin__form`}>
+        <img src={loading} alt="" className="test-img" />
         <div className="signin">
           <div className="signin__header">
             <h3>Welcome Back</h3>

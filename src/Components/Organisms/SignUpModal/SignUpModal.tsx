@@ -87,17 +87,17 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
   // };
 
   const handlerErrorMessage = async () => {
-    if (auth.message.includes("email")) {
-      setEmailError(auth.message);
-      console.log("enter email", auth.message);
+    if (auth.message === "Please verify your email") {
+      await handlerEmailVerificaton();
     } else if (
       auth.message.includes("password") ||
       auth.message.includes("credential")
     ) {
-      console.log("enter password",auth.message);
+      console.log("enter password", auth.message);
       setPasswordError(auth.message);
-    } else if (auth.message.includes("verify")) {
-      await handlerEmailVerificaton();
+    } else if (auth.message.includes("email")) {
+      setEmailError(auth.message);
+      console.log("enter email", auth.message);
     }
 
     if (auth.message.includes("email") === false) {
@@ -114,68 +114,68 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
     <SignUpModalStyle>
       {renderVerifyEmailModal()}
       <form id={color.mode} className={`signup__form`}>
-        <div className="signup">
-          <div className="signup__header">
+        <div className='signup'>
+          <div className='signup__header'>
             <h3>ONE WearHouse</h3>
           </div>
-          <div className="signup__body">
-            <div className="signup__inputs">
-              <div className="input__group">
-              <input
-                className="input"
-                type="text"
-                placeholder="Store Name"
-                name="storeName"
-                onChange={(evt) => {
-                  onchange(evt.target.name, evt.target.value);
-                }}
-              />
+          <div className='signup__body'>
+            <div className='signup__inputs'>
+              <div className='input__group'>
+                <input
+                  className='input'
+                  type='text'
+                  placeholder='Store Name'
+                  name='storeName'
+                  onChange={(evt) => {
+                    onchange(evt.target.name, evt.target.value);
+                  }}
+                />
                 {storeNameError !== "" && (
-                  <small className="small">{storeNameError}</small>
+                  <small className='small'>{storeNameError}</small>
                 )}
               </div>
 
-              <div className="input__group">
+              <div className='input__group'>
                 <input
-                  className="input"
-                  type="text"
-                  placeholder="Email"
-                  name="email"
+                  className='input'
+                  type='text'
+                  placeholder='Email'
+                  name='email'
                   onChange={(evt) => {
                     onchange(evt.target.name, evt.target.value);
                   }}
                 />
                 {emailError !== "" && (
-                  <small className="small">{emailError}</small>
+                  <small className='small'>{emailError}</small>
                 )}
               </div>
 
-              <div className="password__group">
-                <div className="input__group">
+              <div className='password__group'>
+                <div className='input__group'>
                   <input
-                    className="input"
+                    className='input'
                     type={eyes === true ? "text" : "password"}
-                    placeholder="Password"
-                    name="password"
+                    placeholder='Password'
+                    name='password'
                     onChange={(evt) => {
                       onchange(evt.target.name, evt.target.value);
                     }}
                   />
                   {passwordError !== "" && (
-                    <small className="small">{passwordError}</small>
+                    <small className='small'>{passwordError}</small>
                   )}
                 </div>
 
-                <div className="eyes__group">
+                <div className='eyes__group'>
                   <img
                     src={eyes_closed}
-                    alt=""
+                    alt=''
                     className={eyes === false ? "visible" : "hidden"}
                     onClick={() => passwordVisibility(true)}
                   />
                   <img
                     src={eyes_open}
-                    alt=""
+                    alt=''
                     className={eyes === true ? "visible" : "hidden"}
                     onClick={() => passwordVisibility(false)}
                   />
@@ -183,25 +183,25 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
               </div>
             </div>
 
-            <button className="button" onClick={createUserWithEmail}>
+            <button className='button' onClick={createUserWithEmail}>
               Signup
             </button>
 
-            <div className="signup__dash">
+            <div className='signup__dash'>
               <div>——————</div>
               <p>or</p>
               <div>——————</div>
             </div>
 
             <div
-              className="signup__body__googlelogin"
+              className='signup__body__googlelogin'
               onClick={createUserWithGoogle}
             >
-              <img src={google_Icon} alt="google Icon" />
+              <img src={google_Icon} alt='google Icon' />
               <p>Signup with Google</p>
             </div>
 
-            <p className="signin">
+            <p className='signin'>
               Already have an account ? <span onClick={signIn}> Signin</span>
             </p>
           </div>

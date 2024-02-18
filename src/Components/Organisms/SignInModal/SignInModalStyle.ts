@@ -3,23 +3,34 @@ import { LightModeColor, DarkModeColor } from "../../Molecule/Colors/Colors";
 // import { lightmode } from "../../../Redux/ColorSlice";
 
 const SignInModalStyle = styled.div`
+  .test-img {
+    width: 30px;
+    animation: swing 1s infinite;
+  }
 
-  .signin__form{
+  @keyframes swing {
+    0%{
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .signin__form {
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 
-    .visible{
+    .visible {
       display: block;
     }
-    .hidden{
+    .hidden {
       display: none;
     }
   }
-
-  
 
   .signin {
     background-color: #fff;
@@ -58,9 +69,9 @@ const SignInModalStyle = styled.div`
     padding-top: 20px;
 
     .signin__inputs {
-      .input__group{
+      .input__group {
         margin: 24px;
-        .small{
+        .small {
           text-align: start;
           display: block;
           margin: 5px 0;
@@ -72,15 +83,12 @@ const SignInModalStyle = styled.div`
         padding: 10px 65px 10px 8px;
         width: 280px;
         font-size: 14px;
-      
+
         border-outline: none;
         border: none;
         border-bottom: 1px solid grey;
       }
-
-    
     }
-
 
     .button {
       padding: 12px 65px;
@@ -131,39 +139,33 @@ const SignInModalStyle = styled.div`
     }
   }
 
-  .password__group{
+  .password__group {
     display: flex;
 
     // small{
     //   position: absolute;
     // }
 
-     .eyes__group{
+    .eyes__group {
       cursor: pointer;
       margin-left: -60px;
       margin-top: 30px;
 
-      img{
+      img {
         width: 20px;
       }
-     }
+    }
   }
 
-  #light{
-  
+  #light {
     background-color: ${LightModeColor.lightblue};
-  
-}
+  }
 
-
-
-  #dark{
-   background-color: ${DarkModeColor.black}
+  #dark {
+    background-color: ${DarkModeColor.black};
   }
 
   @media (min-width: 1280px) {
-
-
     .signin {
       h2 {
         font-size: 25px;

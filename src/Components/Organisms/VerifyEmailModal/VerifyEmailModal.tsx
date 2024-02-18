@@ -59,7 +59,7 @@ const VerifyEmailModal = (): JSX.Element => {
           {icon === 2 && <img src={mailApproved} alt="email" />}
         </div>
         {icon === 1 && <div>Please verify your email and login here</div>}
-        {icon === 2 && <button onClick={loginHandler}>Open Mail</button>}
+        {icon === 2 && <button onClick={loginHandler}>Proceed</button>}
       </div>
     </VerifyEmailModalStyle>
   );
