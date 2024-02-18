@@ -4,9 +4,9 @@ const Dashboard = () => {
   return (
     <DashboardStyle>
 
-        <div> this is the molecule Dashboard</div>
+        <div>Dashboard</div>
     </DashboardStyle>
   )
 }
 
-export default Dashboard
+export default Dashboard;

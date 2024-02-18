@@ -10,7 +10,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import eyes_closed from "../../../assets/Icons/eye_closed.svg";
 import eyes_open from "../../../assets/Icons/eye_open.svg";
-import loading from "../../../assets/Icons/loading.svg"
+import Button from "../../Molecule/Button/Button";
 
 type fieldsType = {
   email: string;
@@ -65,7 +65,9 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
     evt: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     evt.preventDefault();
-    await dispatch(userLogin(fields)).then(() => {}).then(()=>handlerErrorMessage());
+    await dispatch(userLogin(fields))
+      .then(() => {})
+      .then(() => handlerErrorMessage());
     // handlerErrorMessage();
   };
 
@@ -97,12 +99,14 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
       console.log(auth.message);
       setPasswordError(auth.message);
     }
-    
-    if(auth.message.includes("email") === false){
-      setEmailError("")
-    }else if(auth.message.includes("password") === false ||
-    auth.message.includes("credential") === false){
-      setPasswordError("")
+
+    if (auth.message.includes("email") === false) {
+      setEmailError("");
+    } else if (
+      auth.message.includes("password") === false ||
+      auth.message.includes("credential") === false
+    ) {
+      setPasswordError("");
     }
   };
 
@@ -111,7 +115,6 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
   return (
     <SignInModalStyle>
       <form id={color.mode} className={`signin__form`}>
-        <img src={loading} alt="" className="test-img" />
         <div className="signin">
           <div className="signin__header">
             <h3>Welcome Back</h3>
@@ -128,7 +131,9 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
                     onchange(evt.target.name, evt.target.value);
                   }}
                 />
-                {emailError !== "" && <small className="small">{emailError}</small>}
+                {emailError !== "" && (
+                  <small className="small">{emailError}</small>
+                )}
               </div>
 
               <div className="password__group">
@@ -142,7 +147,9 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
                       onchange(evt.target.name, evt.target.value);
                     }}
                   />
-                  {passwordError !== "" && <small className="small">{passwordError}</small>}
+                  {passwordError !== "" && (
+                    <small className="small">{passwordError}</small>
+                  )}
                 </div>
                 <div className="eyes__group">
                   <img
@@ -161,9 +168,7 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
               </div>
             </div>
 
-            <button className="button" onClick={signInWithEmail}>
-              Signin
-            </button>
+            <Button Click={signInWithEmail} value="Signin" type="submit" className="button"/>
 
             <div className="signin__dash">
               <div>——————</div>

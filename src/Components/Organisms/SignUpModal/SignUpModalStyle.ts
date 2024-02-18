@@ -136,7 +136,7 @@ const SignUpModalStyle = styled.div`
       font-size: 14px;
       border-radius: 16px;
       border: none;
-      background-color: #000;
+      // background-color: #000;
       color: #fff;
       cursor: pointer;
 

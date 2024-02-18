@@ -1,4 +1,4 @@
-import Dashboard from "../Components/Molecule/Dashboard/Dashboard";
+import Dashboard from "../Components/Organisms/Dashboard/Dashboard";
 import WearHouse from "../Components/Template/WearHouseTemplate/WearHouse";
 import UserProfile from "../Components/Template/UserProfileTemplate/UserProfileTemplate";
 import OnboardingSteps from "../Components/Organisms/OnboardingSteps/OnboardingSteps";

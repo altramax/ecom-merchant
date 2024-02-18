@@ -3,19 +3,6 @@ import { LightModeColor, DarkModeColor } from "../../Molecule/Colors/Colors";
 // import { lightmode } from "../../../Redux/ColorSlice";
 
 const SignInModalStyle = styled.div`
-  .test-img {
-    width: 30px;
-    animation: swing 1s infinite;
-  }
-
-  @keyframes swing {
-    0%{
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
 
   .signin__form {
     box-sizing: border-box;
@@ -97,7 +84,7 @@ const SignInModalStyle = styled.div`
       font-size: 14px;
       border-radius: 16px;
       border: none;
-      background-color: #000;
+      // background-color: #000;
       color: #fff;
       cursor: pointer;
     }
