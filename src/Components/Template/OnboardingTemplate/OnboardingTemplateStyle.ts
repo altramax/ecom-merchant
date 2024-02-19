@@ -39,7 +39,14 @@ const OnboardingTemplateStyle = styled.div`
   }
 
 
-
+  .internet__error{
+    padding: 12px 20px;
+    color: red;
+    background-color: #fff;
+    position: absolute;
+    top: 0;
+    right: 20px;
+  }
 
 
 
