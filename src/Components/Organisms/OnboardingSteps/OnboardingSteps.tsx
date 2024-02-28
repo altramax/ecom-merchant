@@ -4,14 +4,26 @@ import OnboardingStepOne from "../OnboardingStepOne/OnboardingStepOne"
 import OnboardingStepTwo from "../OnboardingStepTwo/OnboardingStepTwo"
 
 const OnboardingSteps = () => {
-  const [step, setStep] = useState("one")
+  const [step, setStep] = useState("stepone");
+
+  const changeStep = (evt:string)=>{
+    
+   setStep(evt)
+  }
 
 
+ console.log(step);
     
   return (
     <OnboardingStepsStyle>
 
-        <div>OnboardingSteps</div>
+      {step === "stepone" && <OnboardingStepOne next={()=>changeStep("stepTwo")}/>}
+      {step === "stepTwo" && <OnboardingStepTwo/>}
+  
+        
+        
+
+
     </OnboardingStepsStyle>
   )
 }

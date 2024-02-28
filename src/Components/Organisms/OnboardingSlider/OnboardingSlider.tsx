@@ -4,8 +4,8 @@ import OnboardingSliderStyle from "./OnboardingSliderStyle";
 import market from "../../../assets/Images/market-login.jpg";
 import community from "../../../assets/Images/global-community.jpg";
 import customer_service from "../../../assets/Images/customer-care.jpg";
-import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
-
+import { useAppSelector } from "../../../Redux/Hooks";
+import Button from "../../Molecule/Button/Button";
 
 type sliderControl = {
   slider: any;
@@ -13,11 +13,11 @@ type sliderControl = {
 
 const OnboardingSlider = ({ slider }: sliderControl) => {
   const [selected, setSelected] = useState<number>(0);
-  const dispatch = useAppDispatch();
-  const color = useAppSelector((state:any)=> state.color);
+  // const dispatch = useAppDispatch();
+  const color = useAppSelector((state: any) => state.color);
 
   const fields = [
-    { 
+    {
       image: `${market}`,
       title: "Market",
       text: "Join our altra modern market place where your items are seen by over 1 million people globally",
@@ -42,7 +42,7 @@ const OnboardingSlider = ({ slider }: sliderControl) => {
   };
 
   console.log(color.mode);
-  
+
   return (
     <OnboardingSliderStyle>
       <div id={`${color.mode}`} className="slider__group__container">
@@ -55,20 +55,20 @@ const OnboardingSlider = ({ slider }: sliderControl) => {
               <div>
                 <Slider {...item} />
                 <div className={`direction__group`}>
-                  <p
-                    className={`direction ${selected === 2 ? "hidden" : null}`}
-                    onClick={() => {
+                  <Button
+                    value="Next"
+                    Click={() => {
                       nextImageHandler(i, arr);
                     }}
-                  >
-                    Next
-                  </p>
-                  <p
+                    type= {undefined}
+                    className={`direction ${selected === 2 ? "hidden" : null}`}
+                  />
+                  <Button
+                    value="Get Started"
+                    type= {undefined}
+                    Click={slider}
                     className={`direction ${selected === 2 ? null : "hidden"}`}
-                    onClick={slider}
-                  >
-                    Get Started
-                  </p>
+                  />
                 </div>
                 {
                   <div className="dot__group">

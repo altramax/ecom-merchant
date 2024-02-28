@@ -1,6 +1,7 @@
 import ButtonStyle from "./ButtonStyle";
 import loading from "../../../assets/Icons/loading.svg";
 import { useState } from "react";
+import { useAppSelector } from "../../../Redux/Hooks";
 
 type buttonType = {
   value: string;
@@ -11,6 +12,7 @@ type buttonType = {
 
 const Button = ({ value, Click, type, className }: buttonType) => {
   const [disabled, setDisabled] = useState(false);
+  const color = useAppSelector((state)=>state.color)
 
   const onClickHandler = async (evt:any) => {
     setDisabled(true);
@@ -20,7 +22,7 @@ const Button = ({ value, Click, type, className }: buttonType) => {
 
   return (
     <ButtonStyle>
-      <button type={type} onClick={onClickHandler} disabled={disabled} className={`${className !== "" ? className : "style"}`}>
+      <button id={color.mode} type={type} onClick={onClickHandler} disabled={disabled} className={`${className !== "" ? className : "style"}`}>
         {disabled ? (
           <img src={loading} alt="loading" className="loading__icon" />
         ) : (

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { LightModeColor, DarkModeColor } from "../../Molecule/Colors/Colors";
+import { LightModeColor, DarkModeColor } from "../../Atom/Colors/Colors";
 // import { lightmode } from "../../../Redux/ColorSlice";
 
 const SignInModalStyle = styled.div`
@@ -78,7 +78,7 @@ const SignInModalStyle = styled.div`
     }
 
     .button {
-      padding: 12px 65px;
+      // padding: 12px 65px;
       width: 280px;
       margin: 14px;
       font-size: 14px;
@@ -87,6 +87,7 @@ const SignInModalStyle = styled.div`
       // background-color: #000;
       color: #fff;
       cursor: pointer;
+      height: 40px;
     }
 
     .signin__body__googlelogin {
@@ -96,7 +97,7 @@ const SignInModalStyle = styled.div`
       gap: 8px;
       border: 1px solid grey;
       border-radius: 12px;
-      padding: 8px 36px;
+      height: 40px;
       margin: 14px;
       width: 280px;
       cursor: pointer;

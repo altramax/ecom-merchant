@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import night__sky from "../../../assets/Images/night__sky.jpg";
 import day__sky from "../../../assets/Images/day__sky.jpg";
-import { LightModeColor, DarkModeColor } from "../../Molecule/Colors/Colors";
+import { LightModeColor, DarkModeColor } from "../../Atom/Colors/Colors";
 
 const DashboardTemplateStyle = styled.div`
   position: fixed;

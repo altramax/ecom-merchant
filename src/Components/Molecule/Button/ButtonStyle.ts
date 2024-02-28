@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import { DarkModeColor, LightModeColor } from "../Colors/Colors";
+import { DarkModeColor, LightModeColor } from "../../Atom/Colors/Colors";
 
 const ButtonStyle = styled.div`
 
 .loading__icon {
+    height: 30px;
     width: 20%;
     animation: swing 1s infinite;
   }
@@ -19,23 +20,24 @@ const ButtonStyle = styled.div`
 
 
   .style {
+    height: 40px;
     padding: 10px 20px;
     width: fit-content;
     margin: 14px;
     font-size: 14px;
     border-radius: 16px;
     border: none;
-    // background-color: ;
-    color: #fff;
     cursor: pointer;
   }
 
   #light {
-    background-color: ${LightModeColor.lightblue};
+    background-color: ${LightModeColor.primary};
+    color: ${LightModeColor.secondary}
   }
 
   #dark {
-    background-color: ${DarkModeColor.black};
+    background-color: ${DarkModeColor.primary};
+    color: ${DarkModeColor.background}
   }
 `;
 

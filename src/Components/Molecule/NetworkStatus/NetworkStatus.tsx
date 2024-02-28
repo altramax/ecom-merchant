@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import NetworkErrorStyle from "./NetworkStatusStyle";
+import { useAppSelector } from "../../../Redux/Hooks";
 
 const NetworkStatus = (): JSX.Element => {
   const [online, setOnline] = useState<boolean | null>(navigator.onLine);
   const [OnlineStatus, setOnlineStatus] = useState<boolean>(false);
+  const color = useAppSelector((state) => state.color);
 
   useEffect(() => {
     const handlerOnline = () => {
@@ -36,13 +38,16 @@ const NetworkStatus = (): JSX.Element => {
   return (
     <NetworkErrorStyle>
       {online === true && OnlineStatus && (
-        <p className="online">You are back Online</p>
+        <div id={color.mode}>
+          <p className="online">You are back Online</p>
+        </div>
       )}
 
       {online !== true && (
-        <p className="offline">Network Error, check your Internet</p>
+        <div id={color.mode}>
+          <p className="offline">Network Error, check your Internet</p>
+        </div>
       )}
-
     </NetworkErrorStyle>
   );
 };

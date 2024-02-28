@@ -108,7 +108,7 @@ export const UserAuthSlice = createSlice({
     });
 
     builder.addCase(userLogin.fulfilled, (state, action) => {
-      state.profileCompleted = true;
+      state.profileCompleted = false;
       state.performedAction = "signin"
       if (action.payload.user.emailVerified === true) {
         state.user = action.payload.user;

@@ -24,12 +24,9 @@ type signinType = {
 const SignInModal = ({ signUp }: signinType): JSX.Element => {
   const color = useAppSelector((state) => state.color);
   const auth = useAppSelector((state) => state.auth);
-  const errorMessage = useAppSelector((state) => state.alert);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [eyes, setEyes] = useState<boolean>(false);
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
 
   const [fields, setFields] = useState<fieldsType>({
     email: "",
@@ -41,19 +38,16 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
 
     if (auth.user !== null && auth.profileCompleted === true) {
       navigate("/dashboard");
-      console.log(auth.user);
-    }
-    // } else if (
-    //   auth.user !== null &&
-    //   auth.user.emailVerified !== false &&
-    //   auth.profileCompleted === false
-    // ) {
-    //   navigate("/onboardingsteps");
-    else if (auth.user === null && auth.performedAction === "signin") {
-      handlerErrorMessage();
-      console.log(auth.message);
-    }
-  }, [auth.user, auth.message]);
+      console.log("login");
+    } else if (
+      auth.user !== null &&
+      auth.user.emailVerified === true &&
+      auth.profileCompleted === false
+    ) {
+      navigate("/onboardingsteps");
+    console.log("Onboard");
+  }
+  }, [auth.user]);
 
   const onchange = async (name: string, value: string) => {
     const fieldsValue: any = Object.assign({}, fields);
@@ -65,10 +59,7 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
     evt: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     evt.preventDefault();
-    await dispatch(userLogin(fields))
-      .then(() => {})
-      .then(() => handlerErrorMessage());
-    // handlerErrorMessage();
+    await dispatch(userLogin(fields));
   };
 
   const signInWithGoogle = async (
@@ -86,31 +77,6 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
     dispatch(resetAuthMessage());
     console.log("triggered");
   };
-
-  const handlerErrorMessage = async () => {
-    if (auth.message.includes("email")) {
-      console.log("enter email");
-      setEmailError(auth.message);
-    } else if (
-      auth.message.includes("password") ||
-      auth.message.includes("credential")
-    ) {
-      console.log("enter password");
-      console.log(auth.message);
-      setPasswordError(auth.message);
-    }
-
-    if (auth.message.includes("email") === false) {
-      setEmailError("");
-    } else if (
-      auth.message.includes("password") === false ||
-      auth.message.includes("credential") === false
-    ) {
-      setPasswordError("");
-    }
-  };
-
-  console.log(auth.message);
 
   return (
     <SignInModalStyle>
@@ -131,9 +97,10 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
                     onchange(evt.target.name, evt.target.value);
                   }}
                 />
-                {emailError !== "" && (
-                  <small className="small">{emailError}</small>
-                )}
+                {auth.performedAction === "signin" &&
+                auth.message.includes("email") ? (
+                  <small className="small">{auth.message}</small>
+                ) : null}
               </div>
 
               <div className="password__group">
@@ -147,9 +114,11 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
                       onchange(evt.target.name, evt.target.value);
                     }}
                   />
-                  {passwordError !== "" && (
-                    <small className="small">{passwordError}</small>
-                  )}
+                  {(auth.performedAction === "signin" &&
+                    auth.message.includes("password")) ||
+                  auth.message.includes("credential") ? (
+                    <small className="small">{auth.message}</small>
+                  ) : null}
                 </div>
                 <div className="eyes__group">
                   <img
@@ -168,7 +137,12 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
               </div>
             </div>
 
-            <Button Click={signInWithEmail} value="Signin" type="submit" className="button"/>
+            <Button
+              Click={signInWithEmail}
+              value="Signin"
+              type="submit"
+              className="button"
+            />
 
             <div className="signin__dash">
               <div>——————</div>

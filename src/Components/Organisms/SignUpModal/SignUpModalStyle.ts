@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { LightModeColor, DarkModeColor } from "../../Molecule/Colors/Colors";
+import { LightModeColor, DarkModeColor } from "../../Atom/Colors/Colors";
 
 
 const SignUpModalStyle = styled.div`
@@ -122,7 +122,6 @@ const SignUpModalStyle = styled.div`
         display: block;
         padding: 10px 65px 10px 8px;
         width: 280px;
-        // margin: 28px;
         font-size: 14px;
         border-outline: none;
         border: none;
@@ -130,7 +129,7 @@ const SignUpModalStyle = styled.div`
       }
     }
     .button {
-      padding: 12px 65px;
+      height: 40px;
       width: 280px;
       margin: 14px;
       font-size: 14px;
@@ -154,7 +153,7 @@ const SignUpModalStyle = styled.div`
 
   .password__group{
     display: flex;
-    margin-top: -28px;
+    margin-top: -24px;
      .eyes__group{
       cursor: pointer;
       margin-left: -60px;

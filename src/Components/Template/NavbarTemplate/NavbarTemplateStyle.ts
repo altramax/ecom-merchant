@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { LightModeColor, DarkModeColor } from "../../Molecule/Colors/Colors";
+import { LightModeColor, DarkModeColor } from "../../Atom/Colors/Colors";
 // import { lightmode } from "../../../Redux/ColorSlice";
 
 const NavbarTemplateStyle = styled.div`

@@ -4,10 +4,10 @@ import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
 import {
   createUser,
   googleLogin,
-  resetAuthMessage,
+  // resetAuthMessage,
 } from "../../../Redux/AuthSlice";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import eyes_closed from "../../../assets/Icons/eye_closed.svg";
 import eyes_open from "../../../assets/Icons/eye_open.svg";
 import VerifyEmailModal from "../VerifyEmailModal/VerifyEmailModal";
@@ -27,12 +27,10 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
   const color = useAppSelector((state) => state.color);
   const auth = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const [eyes, setEyes] = useState<boolean>(false);
   const [verifyEmail, setVerifyEmail] = useState(false);
-  const [emailError, setEmailError] = useState("");
   const [storeNameError, setStoreNameError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+
   const [fields, setFields] = useState<fieldsType>({
     email: "",
     password: "",
@@ -40,10 +38,8 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
   });
 
   useEffect(() => {
-    // window.addEventListener("beforeunload", resetErrorMesageHandler);
-
-    if (auth.user === null && auth.performedAction === "signup") {
-      handlerErrorMessage();
+    if (auth.message === "Please verify your email") {
+      handlerEmailVerificaton();
     }
   }, [auth.user, auth.message]);
 
@@ -57,7 +53,12 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
     evt: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     evt.preventDefault();
-    await dispatch(createUser(fields)).then(() => handlerErrorMessage());
+    if (fields.storeName.length <= 1) {
+      setStoreNameError("Invalid Storename");
+    } else {
+      setStoreNameError("")
+      await dispatch(createUser(fields));
+    }
   };
 
   const createUserWithGoogle = async (
@@ -72,42 +73,12 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
   };
 
   const handlerEmailVerificaton = () => {
-    // evt.preventDefault();
     setVerifyEmail(true);
   };
 
   const renderVerifyEmailModal = () => {
     if (verifyEmail) {
       return <VerifyEmailModal />;
-    }
-  };
-
-  // const resetErrorMesageHandler = (evt: any) => {
-  //   dispatch(resetAuthMessage());
-  //   console.log("triggered");
-  // };
-
-  const handlerErrorMessage = async () => {
-    if (auth.message === "Please verify your email") {
-      await handlerEmailVerificaton();
-    } else if (
-      auth.message.includes("password") ||
-      auth.message.includes("credential")
-    ) {
-      console.log("enter password", auth.message);
-      setPasswordError(auth.message);
-    } else if (auth.message.includes("email")) {
-      setEmailError(auth.message);
-      console.log("enter email", auth.message);
-    }
-
-    if (auth.message.includes("email") === false) {
-      setEmailError("");
-    } else if (
-      auth.message.includes("password") === false ||
-      auth.message.includes("credential") === false
-    ) {
-      setPasswordError("");
     }
   };
 
@@ -146,9 +117,10 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
                     onchange(evt.target.name, evt.target.value);
                   }}
                 />
-                {emailError !== "" && (
-                  <small className="small">{emailError}</small>
-                )}
+                {auth.performedAction === "signup" &&
+                auth.message.includes("email") ? (
+                  <small className="small">{auth.message}</small>
+                ) : null}
               </div>
 
               <div className="password__group">
@@ -162,9 +134,10 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
                       onchange(evt.target.name, evt.target.value);
                     }}
                   />
-                  {passwordError !== "" && (
-                    <small className="small">{passwordError}</small>
-                  )}
+                  {auth.message.includes("password") ||
+                  auth.message.includes("credential") ? (
+                    <small className="small">{auth.message}</small>
+                  ) : null}
                 </div>
 
                 <div className="eyes__group">

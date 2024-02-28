@@ -4,13 +4,14 @@ import OnboardingTemplate from "./Components/Template/OnboardingTemplate/Onboard
 import PrivateRoutes from "./Config/PrivateRoute";
 import DashboardTemplate from "./Components/Template/DashBoardTemplate/DashboardTemplate";
 // import { useAppSelector} from"./Redux/Hooks";
+import OnboardingSteps from "./Components/Organisms/OnboardingSteps/OnboardingSteps";
 
 function App() {
-
   return (
     <Router>
       <Routes>
-        <Route path="/" element={< OnboardingTemplate/>} />
+        <Route path="/" element={<OnboardingTemplate />} />
+        <Route path="/onboardingsteps" element={<OnboardingSteps />} />
         <Route
           path="*"
           element={
