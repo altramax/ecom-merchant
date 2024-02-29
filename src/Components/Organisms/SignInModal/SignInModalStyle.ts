@@ -158,14 +158,14 @@ const SignInModalStyle = styled.div`
         }
       }
       .button{
-        color: ${LightModeColor.background};
+        color: ${LightModeColor.secondary};
         background-color: ${LightModeColor.primary}
       }
     }
     .signin__dash, .signin__body__googlelogin, .signup{
       color: ${LightModeColor.secondary};
       span{
-        color: ${LightModeColor.primary};
+        color: ${LightModeColor.primaryVariant};
       }
     }
   }

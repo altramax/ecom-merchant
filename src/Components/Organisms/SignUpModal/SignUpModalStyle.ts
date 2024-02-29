@@ -29,24 +29,12 @@ const SignUpModalStyle = styled.div`
       position: fixed;
     }
   }
-
-  // .signup__header__img {
-  //   display: flex;
-  //   justify-content: end;
-  //   padding: 12px;
-  //   img {
-  //     margin-left: auto;
-  //     cursor: pointer;
-  //   }
-  // }
   
   .signup__header {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    // gap: 100px;
-
     margin: 40px 0 0 0;
     font-family: "Bruno Ace SC", cursive;
   }
@@ -59,11 +47,6 @@ const SignUpModalStyle = styled.div`
     align-items: center;
     text-align: center;
     padding-top: 20px;
-
-    // .error__meassage{
-    //   color: #ff0000;
-    //   text-decoration: underline;
-    // }
 
     h1 {
       font-size: 50px;
@@ -123,9 +106,7 @@ const SignUpModalStyle = styled.div`
         padding: 10px 65px 10px 8px;
         width: 280px;
         font-size: 14px;
-        border-outline: none;
         border: none;
-        border-bottom: 1px solid grey;
       }
     }
     .button {
@@ -135,14 +116,12 @@ const SignUpModalStyle = styled.div`
       font-size: 14px;
       border-radius: 16px;
       border: none;
-      // background-color: #000;
-      color: #fff;
       cursor: pointer;
 
     }
 
     .signin {
-      margin: 20px 0;
+      margin: 20px 0 40px 0;
       font-size: 14px;
       span {
         color: blue;
@@ -164,16 +143,68 @@ const SignUpModalStyle = styled.div`
      }
   }
 
-  #light{
-  
-    background-color: ${LightModeColor.lightblue};
-  
-}
 
+  #light {
+    background-color: ${LightModeColor.primary};
+    .signup{
+      background-color: ${LightModeColor.background};
+   
+      .signup__header{
+        color:${LightModeColor.secondary}
+      }
+      .input__group{
+        input{
+          background-color: ${LightModeColor.background} !important;
+          color: ${LightModeColor.secondary};
+         
+          border-bottom: 1px solid;
+        }
+        small{
+          color: ${LightModeColor.error}
+        }
+      }
+      .button{
+        color: ${LightModeColor.secondary};
+        background-color: ${LightModeColor.primary}
+      }
+    }
+    .signup__dash, .signup__body__googlelogin, .signup{
+      color: ${LightModeColor.secondary};
+      span{
+        color: ${LightModeColor.primaryVariant};
+      }
+    }
+  }
 
-
-  #dark{
-   background-color: ${DarkModeColor.black}
+  #dark {
+    background-color: ${DarkModeColor.backgroundVariant};
+    .signup{
+      background-color: ${DarkModeColor.backgroundVariant2};
+   
+      .signup__header{
+        color:${DarkModeColor.secondary}
+      }
+      .input__group{
+        input{
+          background-color: ${DarkModeColor.backgroundVariant} !important;
+          color: ${DarkModeColor.secondary};
+          border-radius: 8px;
+        }
+        small{
+          color: ${DarkModeColor.error}
+        }
+      }
+      .button{
+        color: ${DarkModeColor.background};
+        background-color: ${DarkModeColor.primary}
+      }
+    }
+    .signup__dash, .signup__body__googlelogin, .signup{
+      color: ${DarkModeColor.secondary};
+      span{
+        color: ${DarkModeColor.primary};
+      }
+    }
   }
 
   @media (min-width: 1280px) {
