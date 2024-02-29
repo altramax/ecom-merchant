@@ -3,6 +3,19 @@ import { LightModeColor, DarkModeColor } from "../../Atom/Colors/Colors";
 // import { lightmode } from "../../../Redux/ColorSlice";
 
 const SignInModalStyle = styled.div`
+  .test-img {
+    width: 30px;
+    animation: swing 1s infinite;
+  }
+
+  @keyframes swing {
+    0%{
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 
   .signin__form {
     box-sizing: border-box;
@@ -78,16 +91,15 @@ const SignInModalStyle = styled.div`
     }
 
     .button {
-      // padding: 12px 65px;
+      padding: 12px 65px;
       width: 280px;
       margin: 14px;
       font-size: 14px;
       border-radius: 16px;
       border: none;
-      // background-color: #000;
+      background-color: #000;
       color: #fff;
       cursor: pointer;
-      height: 40px;
     }
 
     .signin__body__googlelogin {
@@ -97,7 +109,7 @@ const SignInModalStyle = styled.div`
       gap: 8px;
       border: 1px solid grey;
       border-radius: 12px;
-      height: 40px;
+      padding: 8px 36px;
       margin: 14px;
       width: 280px;
       cursor: pointer;
@@ -146,11 +158,14 @@ const SignInModalStyle = styled.div`
   }
 
   #light {
-    background-color: ${LightModeColor.lightblue};
+    background-color: ${LightModeColor.primary};
   }
 
   #dark {
-    background-color: ${DarkModeColor.black};
+    background-color: ${DarkModeColor.backgroundVariant};
+    .signin{
+      background-color: #808080;
+    }
   }
 
   @media (min-width: 1280px) {

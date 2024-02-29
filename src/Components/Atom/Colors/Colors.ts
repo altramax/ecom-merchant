@@ -13,8 +13,8 @@
     primary: "#BB86FC",
     primaryVariant: "#3700B3",
     error: "#CF6679",
-    secondary: "#ffffff"
-    //  black: "#1f1f1f",
+    secondary: "#ffffff",
+    backgroundVariant: "#1f1f1f",
     //  white: "#fff",
     //  darkblue: "#000",
     //  shallow: "#067A8F"

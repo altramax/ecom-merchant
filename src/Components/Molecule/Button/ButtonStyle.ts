@@ -30,12 +30,12 @@ const ButtonStyle = styled.div`
     cursor: pointer;
   }
 
-  #light {
+  #buttonlight {
     background-color: ${LightModeColor.primary};
     color: ${LightModeColor.secondary}
   }
 
-  #dark {
+  #buttondark {
     background-color: ${DarkModeColor.primary};
     color: ${DarkModeColor.background}
   }
