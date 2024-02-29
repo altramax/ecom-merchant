@@ -43,20 +43,10 @@ const SignInModalStyle = styled.div`
     }
   }
 
-  // .signin__header__img {
-  //   display: flex;
-  //   justify-content: end;
-  //   padding: 12px;
-  //   img {
-  //     margin-left: auto;
-  //     cursor: pointer;
-  //   }
-  // }
-
   .signin__header {
     display: flex;
     justify-content: center;
-    margin: 24px 0 12px 0;
+    margin: 40px 0 0 0;
     font-family: "Bruno Ace SC", cursive;
   }
 
@@ -75,30 +65,26 @@ const SignInModalStyle = styled.div`
           text-align: start;
           display: block;
           margin: 5px 0;
-          color: #ff0000;
         }
       }
       .input {
         display: block;
         padding: 10px 65px 10px 8px;
         width: 280px;
+        height: 40px;
         font-size: 14px;
-
-        border-outline: none;
         border: none;
-        border-bottom: 1px solid grey;
+      
       }
     }
 
     .button {
-      padding: 12px 65px;
+      height: 40px;
       width: 280px;
       margin: 14px;
-      font-size: 14px;
-      border-radius: 16px;
+      font-size: 15px;
+      border-radius: 8px;
       border: none;
-      background-color: #000;
-      color: #fff;
       cursor: pointer;
     }
 
@@ -130,10 +116,9 @@ const SignInModalStyle = styled.div`
       margin: 25px 0;
     }
     .signup {
-      margin: 15px 0 25px 0;
+      margin: 15px 0 40px 0;
       font-size: 14px;
       span {
-        color: blue;
         cursor: pointer;
       }
     }
@@ -142,14 +127,10 @@ const SignInModalStyle = styled.div`
   .password__group {
     display: flex;
 
-    // small{
-    //   position: absolute;
-    // }
-
     .eyes__group {
       cursor: pointer;
       margin-left: -60px;
-      margin-top: 30px;
+      margin-top: 34px;
 
       img {
         width: 20px;
@@ -159,12 +140,64 @@ const SignInModalStyle = styled.div`
 
   #light {
     background-color: ${LightModeColor.primary};
+    .signin{
+      background-color: ${LightModeColor.background};
+   
+      .signin__header{
+        color:${LightModeColor.secondary}
+      }
+      .input__group{
+        input{
+          background-color: ${LightModeColor.background} !important;
+          color: ${LightModeColor.secondary};
+         
+          border-bottom: 1px solid;
+        }
+        small{
+          color: ${LightModeColor.error}
+        }
+      }
+      .button{
+        color: ${LightModeColor.background};
+        background-color: ${LightModeColor.primary}
+      }
+    }
+    .signin__dash, .signin__body__googlelogin, .signup{
+      color: ${LightModeColor.secondary};
+      span{
+        color: ${LightModeColor.primary};
+      }
+    }
   }
 
   #dark {
     background-color: ${DarkModeColor.backgroundVariant};
     .signin{
-      background-color: #808080;
+      background-color: ${DarkModeColor.backgroundVariant2};
+   
+      .signin__header{
+        color:${DarkModeColor.secondary}
+      }
+      .input__group{
+        input{
+          background-color: ${DarkModeColor.backgroundVariant} !important;
+          color: ${DarkModeColor.secondary};
+          border-radius: 8px;
+        }
+        small{
+          color: ${DarkModeColor.error}
+        }
+      }
+      .button{
+        color: ${DarkModeColor.background};
+        background-color: ${DarkModeColor.primary}
+      }
+    }
+    .signin__dash, .signin__body__googlelogin, .signup{
+      color: ${DarkModeColor.secondary};
+      span{
+        color: ${DarkModeColor.primary};
+      }
     }
   }
 
