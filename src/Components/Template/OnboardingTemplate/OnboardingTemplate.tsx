@@ -2,19 +2,17 @@ import OnboardingTemplateStyle from "./OnboardingTemplateStyle";
 import OnboardingSlider from "../../Organisms/OnboardingSlider/OnboardingSlider";
 import SignInModal from "../../Organisms/SignInModal/SignInModal";
 import SignUpModal from "../../Organisms/SignUpModal/SignUpModal";
-import { useEffect, useState } from "react";
-// import { useAppDispatch, useAppSelector} from "../../../Redux/Hooks";
+import {  useState } from "react";
 import NetworkStatus from "../../Molecule/NetworkStatus/NetworkStatus";
-import { clearErrors } from "../../../Redux/AlertSlice";
+import { useAppSelector } from "../../../Redux/Hooks";
+
+
 
 const OnboardingTemplate = () => {
   const [access, setAccess] = useState<string>("signin");
   const [mobileScreen, setMobileScreen] = useState<string>("slider")
+  const color = useAppSelector((state)=> state.color)
 
-  
-  useEffect(()=>{
-    // handlerAlert()
-  },[])
 
   const accessHandler = (evt: string) => {
     setAccess(evt);
@@ -24,24 +22,12 @@ const OnboardingTemplate = () => {
      setMobileScreen(evt)
   }
 
-  // const handlerAlert = ()=>{
-  //   if(alert.message === "You are back Online"){
-  //     setTimeout(() => {
-  //       dispatch(clearErrors())
-  //     }, 3000);
-  //   }
-  // }
-  
-
-
-  // console.log(alert.message);
-
   return (
     <OnboardingTemplateStyle>
   <NetworkStatus/>
 
       
-      <div className="onboarding__container">
+      <div id={color.mode} className="onboarding__container">
         <div className={`slider ${mobileScreen === "slider" ? "shown" : "hidden"}`} >
           <p className="skip" onClick={()=> mobileScreenHandler("login")}>Skip</p>
           <OnboardingSlider slider={()=>mobileScreenHandler("login")}/>

@@ -6,8 +6,8 @@ type stepType = {
 };
 
 const initialState: stepType = {
-  stepone: "ddd",
-  steptwo: "ddd",
+  stepone: "",
+  steptwo: "",
 };
 
 const StepForm = createSlice({
@@ -19,9 +19,13 @@ const StepForm = createSlice({
     },
     stepTwo: (state, action) => {
       state.steptwo = action.payload;
-    }
+    },
+    stepClear: (state) => {
+      state.stepone = "";
+      state.steptwo = "";
+    },
   },
 });
 
-export const { stepOne, stepTwo} = StepForm.actions
+export const { stepOne, stepTwo, stepClear } = StepForm.actions;
 export default StepForm.reducer;

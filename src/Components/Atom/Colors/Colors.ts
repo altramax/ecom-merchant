@@ -16,6 +16,7 @@
     secondary: "#ffffff",
     backgroundVariant: "#1f1f1f",
     backgroundVariant2: "#121212",
+    backgroundvariant3: "#3C3C3C"
     //  white: "#fff",
     //  darkblue: "#000",
     //  shallow: "#067A8F"

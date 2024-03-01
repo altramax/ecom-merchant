@@ -6,6 +6,9 @@ import community from "../../../assets/Images/global-community.jpg";
 import customer_service from "../../../assets/Images/customer-care.jpg";
 import { useAppSelector } from "../../../Redux/Hooks";
 import Button from "../../Molecule/Button/Button";
+import customercare_nightmode from "../../../assets/Icons/customerCare-nightmode.jpg";
+import community_nightmode from "../../../assets/Icons/community-nightmode.jpg";
+import market_nightmode from "../../../assets/Icons/market-nightmode.jpg"
 
 type sliderControl = {
   slider: any;
@@ -18,19 +21,19 @@ const OnboardingSlider = ({ slider }: sliderControl) => {
 
   const fields = [
     {
-      image: `${market}`,
+      image: `${color.mode === "dark" ? market_nightmode : market}`,
       title: "Market",
       text: "Join our altra modern market place where your items are seen by over 1 million people globally",
     },
     {
-      image: `${community}`,
+      image: `${color.mode === "dark" ? community_nightmode : community}`,
       title: "community",
       text: "We have a community of dedicated customers all over the world who value our services",
     },
     {
-      image: `${customer_service}`,
+      image: `${color.mode === "dark" ? customercare_nightmode : customer_service}`,
       title: "customer service",
-      text: "Our customer service is one of a kind with 24 hrs availability ",
+      text: "Our customer service is one of a kind with 24hrs availability, and very understanding agents. ",
     },
   ];
 

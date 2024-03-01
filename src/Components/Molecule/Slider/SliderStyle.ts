@@ -7,14 +7,23 @@ const sliderStyle = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    .img__container{
+        height: 450px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     img{
-        width: 400px;
+        width: 350px;
+        max-height: 650px;
     }
 }
 
 .slider__text{
+    margin-top: 30px;
     text-align: center;
     width: 70%;
+    color: #fff;
     h3{
     margin: 0 0 20px 0;
     }
@@ -26,8 +35,12 @@ const sliderStyle = styled.div`
 
 @media (min-width: 1028px){
     .slider__container{
+        .img__container{
+            height: 400px;
+        }
         img{
-            width: 600px;
+            width: 450px;
+            max-height: 450px;
         }
     }
 }

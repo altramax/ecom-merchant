@@ -1,17 +1,9 @@
 import styled from "styled-components";
 import { DarkModeColor, LightModeColor } from "../../Atom/Colors/Colors";
 
-
 const OnboardingTemplateStyle = styled.div`
-
-#light{
-
-}
-#dark {
-
-}
-
-.skip, .previous{
+  .skip,
+  .previous {
     position: absolute;
     top: 40px;
     left: 80%;
@@ -31,15 +23,14 @@ const OnboardingTemplateStyle = styled.div`
     }
   }
 
-  .skip:hover, .previous:hover {
+  .skip:hover,
+  .previous:hover {
     color: #fff;
-    // background-color: #0097da;
     box-shadow: inset 65px 0 0 0 #0097da;
     transition: box-shadow 0.6s ease-in-out;
   }
 
-
-  .internet__error{
+  .internet__error {
     padding: 12px 20px;
     color: red;
     background-color: #fff;
@@ -48,54 +39,52 @@ const OnboardingTemplateStyle = styled.div`
     right: 20px;
   }
 
-
-
-
-
-.onboarding__container{
+  .onboarding__container {
     display: flex;
-    .slider{
-        width: 100%;
+    .slider {
+      width: 100%;
     }
-    .login{
-       width: 100%;
+    .login {
+      width: 100%;
     }
-}
+  }
 
-.shown{
-  display: block;
-}
-.hidden{
+  .shown {
+    display: block;
+  }
+  .hidden {
     display: none;
-}
+  }
 
+  #dark {
+      .slider {
+        background-color: ${DarkModeColor.backgroundvariant3};
+      }
+  }
 
-
-@media (min-width: 1028px){
-    .skip, .previous{
-        display: none;
+  @media (min-width: 1028px) {
+    .skip,
+    .previous {
+      display: none;
     }
 
+    .shown {
+      display: block;
+    }
+    .hidden {
+      display: block;
+    }
 
-    .shown{
+    .onboarding__container {
+      display: flex;
+      .slider {
+        width: 50%;
+      }
+      .login {
+        width: 50%;
         display: block;
       }
-      .hidden{
-          display: block;
-      }
-
-      
-    .onboarding__container{
-        display: flex;
-        .slider{
-            width: 50%;
-        }
-        .login{
-           width: 50%;
-           display: block;
-        }
     }
-}
-
+  }
 `;
 export default OnboardingTemplateStyle;
