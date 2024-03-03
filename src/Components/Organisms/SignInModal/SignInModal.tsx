@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import eyes_closed from "../../../assets/Icons/eye_closed.svg";
 import eyes_open from "../../../assets/Icons/eye_open.svg";
 import Button from "../../Molecule/Button/Button";
-import { collection,getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../Config/Config";
 
 type fieldsType = {
@@ -28,6 +28,7 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
   const auth = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [completedProfile, setCompletedProfile] = useState<boolean>(false)
   const [eyes, setEyes] = useState<boolean>(false);
   const [fields, setFields] = useState<fieldsType>({
     email: "",
@@ -36,38 +37,29 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
 
   useEffect(() => {
     window.addEventListener("beforeunload", resetErrorMesageHandler);
-    getMovieList();
-
-    if (auth.user !== null && auth.profileCompleted === true) {
+   StoreDetails();
+    if (
+      auth.user !== null &&
+      auth.user.emailVerified &&
+      completedProfile
+    ) {
       navigate("/dashboard");
-      console.log("login");
     } else if (
       auth.user !== null &&
-      auth.user.emailVerified === true &&
-      auth.profileCompleted === false
+      auth.user.emailVerified &&
+      !completedProfile
     ) {
       navigate("/onboardingsteps");
-    console.log("Onboard");
-  }
+    }
   }, [auth.user]);
 
-  const movieCollectionRef = collection(db, "Merchant");
-
-  const getMovieList = async () => {
-  // try{
-      const data = await getDocs(movieCollectionRef);
-      // const arr: any = [];
-      console.log(data.docs);
-
-      // data.docs.forEach((items) => {
-      //   arr.push({ ...items.data(), id: items.id } as movieType);
-      // });
-
-    //   setMovies(arr);
-    // } catch (err) {
-    //   console.log(err);
-    // }
+ const StoreDetails =  async () => {
+    const CollectionRef = collection(db, "Merchant", auth.user?.uid);
+    const data = await getDocs(CollectionRef);
+    console.log(data?.docs[0].data());
+    // return data.docs[0].data() ? setCompletedProfile(true) : setCompletedProfile(false);
   };
+  
 
   const onchange = async (name: string, value: string) => {
     const fieldsValue: any = Object.assign({}, fields);
@@ -80,6 +72,7 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
   ) => {
     evt.preventDefault();
     await dispatch(userLogin(fields));
+   
   };
 
   const signInWithGoogle = async (
