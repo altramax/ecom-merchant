@@ -22,7 +22,7 @@ const Button = ({ value, Click, type, className }: buttonType) => {
 
   return (
     <ButtonStyle>
-      <button id={`button${color.mode}`} type={type} onClick={onClickHandler} disabled={disabled} className={className} >
+      <button id={`button${color.mode}`} type={type} onClick={onClickHandler} disabled={disabled} className={`${className !== "" ? className : "style"}`}>
         {disabled ? (
           <img src={loading} alt="loading" className="loading__icon" />
         ) : (

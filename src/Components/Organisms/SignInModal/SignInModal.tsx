@@ -11,6 +11,8 @@ import { useNavigate } from "react-router-dom";
 import eyes_closed from "../../../assets/Icons/eye_closed.svg";
 import eyes_open from "../../../assets/Icons/eye_open.svg";
 import Button from "../../Molecule/Button/Button";
+import { collection,getDocs } from "firebase/firestore";
+import { db } from "../../../Config/Config";
 
 type fieldsType = {
   email: string;
@@ -27,7 +29,6 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [eyes, setEyes] = useState<boolean>(false);
-
   const [fields, setFields] = useState<fieldsType>({
     email: "",
     password: "",
@@ -35,6 +36,7 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
 
   useEffect(() => {
     window.addEventListener("beforeunload", resetErrorMesageHandler);
+    getMovieList();
 
     if (auth.user !== null && auth.profileCompleted === true) {
       navigate("/dashboard");
@@ -48,6 +50,24 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
     console.log("Onboard");
   }
   }, [auth.user]);
+
+  const movieCollectionRef = collection(db, "Merchant");
+
+  const getMovieList = async () => {
+  // try{
+      const data = await getDocs(movieCollectionRef);
+      // const arr: any = [];
+      console.log(data.docs);
+
+      // data.docs.forEach((items) => {
+      //   arr.push({ ...items.data(), id: items.id } as movieType);
+      // });
+
+    //   setMovies(arr);
+    // } catch (err) {
+    //   console.log(err);
+    // }
+  };
 
   const onchange = async (name: string, value: string) => {
     const fieldsValue: any = Object.assign({}, fields);

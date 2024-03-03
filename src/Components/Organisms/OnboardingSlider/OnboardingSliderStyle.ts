@@ -60,6 +60,7 @@ const OnboardingSliderStyle = styled.div`
 
 
   #light {
+    color: #000;
     .dot__group{
       .dot {
         border: 1px solid ${LightModeColor.primary};
@@ -71,6 +72,7 @@ const OnboardingSliderStyle = styled.div`
   }
 
   #dark {
+    color: #fff;
     .slider__group{
       background-color: ${DarkModeColor.backgroundvariant3}
     }

@@ -23,7 +23,6 @@ const sliderStyle = styled.div`
     margin-top: 30px;
     text-align: center;
     width: 70%;
-    color: #fff;
     h3{
     margin: 0 0 20px 0;
     }

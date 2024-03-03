@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 type stepType = {
-  stepone: string;
-  steptwo: string;
+  stepOne: string;
+  stepTwo: string;
 };
 
 const initialState: stepType = {
-  stepone: "",
-  steptwo: "",
+  stepOne: "",
+  stepTwo: "",
 };
 
 const StepForm = createSlice({
@@ -15,14 +15,14 @@ const StepForm = createSlice({
   initialState,
   reducers: {
     stepOne: (state, action) => {
-      state.stepone = action.payload;
+      state.stepOne = action.payload;
     },
     stepTwo: (state, action) => {
-      state.steptwo = action.payload;
+      state.stepTwo = action.payload;
     },
     stepClear: (state) => {
-      state.stepone = "";
-      state.steptwo = "";
+      state.stepOne = "";
+      state.stepTwo = "";
     },
   },
 });
