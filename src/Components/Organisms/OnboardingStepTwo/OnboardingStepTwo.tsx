@@ -24,7 +24,7 @@ const OnboardingStepTwo = ({ skip }: OnboardType) => {
   const stepForm = useAppSelector((state) => state.stepForm);
   const color = useAppSelector((state) => state.color);
   const [error, setError] = useState("");
-  const auth = useAppSelector(state=>state.auth)
+  const auth = useAppSelector((state) => state.auth);
   const file = useRef<any>();
   const [selectedImage, setSelectedImage] = useState<any>("");
   const navigate = useNavigate();
@@ -73,15 +73,15 @@ const OnboardingStepTwo = ({ skip }: OnboardType) => {
           profilePicture: selectedImage,
         })
       );
-      await setDoc(doc(db, "Merchant", `${auth.user.uid}` ), {
+      await setDoc(doc(db, "Merchant", `${auth.user.uid}`), {
         businessInformation: stepForm.stepOne,
-        OwnersInformation:  stepForm.stepTwo
+        OwnersInformation: stepForm.stepTwo,
       });
-      navigate("/dashboard")
+      navigate("/dashboard");
       dispatch(stepClear());
     }
   };
-  console.log(stepForm.stepOne,stepForm.stepTwo);
+  console.log(stepForm.stepOne, stepForm.stepTwo);
 
   const onchange = async (name: string, value: string) => {
     const fieldsValue: any = Object.assign({}, fields);
@@ -209,15 +209,15 @@ const OnboardingStepTwo = ({ skip }: OnboardType) => {
           </div>
           <div className="buttons__group">
             <Button
-              type="submit"
-              value="Next"
-              Click={(evt: any) => handlerSubmit(evt)}
-              className="button"
-            />
-            <Button
               type="button"
               value="Skip for Now"
               Click={skip}
+              className="button"
+            />
+            <Button
+              type="submit"
+              value="Submit"
+              Click={(evt: any) => handlerSubmit(evt)}
               className="button"
             />
           </div>

@@ -1,10 +1,9 @@
 import OnboardingStepOnestyle from "./OnboardingStepOneStyle";
 import Button from "../../Molecule/Button/Button";
 import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
-import { stepOne} from "../../../Redux/StepForm";
+import { stepOne } from "../../../Redux/StepForm";
 import { useEffect, useRef, useState } from "react";
 import delete_icon from "../../../assets/Icons/trash.svg";
-
 
 type OnboardType = {
   next: Function;
@@ -32,14 +31,12 @@ const OnboardingStepOne = ({ next, skip }: OnboardType) => {
     countryAndState: "",
   });
 
-  useEffect(()=>{
-    if(stepForm.stepOne !== ""){
+  useEffect(() => {
+    if (stepForm.stepOne !== "") {
       setfields(stepForm.stepOne);
-      setSelectedImage(stepForm.stepOne.brandLogo)
+      setSelectedImage(stepForm.stepOne.brandLogo);
     }
-
-  },[])
-
+  }, []);
 
   const handlerSubmit = async (evt: any) => {
     evt.preventDefault();
@@ -53,11 +50,12 @@ const OnboardingStepOne = ({ next, skip }: OnboardType) => {
       numberValidation.test(fields.storePhonenumber)
     ) {
       setError("Incorrect Phone Number");
-    }else if(!selectedImage){
-      setError("No Image Uploaded")
+    } else if (!selectedImage) {
+      setError("No Image Uploaded");
     } else if (
       fields.storeAddress.length > 1 &&
-      !numberValidation.test(fields.storePhonenumber) && selectedImage
+      !numberValidation.test(fields.storePhonenumber) &&
+      selectedImage
     ) {
       setError("");
       await dispatch(
@@ -71,8 +69,6 @@ const OnboardingStepOne = ({ next, skip }: OnboardType) => {
       );
       next();
     }
-
-    
   };
 
   const onchange = async (name: string, value: string) => {
@@ -95,23 +91,21 @@ const OnboardingStepOne = ({ next, skip }: OnboardType) => {
     setSelectedImage("");
   };
 
-  const handleDragStart = (evt:any)=>{
-  }
-  
-  const handleDragOver = (evt:any)=>{
-    evt.preventDefault();
+  const handleDragStart = (evt: any) => {};
 
-  }
-
-  const handleDragDrop = (evt: any)=>{
+  const handleDragOver = (evt: any) => {
     evt.preventDefault();
-    const {files} = evt.dataTransfer;
-    if(files){
-      const file = [...files]
- 
-      setSelectedImage(file[0].name)
+  };
+
+  const handleDragDrop = (evt: any) => {
+    evt.preventDefault();
+    const { files } = evt.dataTransfer;
+    if (files) {
+      const file = [...files];
+
+      setSelectedImage(file[0].name);
     }
-  }
+  };
 
   return (
     <OnboardingStepOnestyle>
@@ -170,14 +164,20 @@ const OnboardingStepOne = ({ next, skip }: OnboardType) => {
               />
             </div>
           </div>
-          <div className="image__upload__groups" onDrop={handleDragDrop} onDragOver={handleDragOver}>
+          <div
+            className="image__upload__groups"
+            onDrop={handleDragDrop}
+            onDragOver={handleDragOver}
+          >
             <div className="upload__text" onDragStart={handleDragStart}>
               <h3>Brand Logo</h3>
               <p>
                 Drag file here or <span onClick={handlerClick}>Click here</span>{" "}
                 to upload
               </p>
-              {error.includes("Image") && !selectedImage && <small>{error}</small>}
+              {error.includes("Image") && !selectedImage && (
+                <small>{error}</small>
+              )}
             </div>
             <input
               type="file"
@@ -197,15 +197,15 @@ const OnboardingStepOne = ({ next, skip }: OnboardType) => {
           </div>
           <div className="buttons__group">
             <Button
-              type="submit"
-              value="Next"
-              Click={(evt: any) => handlerSubmit(evt)}
-              className="button"
-            />
-            <Button
               type="button"
               value="Skip for Now"
               Click={skip}
+              className="button"
+            />
+            <Button
+              type="submit"
+              value="Next"
+              Click={(evt: any) => handlerSubmit(evt)}
               className="button"
             />
           </div>

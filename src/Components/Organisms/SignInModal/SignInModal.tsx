@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import eyes_closed from "../../../assets/Icons/eye_closed.svg";
 import eyes_open from "../../../assets/Icons/eye_open.svg";
 import Button from "../../Molecule/Button/Button";
-import { collection, getDocs } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../Config/Config";
 
 type fieldsType = {
@@ -28,7 +28,7 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
   const auth = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [completedProfile, setCompletedProfile] = useState<boolean>(false)
+  const [completedProfile, setCompletedProfile] = useState<any>(null)
   const [eyes, setEyes] = useState<boolean>(false);
   const [fields, setFields] = useState<fieldsType>({
     email: "",
@@ -37,7 +37,11 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
 
   useEffect(() => {
     window.addEventListener("beforeunload", resetErrorMesageHandler);
-   StoreDetails();
+   auth.user !== null && StoreDetails();
+  completedProfile !== null && loginParameters()
+  }, [auth.user, completedProfile]);
+
+  const loginParameters = ()=>{
     if (
       auth.user !== null &&
       auth.user.emailVerified &&
@@ -51,14 +55,23 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
     ) {
       navigate("/onboardingsteps");
     }
-  }, [auth.user]);
+  }
+
+  console.log(auth.user);
 
  const StoreDetails =  async () => {
-    const CollectionRef = collection(db, "Merchant", auth.user?.uid);
-    const data = await getDocs(CollectionRef);
-    console.log(data?.docs[0].data());
-    // return data.docs[0].data() ? setCompletedProfile(true) : setCompletedProfile(false);
+    const CollectionRef = doc(db, "Merchant", auth.user.uid);
+    const data = await getDoc(CollectionRef);
+    console.log(auth.user.uid, data.data(), data.exists());
+    if(data.exists()){
+      setCompletedProfile(true)
+      console.log("exist");
+    }else if (!data.exists()){
+      console.log("not exist");
+      setCompletedProfile(false)
+    }
   };
+
   
 
   const onchange = async (name: string, value: string) => {
@@ -69,17 +82,17 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
 
   const signInWithEmail = async (
     evt: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  ) => { 
     evt.preventDefault();
-    await dispatch(userLogin(fields));
-   
+    await dispatch(userLogin(fields))
+    
   };
 
   const signInWithGoogle = async (
     evt: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     evt.preventDefault();
-    await dispatch(googleLogin());
+    await dispatch(googleLogin())
   };
 
   const passwordVisibility = (evt: boolean) => {

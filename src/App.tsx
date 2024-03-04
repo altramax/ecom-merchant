@@ -11,7 +11,14 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<OnboardingTemplate />} />
-        <Route path="/onboardingsteps" element={<OnboardingSteps />} />
+        <Route
+          path="/onboardingsteps"
+          element={
+            <PrivateRoutes>
+              <OnboardingSteps />
+            </PrivateRoutes>
+          }
+        />
         <Route
           path="*"
           element={

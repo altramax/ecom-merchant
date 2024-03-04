@@ -66,7 +66,6 @@ height: 100vh;
 
 .step__one__container{
    width: 90vw;
-//    margin-top: 50px;
    padding: 10px;
    border-radius: 10px;
    .step__one__heading{
@@ -84,15 +83,12 @@ height: 100vh;
    }
 
    .input__groups{
-    //    margin: 20px auto 0 auto;
        width: 100%;
        display: flex;
-    //    gap: 20px;
        justify-content: center;
        align-items: center;
        flex-wrap: wrap;
        align-items: center;
-     
    }
 
 
@@ -114,6 +110,7 @@ height: 100vh;
    }
 
    .image__upload__groups{
+    padding: 20px;
     margin: 40px auto 0 auto;
     width: 300px;
     display: flex;
@@ -201,11 +198,12 @@ height: 100vh;
    }
 
    .image__upload__groups{
+    padding: 20px;
     width: 610px;
    }
 }
 
-@media (min-width: 1080px){
+@media (min-width: 1280px){
    .step__one__container{
     width: 60vw;
        
@@ -225,6 +223,7 @@ height: 100vh;
 
        }
        .image__upload__groups{
+        padding: 20px;
         width: 670px;
        }
 }

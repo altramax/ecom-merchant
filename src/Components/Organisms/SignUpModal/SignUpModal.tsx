@@ -7,11 +7,13 @@ import {
   // resetAuthMessage,
 } from "../../../Redux/AuthSlice";
 import { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import eyes_closed from "../../../assets/Icons/eye_closed.svg";
 import eyes_open from "../../../assets/Icons/eye_open.svg";
 import VerifyEmailModal from "../VerifyEmailModal/VerifyEmailModal";
 import Button from "../../Molecule/Button/Button";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../../../Config/Config";
 
 type fieldsType = {
   email: string;
@@ -30,7 +32,7 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
   const [eyes, setEyes] = useState<boolean>(false);
   const [verifyEmail, setVerifyEmail] = useState(false);
   const [storeNameError, setStoreNameError] = useState("");
-
+const navigate = useNavigate();
   const [fields, setFields] = useState<fieldsType>({
     email: "",
     password: "",
@@ -40,6 +42,8 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
   useEffect(() => {
     if (auth.message === "Please verify your email") {
       handlerEmailVerificaton();
+    }else if (auth.message === "Request Successful"){
+      navigate("/onboardingSteps")
     }
   }, [auth.user, auth.message]);
 
@@ -48,6 +52,15 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
     fieldsValue[name] = value;
     await setFields(fieldsValue);
   };
+
+
+  const StoreDetails =  async () => {
+    const CollectionRef = doc(db, "Merchant", auth.user.uid);
+    const data = await getDoc(CollectionRef);
+    console.log(auth.user.uid, data.data(), data.exists());
+   
+  };
+
 
   const createUserWithEmail = async (
     evt: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -65,7 +78,7 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
     evt: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     evt.preventDefault();
-    await dispatch(googleLogin());
+    await dispatch(googleLogin()).then((res:any)=> res.payload.user.email);
   };
 
   const passwordVisibility = (evt: boolean) => {
