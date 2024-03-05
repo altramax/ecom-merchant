@@ -17,15 +17,15 @@ import trial from "../../../assets/Images/men.jpg";
 
 const NavbarTemplate = () => {
   const color = useAppSelector((state) => state.color);
-  const [successResponse, setSuccessResponse] = useState<boolean>(false);
-  const [errorResponse, setErrorResponse] = useState<boolean>(false);
+  // const [successResponse, setSuccessResponse] = useState<boolean>(false);
+  // const [errorResponse, setErrorResponse] = useState<boolean>(false);
   const [navWidth, setNavWidth] = useState<boolean>(false);
   const alert = useAppSelector((state) => state.alert);
   const errorMessage = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    handleNetWorkChange();
+    // handleNetWorkChange();
   }, [alert.message, errorMessage.message]);
 
   const themeHandler = (theme: string) => {
@@ -36,27 +36,27 @@ const NavbarTemplate = () => {
     }
   };
 
-  const d = () => {
-    if (alert.message !== "") {
-      setSuccessResponse(true);
-    }
-  };
+  // const d = () => {
+  //   if (alert.message !== "") {
+  //     setSuccessResponse(true);
+  //   }
+  // };
 
-  const handleNetWorkChange = () => {
-    if (alert.message !== "") {
-      setSuccessResponse(true);
-      setTimeout(() => {
-        setSuccessResponse(false);
-        dispatch(otherErrors(""));
-      }, 2000);
-    } else if (errorMessage.message !== "") {
-      setErrorResponse(true);
-      setTimeout(() => {
-        setErrorResponse(false);
-        dispatch(resetAuthMessage());
-      }, 2000);
-    }
-  };
+  // const handleNetWorkChange = () => {
+  //   if (alert.message !== "") {
+  //     setSuccessResponse(true);
+  //     setTimeout(() => {
+  //       setSuccessResponse(false);
+  //       dispatch(otherErrors(""));
+  //     }, 2000);
+  //   } else if (errorMessage.message !== "") {
+  //     setErrorResponse(true);
+  //     setTimeout(() => {
+  //       setErrorResponse(false);
+  //       dispatch(resetAuthMessage());
+  //     }, 2000);
+  //   }
+  // };
 
   const handleNavWidth = () => {
     setNavWidth(!navWidth);

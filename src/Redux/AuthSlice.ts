@@ -24,7 +24,6 @@ const initialState: valueState = {
   message: "",
   holdAuth: null,
   performedAction: "",
-
 };
 
 type propsType = {
@@ -64,14 +63,14 @@ export const userLogin = createAsyncThunk(
 
 export const googleLogin = createAsyncThunk(
   "google/sigin",
-  async (arg) => {
+  async () => {
     let user = await signInWithPopup(auth, googleprovider);
-    console.log(user);
     return user;
   }
 );
 
-export const logOut = createAsyncThunk("Signout", async (arg, { dispatch }) => {
+export const logOut = createAsyncThunk("Signout", async (arg , { dispatch }) => {
+  arg
   let user = await signOut(auth);
   dispatch(successful());
   return user;
@@ -86,6 +85,13 @@ const UserAuthSlice = createSlice({
     },
     tempAuth: (state) => {
       state.user = state.holdAuth;
+    },
+    clearAuth: (state) => {
+      state.user = null;
+      state.message = ""
+      state.holdAuth = null
+      state.performedAction= "";
+      
     },
   },
 
@@ -147,5 +153,5 @@ const UserAuthSlice = createSlice({
   },
 });
 
-export const { resetAuthMessage, tempAuth } = UserAuthSlice.actions;
+export const { resetAuthMessage, tempAuth, clearAuth } = UserAuthSlice.actions;
 export default UserAuthSlice.reducer;

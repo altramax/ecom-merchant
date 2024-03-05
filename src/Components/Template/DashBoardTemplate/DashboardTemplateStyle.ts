@@ -10,7 +10,7 @@ const DashboardTemplateStyle = styled.div`
 
   #light {
     // .nav__width {
-    //   background-color: ${LightModeColor.lightblue};
+    //   background-color: ${LightModeColor.primary};
     // }
 
     .bot {
@@ -21,7 +21,7 @@ const DashboardTemplateStyle = styled.div`
 
   #dark {
     // .nav__width {
-    //   background-color: ${DarkModeColor.shallow};
+    //   background-color: ${DarkModeColor.primary};
     // }
     .bot {
       transition: 0.7s ease-in;

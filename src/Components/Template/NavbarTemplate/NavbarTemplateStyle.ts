@@ -4,15 +4,15 @@ import { LightModeColor, DarkModeColor } from "../../Atom/Colors/Colors";
 
 const NavbarTemplateStyle = styled.div`
   #light {
-    background-color: ${LightModeColor.lightblue};
+    background-color: ${LightModeColor.primary};
     .link__sub__group:hover {
-      background-color: ${LightModeColor.grey};
+      background-color: ${LightModeColor.secondary};
     }
   }
   #dark {
-    background-color: ${DarkModeColor.shallow};
+    background-color: ${DarkModeColor.primary};
     .link__sub__group:hover {
-      background-color: ${DarkModeColor.darkblue};
+      background-color: ${DarkModeColor.backgroundVariant};
     }
   }
 

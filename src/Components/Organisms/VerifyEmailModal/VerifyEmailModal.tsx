@@ -3,11 +3,15 @@ import mailSent from "../../../assets/Icons/mail_sent.svg";
 import mailApproved from "../../../assets/Icons/mail_approved.svg";
 import { useAppSelector } from "../../../Redux/Hooks";
 import { useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../Redux/Hooks";
 import { tempAuth } from "../../../Redux/AuthSlice";
 
-const VerifyEmailModal = (): JSX.Element => {
+type createType = {
+  register: Function;
+};
+
+const VerifyEmailModal = ({ register }: createType): JSX.Element => {
   const dispatch = useAppDispatch();
   const auth = useAppSelector((state) => state.auth);
   const [icon, setIcon] = useState<number>(1);
@@ -22,41 +26,28 @@ const VerifyEmailModal = (): JSX.Element => {
     }
   }, [auth.user]);
 
-  console.log(auth.user);
-
-  
-  
-
-  
   const login = async () => {
-    const reloadinterval = 
-    setInterval(async () => {
+    const reloadinterval = setInterval(async () => {
       await auth.holdAuth.reload();
       console.log("interval ran");
       if (auth.holdAuth.emailVerified !== false) {
         dispatch(tempAuth());
-        clearInterval(reloadinterval)
+        clearInterval(reloadinterval);
       }
     }, 5000);
-
-
-
-    console.log(auth.holdAuth);
-    console.log("auth reload", auth.user);
   };
 
- 
-
   const loginHandler = () => {
+    register();
     navigate("/onboardingSteps");
   };
 
   return (
     <VerifyEmailModalStyle>
-      <div className="verify__mail__container">
-        <div className="verify__mail__images">
-          {icon === 1 && <img src={mailSent} alt="email" />}
-          {icon === 2 && <img src={mailApproved} alt="email" />}
+      <div className='verify__mail__container'>
+        <div className='verify__mail__images'>
+          {icon === 1 && <img src={mailSent} alt='email' />}
+          {icon === 2 && <img src={mailApproved} alt='email' />}
         </div>
         {icon === 1 && <div>Please verify your email and login here</div>}
         {icon === 2 && <button onClick={loginHandler}>Proceed</button>}

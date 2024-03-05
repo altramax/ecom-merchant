@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
 import {
   createUser,
   googleLogin,
-  // resetAuthMessage,
 } from "../../../Redux/AuthSlice";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -12,9 +11,8 @@ import eyes_closed from "../../../assets/Icons/eye_closed.svg";
 import eyes_open from "../../../assets/Icons/eye_open.svg";
 import VerifyEmailModal from "../VerifyEmailModal/VerifyEmailModal";
 import Button from "../../Molecule/Button/Button";
-import { addDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import {doc, getDoc, setDoc} from "firebase/firestore";
 import { db } from "../../../Config/Config";
-import { update } from "firebase/database";
 
 type fieldsType = {
   email: string;
@@ -47,6 +45,7 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
     if (auth.message === "Please verify your email") {
       handlerEmailVerificaton();
     } else if (auth.message === "Request Successful") {
+      createDatabase();
       navigate("/onboardingSteps");
     }
   }, [auth.user, auth.message]);
@@ -54,11 +53,21 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
   useEffect(() => {
     if (fields.storeName !== "") {
       setTimeout(() => {
-      existingStoreName &&  checkIfStoreNameExist();
+        existingStoreName && checkIfStoreNameExist();
       }, 2000);
     }
   }, [fields.storeName]);
 
+  const createDatabase = async () => {
+    if (auth.user !== null) {
+      await setDoc(doc(db, "Merchant", `${auth.user.uid}`), {
+        businessInformation: {},
+        OwnersInformation: {},
+        skipForNow: false,
+      });
+      storeNameCreationHandler(); 
+    }
+  };
 
   const onchange = async (name: string, value: string) => {
     const fieldsValue: any = Object.assign({}, fields);
@@ -81,23 +90,19 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
   };
 
   const storeNameCreationHandler = async () => {
-    await setDoc(docRef, {
-      stores: [...existingStoreName, fields.storeName],
-    });
-    await setDoc(doc(db, "Merchant", `${auth.user.uid}`), {
-      businessInformation: {},
-      OwnersInformation: {},
-      skipForNow: false 
-    });
+    if (fields.storeName) {
+      await setDoc(docRef, {
+        stores: [...existingStoreName, fields.storeName],
+      });
+    }
   };
 
   const createUserWithEmail = async (
     evt: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     evt.preventDefault();
-      if (!storeNameError) {
-        await dispatch(createUser(fields));
-        storeNameCreationHandler();
+    if (!storeNameError) {
+     return await dispatch(createUser(fields));
     }
   };
 
@@ -118,7 +123,7 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
 
   const renderVerifyEmailModal = () => {
     if (verifyEmail) {
-      return <VerifyEmailModal />;
+      return <VerifyEmailModal register={createDatabase} />;
     }
   };
 
@@ -126,70 +131,70 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
     <SignUpModalStyle>
       {renderVerifyEmailModal()}
       <form id={color.mode} className={`signup__form`}>
-        <div className="signup">
-          <div className="signup__header">
+        <div className='signup'>
+          <div className='signup__header'>
             <h3>ONE WearHouse</h3>
           </div>
-          <div className="signup__body">
-            <div className="signup__inputs">
-              <div className="input__group">
+          <div className='signup__body'>
+            <div className='signup__inputs'>
+              <div className='input__group'>
                 <input
-                  className="input"
-                  type="text"
-                  placeholder="Store Name"
-                  name="storeName"
+                  className='input'
+                  type='text'
+                  placeholder='Store Name'
+                  name='storeName'
                   onChange={(evt) => {
                     onchange(evt.target.name, evt.target.value);
                   }}
                 />
                 {storeNameError && (
-                  <small className="small">This Store Already Exist</small>
+                  <small className='small'>This Store Already Exist</small>
                 )}
               </div>
 
-              <div className="input__group">
+              <div className='input__group'>
                 <input
-                  className="input"
-                  type="text"
-                  placeholder="Email"
-                  name="email"
+                  className='input'
+                  type='text'
+                  placeholder='Email'
+                  name='email'
                   onChange={(evt) => {
                     onchange(evt.target.name, evt.target.value);
                   }}
                 />
                 {auth.performedAction === "signup" &&
                 auth.message.includes("email") ? (
-                  <small className="small">{auth.message}</small>
+                  <small className='small'>{auth.message}</small>
                 ) : null}
               </div>
 
-              <div className="password__group">
-                <div className="input__group">
+              <div className='password__group'>
+                <div className='input__group'>
                   <input
-                    className="input"
+                    className='input'
                     type={eyes === true ? "text" : "password"}
-                    placeholder="Password"
-                    name="password"
+                    placeholder='Password'
+                    name='password'
                     onChange={(evt) => {
                       onchange(evt.target.name, evt.target.value);
                     }}
                   />
                   {auth.message.includes("password") ||
                   auth.message.includes("credential") ? (
-                    <small className="small">{auth.message}</small>
+                    <small className='small'>{auth.message}</small>
                   ) : null}
                 </div>
 
-                <div className="eyes__group">
+                <div className='eyes__group'>
                   <img
                     src={eyes_closed}
-                    alt=""
+                    alt=''
                     className={eyes === false ? "visible" : "hidden"}
                     onClick={() => passwordVisibility(true)}
                   />
                   <img
                     src={eyes_open}
-                    alt=""
+                    alt=''
                     className={eyes === true ? "visible" : "hidden"}
                     onClick={() => passwordVisibility(false)}
                   />
@@ -198,27 +203,27 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
             </div>
 
             <Button
-              type="submit"
-              className="button"
+              type='submit'
+              className='button'
               Click={createUserWithEmail}
-              value="Signup"
+              value='Signup'
             />
 
-            <div className="signup__dash">
+            <div className='signup__dash'>
               <div>——————</div>
               <p>or</p>
               <div>——————</div>
             </div>
 
             <div
-              className="signup__body__googlelogin"
+              className='signup__body__googlelogin'
               onClick={createUserWithGoogle}
             >
-              <img src={google_Icon} alt="google Icon" />
+              <img src={google_Icon} alt='google Icon' />
               <p>Signup with Google</p>
             </div>
 
-            <p className="signin">
+            <p className='signin'>
               Already have an account ? <span onClick={signIn}> Signin</span>
             </p>
           </div>

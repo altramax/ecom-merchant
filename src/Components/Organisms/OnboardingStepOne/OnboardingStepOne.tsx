@@ -91,7 +91,7 @@ const OnboardingStepOne = ({ next, skip }: OnboardType) => {
     setSelectedImage("");
   };
 
-  const handleDragStart = (evt: any) => {};
+  const handleDragStart = () => {};
 
   const handleDragOver = (evt: any) => {
     evt.preventDefault();
@@ -109,67 +109,63 @@ const OnboardingStepOne = ({ next, skip }: OnboardType) => {
 
   return (
     <OnboardingStepOnestyle>
-      <form id={color.mode} className="step__form">
-        <div className="step__one__container">
-          <div className="step__one__heading">
+      <form id={color.mode} className='step__form'>
+        <div className='step__one__container'>
+          <div className='step__one__heading'>
             <h1>Business Information</h1>
-            <p className="step__one__heading">
+            <p className='step__one__heading'>
               Kindly ensure that all the informations provide are correct before
               proceeding
             </p>
           </div>
-          <div className="input__groups">
-            <div className="input__group">
-              {/* <title></title> */}
+          <div className='input__groups'>
+            <div className='input__group'>
               <input
-                type="text"
-                name="storeName"
-                placeholder="Store Name"
+                type='text'
+                name='storeName'
+                placeholder='Store Name'
                 value={fields.storeName}
                 onChange={(evt) => onchange(evt.target.name, evt.target.value)}
               />
             </div>
-            <div className="input__group">
-              {/* <title></title> */}
+            <div className='input__group'>
               <input
-                type="text"
-                name="storeAddress"
+                type='text'
+                name='storeAddress'
                 value={fields.storeAddress}
-                placeholder="Store Address"
+                placeholder='Store Address'
                 onChange={(evt) => onchange(evt.target.name, evt.target.value)}
               />
               {error.includes("Address") && <small>{error}</small>}
             </div>
           </div>
-          <div className="input__groups">
-            <div className="input__group">
-              {/* <title></title> */}
+          <div className='input__groups'>
+            <div className='input__group'>
               <input
-                type="text"
-                name="storePhonenumber"
+                type='text'
+                name='storePhonenumber'
                 value={fields.storePhonenumber}
-                placeholder="Store Phone Number"
+                placeholder='Store Phone Number'
                 onChange={(evt) => onchange(evt.target.name, evt.target.value)}
               />
               {error.includes("Phone") && <small>{error}</small>}
             </div>
-            <div className="input__group">
-              {/* <title></title> */}
+            <div className='input__group'>
               <input
-                type="text"
-                name="countryAndState"
+                type='text'
+                name='countryAndState'
                 value={fields.countryAndState}
-                placeholder="Country And State"
+                placeholder='Country And State'
                 onChange={(evt) => onchange(evt.target.name, evt.target.value)}
               />
             </div>
           </div>
           <div
-            className="image__upload__groups"
+            className='image__upload__groups'
             onDrop={handleDragDrop}
             onDragOver={handleDragOver}
           >
-            <div className="upload__text" onDragStart={handleDragStart}>
+            <div className='upload__text' onDragStart={handleDragStart}>
               <h3>Brand Logo</h3>
               <p>
                 Drag file here or <span onClick={handlerClick}>Click here</span>{" "}
@@ -180,33 +176,33 @@ const OnboardingStepOne = ({ next, skip }: OnboardType) => {
               )}
             </div>
             <input
-              type="file"
-              name="  brandLogo"
-              className=" hidden"
+              type='file'
+              name='  brandLogo'
+              className=' hidden'
               ref={file}
               onChange={fileHandler}
             />
-            <div className="uploaded__image">
+            <div className='uploaded__image'>
               {selectedImage && (
-                <div className="image__delete">
+                <div className='image__delete'>
                   <p>{selectedImage}</p>
-                  <img src={delete_icon} alt="" onClick={deleteFile} />
+                  <img src={delete_icon} alt='' onClick={deleteFile} />
                 </div>
               )}
             </div>
           </div>
-          <div className="buttons__group">
+          <div className='buttons__group'>
             <Button
-              type="button"
-              value="Skip for Now"
+              type='button'
+              value='Skip for Now'
               Click={skip}
-              className="button"
+              className='button'
             />
             <Button
-              type="submit"
-              value="Next"
+              type='submit'
+              value='Next'
               Click={(evt: any) => handlerSubmit(evt)}
-              className="button"
+              className='button'
             />
           </div>
         </div>
