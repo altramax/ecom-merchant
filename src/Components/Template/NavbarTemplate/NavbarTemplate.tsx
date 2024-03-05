@@ -4,8 +4,7 @@ import moon from "../../../assets/Icons/moon.svg";
 import sun from "../../../assets/Icons/sun.svg";
 import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
 import { lightmode, darkmode } from "../../../Redux/ColorSlice";
-import { logOut, resetAuthMessage } from "../../../Redux/AuthSlice";
-import { otherErrors } from "../../../Redux/AlertSlice";
+import { logOut } from "../../../Redux/AuthSlice";
 import { Link } from "react-router-dom";
 import dashbordIconlight from "../../../assets/Icons/dashboard-icon.svg";
 import addProductsIconlight from "../../../assets/Icons/products-icon.svg";
@@ -78,70 +77,73 @@ const NavbarTemplate = () => {
           )}
         </div> */}
 
-        <div className="nav__heading__container">
+        <div className='nav__heading__container'>
           <h3 className={`${navWidth === true ? "null" : "slowVisibility"}`}>
             ONE WearHouse{" "}
           </h3>
-          <img src={hamburger} alt="menu" onClick={handleNavWidth} />
+          <img src={hamburger} alt='menu' onClick={handleNavWidth} />
           <img
             src={hamburgerClosed}
-            alt="menu"
+            alt='menu'
             onClick={handleNavWidth}
-            className="closed"
+            className='closed'
           />
         </div>
 
-        <div className="nav__link__groups">
-          <Link to={"/dashboard"} className="link__sub__group">
-            <img src={dashbordIconlight} alt="dashboard-icon" />
+        <div className='nav__link__groups'>
+          <Link to={"/dashboard"} className='link__sub__group'>
+            <img src={dashbordIconlight} alt='dashboard-icon' />
             <p className={`${navWidth === true ? "null" : "slowVisibility"}`}>
               Dashboard
             </p>
           </Link>
-          <Link to={"/wearhouse"} className="link__sub__group">
-            <img src={addProductsIconlight} alt="addproducts-icon" />
+          <Link to={"/wearhouse"} className='link__sub__group'>
+            <img src={addProductsIconlight} alt='addproducts-icon' />
             <p className={`${navWidth === true ? "null" : "slowVisibility"}`}>
               WearHouse
             </p>
           </Link>
 
-          <Link to={"/orders"} className="link__sub__group">
-            <img src={ordericonColor} alt="" />
+          <Link to={"/orders"} className='link__sub__group'>
+            <img src={ordericonColor} alt='' />
             <p className={`${navWidth === true ? "null" : "slowVisibility"}`}>
               Orders
             </p>
           </Link>
         </div>
 
-        <div className="nav__profile__group">
-          <Avatar storename="easy" image={trial} />
-          <div className={`${navWidth === true ? "nav__profile__text__group" : "slowVisibility"}`}>
-            <p className="store__name">Easy</p>
-            <p className="store__email">Ezsy@gmail.com</p>
+        <div className='nav__profile__group'>
+          <Avatar storename='easy' image={trial} />
+          <div
+            className={`${
+              navWidth === true ? "nav__profile__text__group" : "slowVisibility"
+            }`}
+          >
+            <p className='store__name'>Easy</p>
+            <p className='store__email'>Ezsy@gmail.com</p>
           </div>
-
 
           <div className={`theme__button ${color.mode}`}>
             <div
-              className="img__container sun"
+              className='img__container sun'
               onClick={() => {
                 // modeHandler("dark");
                 themeHandler("dark");
               }}
             >
-              <img src={sun} alt="" />
+              <img src={sun} alt='' />
             </div>
             <div
-              className="img__container moon"
+              className='img__container moon'
               onClick={() => {
                 // modeHandler("light");
                 themeHandler("light");
               }}
             >
-              <img src={moon} alt="" />
+              <img src={moon} alt='' />
             </div>
           </div>
-          <button className="logout" onClick={() => dispatch(logOut())}>
+          <button className='logout' onClick={() => dispatch(logOut())}>
             logout
           </button>
         </div>
