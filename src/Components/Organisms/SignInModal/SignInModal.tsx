@@ -57,20 +57,16 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
     }
   }
 
-  console.log(auth.user);
-
  const StoreDetails =  async () => {
     const CollectionRef = doc(db, "Merchant", auth.user.uid);
     const data = await getDoc(CollectionRef);
-    console.log(auth.user.uid, data.data(), data.exists());
     if(data.exists()){
-      setCompletedProfile(true)
-      console.log("exist");
+      setCompletedProfile(data.data().skipForNow)
     }else if (!data.exists()){
-      console.log("not exist");
       setCompletedProfile(false)
     }
   };
+
 
   
 

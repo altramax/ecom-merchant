@@ -12,8 +12,9 @@ import eyes_closed from "../../../assets/Icons/eye_closed.svg";
 import eyes_open from "../../../assets/Icons/eye_open.svg";
 import VerifyEmailModal from "../VerifyEmailModal/VerifyEmailModal";
 import Button from "../../Molecule/Button/Button";
-import { doc, getDoc } from "firebase/firestore";
+import { addDoc, doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../../Config/Config";
+import { update } from "firebase/database";
 
 type fieldsType = {
   email: string;
@@ -31,21 +32,33 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
   const dispatch = useAppDispatch();
   const [eyes, setEyes] = useState<boolean>(false);
   const [verifyEmail, setVerifyEmail] = useState(false);
-  const [storeNameError, setStoreNameError] = useState("");
-const navigate = useNavigate();
+  const [storeNameError, setStoreNameError] = useState<boolean>(false);
+  const [existingStoreName, setExistingName] = useState<any>("");
+  const navigate = useNavigate();
   const [fields, setFields] = useState<fieldsType>({
     email: "",
     password: "",
     storeName: "",
   });
+  const docRef = doc(db, "Merchant", "StoreName");
 
   useEffect(() => {
+    getExistingStore();
     if (auth.message === "Please verify your email") {
       handlerEmailVerificaton();
-    }else if (auth.message === "Request Successful"){
-      navigate("/onboardingSteps")
+    } else if (auth.message === "Request Successful") {
+      navigate("/onboardingSteps");
     }
   }, [auth.user, auth.message]);
+
+  useEffect(() => {
+    if (fields.storeName !== "") {
+      setTimeout(() => {
+        checkIfStoreNameExist();
+      }, 2000);
+    }
+  }, [fields.storeName]);
+
 
   const onchange = async (name: string, value: string) => {
     const fieldsValue: any = Object.assign({}, fields);
@@ -53,24 +66,33 @@ const navigate = useNavigate();
     await setFields(fieldsValue);
   };
 
-
-  const StoreDetails =  async () => {
-    const CollectionRef = doc(db, "Merchant", auth.user.uid);
-    const data = await getDoc(CollectionRef);
-    console.log(auth.user.uid, data.data(), data.exists());
-   
+  const getExistingStore = async () => {
+    const data = await getDoc(docRef);
+    if (data.exists()) {
+      setExistingName(data.data().stores);
+    }
   };
 
+  const checkIfStoreNameExist = () => {
+    existingStoreName.filter((stores: any) => fields.storeName === stores)
+      .length >= 1
+      ? setStoreNameError(true)
+      : setStoreNameError(false);
+  };
+
+  const storeNameDataHandler = async () => {
+    await setDoc(docRef, {
+      stores: [...existingStoreName, fields.storeName],
+    });
+  };
 
   const createUserWithEmail = async (
     evt: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     evt.preventDefault();
-    if (fields.storeName.length <= 1) {
-      setStoreNameError("Invalid Storename");
-    } else {
-      setStoreNameError("")
-      await dispatch(createUser(fields));
+      if (!storeNameError) {
+        await dispatch(createUser(fields));
+        storeNameDataHandler();
     }
   };
 
@@ -78,7 +100,7 @@ const navigate = useNavigate();
     evt: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     evt.preventDefault();
-    await dispatch(googleLogin()).then((res:any)=> res.payload.user.email);
+    await dispatch(googleLogin());
   };
 
   const passwordVisibility = (evt: boolean) => {
@@ -115,8 +137,8 @@ const navigate = useNavigate();
                     onchange(evt.target.name, evt.target.value);
                   }}
                 />
-                {storeNameError !== "" && (
-                  <small className="small">{storeNameError}</small>
+                {storeNameError && (
+                  <small className="small">This Store Already Exist</small>
                 )}
               </div>
 

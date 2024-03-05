@@ -76,6 +76,7 @@ const OnboardingStepTwo = ({ skip }: OnboardType) => {
       await setDoc(doc(db, "Merchant", `${auth.user.uid}`), {
         businessInformation: stepForm.stepOne,
         OwnersInformation: stepForm.stepTwo,
+        skipForNow: stepForm.skipForNow 
       });
       navigate("/dashboard");
       dispatch(stepClear());
@@ -103,7 +104,7 @@ const OnboardingStepTwo = ({ skip }: OnboardType) => {
     setSelectedImage("");
   };
 
-  const handleDragStart = (evt: any) => {};
+  const handleDragStart = () => {};
 
   const handleDragOver = (evt: any) => {
     evt.preventDefault();
