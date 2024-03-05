@@ -45,7 +45,7 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
     if (
       auth.user !== null &&
       auth.user.emailVerified &&
-      completedProfile
+      completedProfile === "true" || completedProfile === "completed"
     ) {
       navigate("/dashboard");
     } else if (
@@ -63,7 +63,7 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
     if(data.exists()){
       setCompletedProfile(data.data().skipForNow)
     }else if (!data.exists()){
-      setCompletedProfile(false)
+      setCompletedProfile("completed")
     }
   };
 

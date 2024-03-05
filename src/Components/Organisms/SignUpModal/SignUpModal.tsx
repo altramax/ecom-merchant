@@ -54,7 +54,7 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
   useEffect(() => {
     if (fields.storeName !== "") {
       setTimeout(() => {
-        checkIfStoreNameExist();
+      existingStoreName &&  checkIfStoreNameExist();
       }, 2000);
     }
   }, [fields.storeName]);
@@ -80,9 +80,14 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
       : setStoreNameError(false);
   };
 
-  const storeNameDataHandler = async () => {
+  const storeNameCreationHandler = async () => {
     await setDoc(docRef, {
       stores: [...existingStoreName, fields.storeName],
+    });
+    await setDoc(doc(db, "Merchant", `${auth.user.uid}`), {
+      businessInformation: {},
+      OwnersInformation: {},
+      skipForNow: false 
     });
   };
 
@@ -92,7 +97,7 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
     evt.preventDefault();
       if (!storeNameError) {
         await dispatch(createUser(fields));
-        storeNameDataHandler();
+        storeNameCreationHandler();
     }
   };
 

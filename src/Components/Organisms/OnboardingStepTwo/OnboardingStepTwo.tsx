@@ -76,7 +76,7 @@ const OnboardingStepTwo = ({ skip }: OnboardType) => {
       await setDoc(doc(db, "Merchant", `${auth.user.uid}`), {
         businessInformation: stepForm.stepOne,
         OwnersInformation: stepForm.stepTwo,
-        skipForNow: stepForm.skipForNow 
+        skipForNow: "completed" 
       });
       navigate("/dashboard");
       dispatch(stepClear());

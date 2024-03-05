@@ -48,7 +48,7 @@ const VerifyEmailModal = (): JSX.Element => {
  
 
   const loginHandler = () => {
-    navigate("/dashboard");
+    navigate("/onboardingSteps");
   };
 
   return (
