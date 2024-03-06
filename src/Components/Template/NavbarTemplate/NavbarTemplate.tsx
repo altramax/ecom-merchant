@@ -14,11 +14,15 @@ import hamburgerClosed from "../../../assets/Icons/hamburger-closed.svg";
 import Avatar from "../../Atom/Avatar/Avatar";
 import trial from "../../../assets/Images/men.jpg";
 
-const NavbarTemplate = () => {
+type navtype = {
+  widthControl: Function,
+  navWidth: boolean;
+}
+
+const NavbarTemplate = ({navWidth, widthControl}:navtype) => {
   const color = useAppSelector((state) => state.color);
   // const [successResponse, setSuccessResponse] = useState<boolean>(false);
   // const [errorResponse, setErrorResponse] = useState<boolean>(false);
-  const [navWidth, setNavWidth] = useState<boolean>(false);
   const alert = useAppSelector((state) => state.alert);
   const errorMessage = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
@@ -57,10 +61,6 @@ const NavbarTemplate = () => {
   //   }
   // };
 
-  const handleNavWidth = () => {
-    setNavWidth(!navWidth);
-    console.log("click");
-  };
 
   return (
     <NavbarTemplateStyle>
@@ -81,11 +81,11 @@ const NavbarTemplate = () => {
           <h3 className={`${navWidth === true ? "null" : "slowVisibility"}`}>
             ONE WearHouse{" "}
           </h3>
-          <img src={hamburger} alt='menu' onClick={handleNavWidth} />
+          <img src={hamburger} alt='menu' onClick={()=>widthControl()} />
           <img
             src={hamburgerClosed}
             alt='menu'
-            onClick={handleNavWidth}
+            onClick={()=>widthControl() }
             className='closed'
           />
         </div>

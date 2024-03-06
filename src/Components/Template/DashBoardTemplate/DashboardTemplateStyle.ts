@@ -30,7 +30,6 @@ const DashboardTemplateStyle = styled.div`
     }
   }
 
-
   .bot {
     width: 300px;
     height: 100px;
@@ -87,26 +86,32 @@ const DashboardTemplateStyle = styled.div`
 
   .dashboard__template__container {
     .route__body {
-      // width: 100%;
-      // padding-left: 50px;
+      width: 100%;
+      padding-left: 50px;
     }
   }
 
-  @media(min-width: 1080px){
+  @media (min-width: 1080px) {
     .dashboard__template__container {
       display: flex;
       justify-content: start;
       .nav__width {
+        transition: width 0.5s ease-in-out;
         width: 20%;
       }
       .route__body {
-        // width: 80%;
+        transition: width 0.5s ease-in-out;
+        width: 80%;
+        padding: 0 30px;
+      }
+      .expand {
+        width: 95%;
+      }
+      .contract {
+        width: 5%;
       }
     }
-
-
   }
-
 `;
 
 export default DashboardTemplateStyle;
