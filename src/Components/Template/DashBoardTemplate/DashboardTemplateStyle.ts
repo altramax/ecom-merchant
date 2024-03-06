@@ -87,20 +87,20 @@ const DashboardTemplateStyle = styled.div`
 
   .dashboard__template__container {
     .route__body {
-      width: 100%;
-      padding-left: 50px;
+      // width: 100%;
+      // padding-left: 50px;
     }
   }
 
   @media(min-width: 1080px){
     .dashboard__template__container {
       display: flex;
-      justify-content: space-between;
+      justify-content: start;
       .nav__width {
         width: 20%;
       }
       .route__body {
-        width: 80%;
+        // width: 80%;
       }
     }
 

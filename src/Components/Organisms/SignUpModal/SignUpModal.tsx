@@ -179,7 +179,7 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
                       onchange(evt.target.name, evt.target.value);
                     }}
                   />
-                  {auth.message.includes("password") ||
+                  {auth.performedAction === "signup" && auth.message.includes("password") ||
                   auth.message.includes("credential") ? (
                     <small className='small'>{auth.message}</small>
                   ) : null}
