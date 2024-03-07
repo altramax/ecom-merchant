@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import night__sky from "../../../assets/Images/night__sky.jpg";
-import day__sky from "../../../assets/Images/day__sky.jpg";
+
 import { LightModeColor, DarkModeColor } from "../../Atom/Colors/Colors";
 
 const DashboardTemplateStyle = styled.div`
@@ -36,53 +35,7 @@ const DashboardTemplateStyle = styled.div`
     margin: 50px;
   }
 
-  .theme__button {
-    position: absolute;
-    bottom: 30px;
-    left: 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 70px;
-    transition: background-image 1s ease-in;
-    border-radius: 100px;
-
-    cursor: pointer;
-
-    .moon {
-      border-radius: 50%;
-      margin-left: auto;
-    }
-    .sun {
-      border-radius: 50%;
-    }
-
-    .img__container {
-      width: 30px;
-      padding: 5px;
-      opacity: 1;
-      img {
-        display: block;
-        width: 100%;
-      }
-    }
-  }
-
-  .light {
-    background-image: url(${day__sky});
-    background-size: 100%;
-    .moon {
-      opacity: 0;
-    }
-  }
-
-  .dark {
-    background-image: url(${night__sky});
-    background-size: 100%;
-    .sun {
-      opacity: 0;
-    }
-  }
+ 
 
   .dashboard__template__container {
     .route__body {

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { LightModeColor, DarkModeColor } from "../../Atom/Colors/Colors";
-// import { lightmode } from "../../../Redux/ColorSlice";
+import night__sky from "../../../assets/Images/night__sky.jpg";
+import day__sky from "../../../assets/Images/day__sky.jpg";
 
 const NavbarTemplateStyle = styled.div`
   #light {
@@ -14,6 +15,23 @@ const NavbarTemplateStyle = styled.div`
     .link__sub__group:hover {
       background-color: ${DarkModeColor.backgroundVariant};
     }
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .hamburger {
+    position: absolute;
+    margin-right: -20px;
+    cursor: pointer;
+    width: 40px;
+    margin-bottom: -10px;
+    z-index: 30;
+  }
+
+  .closed {
+    display: none;
   }
 
   .network__response {
@@ -37,7 +55,7 @@ const NavbarTemplateStyle = styled.div`
     justifty-content: center;
     align-items: center;
     position: absolute;
-    width: 40%;
+    width: 30%;
     height: 100vh;
     transition: width 0.5s ease-in-out, background-color 0.2s ease-in-out;
 
@@ -45,6 +63,8 @@ const NavbarTemplateStyle = styled.div`
       // background-color: red;
       width: 80%;
       .link__sub__group {
+        height: 80px;
+
         width: 100%;
         border-radius: 3px;
         padding: 5px 5px;
@@ -65,22 +85,80 @@ const NavbarTemplateStyle = styled.div`
 
     .nav__heading__container {
       display: flex;
-      justify-content: end;
+      justify-content: center;
       align-items: center;
       gap: 10px;
       margin-bottom: 20px;
       width: 100%;
+    }
+  }
+
+  .nav__profile__group {
+    position: absolute;
+    bottom: 30px;
+    cursor: pointer;
+
+    .nav__profile {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+    .profile__dropDown {
+      // display: none;
+    }
+    .profile__dropDown__tools {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+
+  .theme__button {
+    // position: absolute;
+    // bottom: 30px;
+    // left: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 70px;
+    transition: background-image 1s ease-in;
+    border-radius: 100px;
+
+    cursor: pointer;
+
+    .moon {
+      border-radius: 50%;
+      margin-left: auto;
+    }
+    .sun {
+      border-radius: 50%;
+    }
+
+    .img__container {
+      width: 30px;
+      padding: 5px;
+      opacity: 1;
       img {
-        // position: absolute;
-        margin-right: -20px;
-        cursor: pointer;
-        width: 40px;
-        margin-bottom: -10px;
-        // display: block;
+        display: block;
+        width: 100%;
       }
-      .closed {
-        display: none;
-      }
+    }
+  }
+
+  .light {
+    background-image: url(${day__sky});
+    background-size: 100%;
+    .moon {
+      opacity: 0;
+    }
+  }
+
+  .dark {
+    background-image: url(${night__sky});
+    background-size: 100%;
+    .sun {
+      opacity: 0;
     }
   }
 
@@ -89,7 +167,9 @@ const NavbarTemplateStyle = styled.div`
 
     .nav__link__groups {
       .link__sub__group {
+        height: 80px;
         gap: 0;
+        justify-content: center;
         p {
           // transition: opacity 0.2s ease-in-out;
           opacity: 0;
@@ -113,31 +193,16 @@ const NavbarTemplateStyle = styled.div`
       }
     }
 
-    .nav__profile__group{
+    .nav__profile__group {
       gap: 0;
-      .nav__profile__text__group{
-       opacity: 0;
-       width: 0;
+      .nav__profile{
+        gap: 0;
+      }
+      .nav__profile__text__group {
+        opacity: 0;
+        width: 0;
       }
     }
-  }
-
-  
-
-  .nav__profile__group{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    position: absolute;
-    bottom: 30px;
-  }
-
-  .logout{
-    z-index: 300;
-    // position: absolute;
-    // bottom: 0;
-    // display: none;
   }
 
   @media (min-width: 1080px) {
@@ -151,8 +216,8 @@ const NavbarTemplateStyle = styled.div`
 
       .nav__link__groups {
         .link__sub__group {
-        padding: 8px 20px;
-        // padding: 20px 0;
+          padding: 8px 20px;
+          // padding: 20px 0;
           // gap: 8px;
           img {
             width: 25px;
@@ -166,6 +231,11 @@ const NavbarTemplateStyle = styled.div`
 
     .contract {
       width: 5%;
+      // .nav__profile__group {
+      //   .nav__profile {
+      //     gap: 100px;
+      //   }
+      // }
     }
   }
 `;

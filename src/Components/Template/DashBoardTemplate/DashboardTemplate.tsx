@@ -3,6 +3,7 @@ import {useAppSelector } from "../../../Redux/Hooks";
 import NavbarTemplate from "../NavbarTemplate/NavbarTemplate";
 import PrivateRoute from "../../../Routes/RoutesPath";
 import { useState } from "react";
+import NetworkStatus from "../../Molecule/NetworkStatus/NetworkStatus";
 
 const DashboardTemplate = () => {
   const color = useAppSelector((state) => state.color);
@@ -37,15 +38,20 @@ const DashboardTemplate = () => {
     setWidth(!width);
   };
 
+  const openWidth = ()=>{
+    setWidth(false)
+  }
+
 
   return (
     <DashboardTemplateStyle>
       <div id={color.mode}>
+        <NetworkStatus/>
      
 
         <div className="dashboard__template__container">
           <div className={`nav__width ${width ? "contract" : null}`}>
-            <NavbarTemplate navWidth={width} widthControl={handleWidth}/>
+            <NavbarTemplate navWidth={width} widthControl={handleWidth} openWidth={openWidth}/>
           </div>
           <div className={`route__body ${width ? "expand" : null}`} >
             <PrivateRoute />
