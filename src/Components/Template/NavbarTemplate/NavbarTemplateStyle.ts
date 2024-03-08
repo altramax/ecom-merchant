@@ -21,17 +21,12 @@ const NavbarTemplateStyle = styled.div`
     display: none;
   }
 
-  .hamburger {
+  .hamburger__container {
     position: absolute;
-    margin-right: -20px;
     cursor: pointer;
     width: 40px;
-    margin-bottom: -10px;
+    left: 0;
     z-index: 30;
-  }
-
-  .closed {
-    display: none;
   }
 
   .network__response {
@@ -103,6 +98,7 @@ const NavbarTemplateStyle = styled.div`
       justify-content: space-between;
       align-items: center;
       gap: 10px;
+      transition: bottom 1s ease-in;
     }
     .profile__dropDown {
       // display: none;
@@ -185,17 +181,11 @@ const NavbarTemplateStyle = styled.div`
         width: 0;
         height: 0;
       }
-      img {
-        display: none;
-      }
-      .closed {
-        display: block;
-      }
     }
 
     .nav__profile__group {
       gap: 0;
-      .nav__profile{
+      .nav__profile {
         gap: 0;
       }
       .nav__profile__text__group {

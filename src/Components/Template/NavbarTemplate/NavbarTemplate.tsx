@@ -53,12 +53,12 @@ const NavbarTemplate = ({ navWidth, widthControl, openWidth }: navtype) => {
     });
   };
 
-  console.log(auth.user);
+  // console.log(auth.user);
 
   return (
     <NavbarTemplateStyle>
       <div className='main__nav__container '>
-        <div className='images__groups'>
+        <div className='hamburger__container'>
           <img
             src={hamburger}
             alt='menu'
@@ -67,15 +67,6 @@ const NavbarTemplate = ({ navWidth, widthControl, openWidth }: navtype) => {
               widthControl();
               setDropDown(false);
             }}
-          />
-          <img
-            src={hamburgerClosed}
-            alt='menu'
-            onClick={() => {
-              widthControl();
-              setDropDown(false);
-            }}
-            className='hamburger closed'
           />
         </div>
 
