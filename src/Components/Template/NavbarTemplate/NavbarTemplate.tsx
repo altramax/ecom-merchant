@@ -9,13 +9,13 @@ import { Link } from "react-router-dom";
 import dashbordIconlight from "../../../assets/Icons/dashboard-icon.svg";
 import addProductsIconlight from "../../../assets/Icons/products-icon.svg";
 import ordericonColor from "../../../assets/Icons/cart.png";
-import hamburger from "../../../assets/Icons/hamburger.svg";
-import hamburgerClosed from "../../../assets/Icons/hamburger-closed.svg";
+import hamburger from "../../../assets/Icons/hamburger-closed.svg";
 import Avatar from "../../Atom/Avatar/Avatar";
 import trial from "../../../assets/Images/men.jpg";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../Config/Config";
 import { stepOne, stepTwo, skipForNow } from "../../../Redux/StepForm";
+import LoadingModal from "../../Organisms/LoadingModal/LoadingModalStyle";
 
 type navtype = {
   widthControl: Function;
@@ -57,12 +57,14 @@ const NavbarTemplate = ({ navWidth, widthControl, openWidth }: navtype) => {
 
   return (
     <NavbarTemplateStyle>
-      <div className='main__nav__container '>
-        <div className='hamburger__container'>
+
+      <div className="main__nav__container ">
+        <LoadingModal/>
+        <div className="hamburger__container">
           <img
             src={hamburger}
-            alt='menu'
-            className='hamburger'
+            alt="menu"
+            className="hamburger"
             onClick={() => {
               widthControl();
               setDropDown(false);
@@ -75,28 +77,28 @@ const NavbarTemplate = ({ navWidth, widthControl, openWidth }: navtype) => {
           className={`nav__container ${navWidth === true ? "contract" : null}`}
           onClick={() => openWidth()}
         >
-          <div className='nav__heading__container'>
+          <div className="nav__heading__container">
             <h3 className={`${navWidth === true ? "null" : "slowVisibility"}`}>
               ONE WearHouse{" "}
             </h3>
           </div>
 
-          <div className='nav__link__groups'>
-            <Link to={"/dashboard"} className='link__sub__group'>
-              <img src={dashbordIconlight} alt='dashboard-icon' />
+          <div className="nav__link__groups">
+            <Link to={"/dashboard"} className="link__sub__group">
+              <img src={dashbordIconlight} alt="dashboard-icon" />
               <p className={`${navWidth === true ? "null" : "slowVisibility"}`}>
                 Dashboard
               </p>
             </Link>
-            <Link to={"/wearhouse"} className='link__sub__group'>
-              <img src={addProductsIconlight} alt='addproducts-icon' />
+            <Link to={"/wearhouse"} className="link__sub__group">
+              <img src={addProductsIconlight} alt="addproducts-icon" />
               <p className={`${navWidth === true ? "null" : "slowVisibility"}`}>
                 WearHouse
               </p>
             </Link>
 
-            <Link to={"/orders"} className='link__sub__group'>
-              <img src={ordericonColor} alt='' />
+            <Link to={"/orders"} className="link__sub__group">
+              <img src={ordericonColor} alt="" />
               <p className={`${navWidth === true ? "null" : "slowVisibility"}`}>
                 Orders
               </p>
@@ -104,51 +106,57 @@ const NavbarTemplate = ({ navWidth, widthControl, openWidth }: navtype) => {
           </div>
 
           <div
-            className='nav__profile__group'
+            className="nav__profile__group"
             onClick={() => setDropDown(!dropDown)}
           >
-            <div className='nav__profile'>
-              <Avatar storename='easy' image={trial} />
-              <div
-                className={`${
-                  navWidth === true
-                    ? "nav__profile__text__group"
-                    : "slowVisibility"
-                }`}
-              >
-                <p className='store__name'>{auth.user.displayName}</p>
-                <p className='store__email'>{auth.user.email}</p>
-              </div>
+            <div className="nav__profile">
+              <Avatar storename="easy" image={trial} />
+              {auth.user && (
+                <div
+                  className={`${
+                    navWidth === true
+                      ? "nav__profile__text__group"
+                      : "slowVisibility"
+                  }`}
+                >
+                  <p className="store__name">{auth.user.displayName}</p>
+                  <p className="store__email">{auth.user.email}</p>
+                </div>
+              )}
             </div>
 
-            <div className={`profile__dropDown ${!dropDown ? "hidden" : null}`}>
+            <div
+              className={`profile__dropDown ${
+                navWidth === true ? "null" : "slowVisibility"
+              } ${!dropDown ? "hidden" : null}`}
+            >
               <div>
                 <h1>Game</h1>
                 <h1>Game</h1>
                 <h1>Game</h1>
               </div>
-              <div className='profile__dropDown__tools'>
+              <div className="profile__dropDown__tools">
                 <div className={`theme__button ${color.mode}`}>
                   <div
-                    className='img__container sun'
+                    className="img__container sun"
                     onClick={() => {
                       // modeHandler("dark");
                       themeHandler("dark");
                     }}
                   >
-                    <img src={sun} alt='' />
+                    <img src={sun} alt="" />
                   </div>
                   <div
-                    className='img__container moon'
+                    className="img__container moon"
                     onClick={() => {
                       // modeHandler("light");
                       themeHandler("light");
                     }}
                   >
-                    <img src={moon} alt='' />
+                    <img src={moon} alt="" />
                   </div>
                 </div>
-                <button className='logout' onClick={() => dispatch(logOut())}>
+                <button className="logout" onClick={() => dispatch(logOut())}>
                   logout
                 </button>
               </div>

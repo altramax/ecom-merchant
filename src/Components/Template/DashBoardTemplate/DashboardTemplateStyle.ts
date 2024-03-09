@@ -40,7 +40,7 @@ const DashboardTemplateStyle = styled.div`
   .dashboard__template__container {
     .route__body {
       width: 100%;
-      padding-left: 50px;
+      padding-left: 10%;
     }
   }
 
@@ -55,7 +55,7 @@ const DashboardTemplateStyle = styled.div`
       .route__body {
         transition: width 0.5s ease-in-out;
         width: 80%;
-        padding: 0 30px;
+        padding-left: 2%;
       }
       .expand {
         width: 95%;

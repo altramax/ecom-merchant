@@ -24,9 +24,16 @@ const NavbarTemplateStyle = styled.div`
   .hamburger__container {
     position: absolute;
     cursor: pointer;
-    width: 40px;
+    width: 7%;
+    // height: 20px;
     left: 0;
     z-index: 30;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    img {
+      width: 20px;
+    }
   }
 
   .network__response {
@@ -50,16 +57,13 @@ const NavbarTemplateStyle = styled.div`
     justifty-content: center;
     align-items: center;
     position: absolute;
-    width: 30%;
+    width: 50%;
     height: 100vh;
     transition: width 0.5s ease-in-out, background-color 0.2s ease-in-out;
 
     .nav__link__groups {
-      // background-color: red;
-      width: 80%;
+      width: 70%;
       .link__sub__group {
-        height: 80px;
-
         width: 100%;
         border-radius: 3px;
         padding: 5px 5px;
@@ -68,6 +72,8 @@ const NavbarTemplateStyle = styled.div`
         justify-content: start;
         align-items: center;
         gap: 8px;
+        font-size: 14px;
+
         img {
           width: 15px;
         }
@@ -79,12 +85,11 @@ const NavbarTemplateStyle = styled.div`
     }
 
     .nav__heading__container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 10px;
       margin-bottom: 20px;
-      width: 100%;
+      width: 70%;
+      height: 30px;
+
+      font-size: 14px;
     }
   }
 
@@ -92,6 +97,8 @@ const NavbarTemplateStyle = styled.div`
     position: absolute;
     bottom: 30px;
     cursor: pointer;
+    // left: 15%;
+    // width: 70%;
 
     .nav__profile {
       display: flex;
@@ -99,6 +106,10 @@ const NavbarTemplateStyle = styled.div`
       align-items: center;
       gap: 10px;
       transition: bottom 1s ease-in;
+      .store__email {
+        font-size: 12px;
+        text-wrap: wrap;
+      }
     }
     .profile__dropDown {
       // display: none;
@@ -111,9 +122,6 @@ const NavbarTemplateStyle = styled.div`
   }
 
   .theme__button {
-    // position: absolute;
-    // bottom: 30px;
-    // left: 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -160,10 +168,10 @@ const NavbarTemplateStyle = styled.div`
 
   .contract {
     width: 7%;
+    cursor: pointer;
 
     .nav__link__groups {
       .link__sub__group {
-        height: 80px;
         gap: 0;
         justify-content: center;
         p {
@@ -179,7 +187,8 @@ const NavbarTemplateStyle = styled.div`
       h3 {
         opacity: 0;
         width: 0;
-        height: 0;
+
+        height: 30px;
       }
     }
 
@@ -196,19 +205,27 @@ const NavbarTemplateStyle = styled.div`
   }
 
   @media (min-width: 1080px) {
+    .hamburger__container {
+      margin-top: 28px;
+      width: 5%;
+      img {
+        width: 30px;
+      }
+    }
+
     .nav__container {
-      width: 20%;
-      // padding-top: 70px;
+      width: 25%;
 
       .nav__heading__container {
-        gap: 100px;
+        width: 57%;
+        font-size: 16px;
       }
 
       .nav__link__groups {
         .link__sub__group {
           padding: 8px 20px;
-          // padding: 20px 0;
-          // gap: 8px;
+          font-size: 15px;
+
           img {
             width: 25px;
           }
@@ -216,6 +233,10 @@ const NavbarTemplateStyle = styled.div`
             transition: opacity 1s ease-in-out;
           }
         }
+      }
+
+      .nav__profile__group {
+        // left: 0;
       }
     }
 
