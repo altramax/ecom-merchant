@@ -3,7 +3,6 @@ import "./App.css";
 import OnboardingTemplate from "./Components/Template/OnboardingTemplate/OnboardingTemplate";
 import PrivateRoutes from "./Config/PrivateRoute";
 import DashboardTemplate from "./Components/Template/DashBoardTemplate/DashboardTemplate";
-// import { useAppSelector} from"./Redux/Hooks";
 import OnboardingSteps from "./Components/Organisms/OnboardingSteps/OnboardingSteps";
 
 function App() {

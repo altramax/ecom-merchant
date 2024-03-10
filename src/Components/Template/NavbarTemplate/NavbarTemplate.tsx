@@ -15,7 +15,6 @@ import trial from "../../../assets/Images/men.jpg";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../Config/Config";
 import { stepOne, stepTwo, skipForNow } from "../../../Redux/StepForm";
-import LoadingModal from "../../Organisms/LoadingModal/LoadingModalStyle";
 
 type navtype = {
   widthControl: Function;
@@ -59,7 +58,6 @@ const NavbarTemplate = ({ navWidth, widthControl, openWidth }: navtype) => {
     <NavbarTemplateStyle>
 
       <div className="main__nav__container ">
-        <LoadingModal/>
         <div className="hamburger__container">
           <img
             src={hamburger}

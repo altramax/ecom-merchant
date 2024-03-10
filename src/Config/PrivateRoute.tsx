@@ -5,29 +5,36 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { auth } from "./Config";
 import { clearAuth } from "../Redux/AuthSlice";
+import LoadingModal from "../Components/Organisms/LoadingModal/LoadingModal";
 
 type privateType = {
   children: JSX.Element;
 };
 
 const PrivateRoute = ({ children }: privateType) => {
-  // const state = useAppSelector((state) => state.auth);
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const [client, setClient] = useState<any>("");
-  // const auths = state.user !== null ? state.user?.userId : null;
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
+      setLoading(false);
       if (user) {
         setClient(user);
       } else {
         setClient(null);
-        dispatch(clearAuth())
+        dispatch(clearAuth());
       }
     });
-  },[]);
+  }, [auth]);
 
-  return client !== null ? children : <Navigate to={"/"} />;
+  return loading ? (
+    <LoadingModal />
+  ) : client !== null ? (
+    children
+  ) : (
+    <Navigate to={"/"} />
+  );
 };
 
 export default memo(PrivateRoute);
