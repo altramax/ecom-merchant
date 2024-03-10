@@ -1,7 +1,7 @@
 import OnboardingStepTwostyle from "./OnboardingStepTwoStyle";
 import Button from "../../Molecule/Button/Button";
 import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
-import { stepTwo, stepClear } from "../../../Redux/StepForm";
+import {stepClear } from "../../../Redux/StepForm";
 import { useEffect, useRef, useState } from "react";
 import delete_icon from "../../../assets/Icons/trash.svg";
 import { setDoc, doc } from "firebase/firestore";
@@ -36,7 +36,7 @@ const OnboardingStepTwo = ({ skip }: OnboardType) => {
   });
 
   useEffect(() => {
-    // dispatch(stepClear())
+   
     if (stepForm.stepTwo !== "") {
       console.log("enter");
       setfields(stepForm.stepTwo);
