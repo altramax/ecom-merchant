@@ -4,7 +4,7 @@ import night__sky from "../../../assets/Images/night__sky.jpg";
 import day__sky from "../../../assets/Images/day__sky.jpg";
 
 const NavbarTemplateStyle = styled.div`
-height: 100vh;
+
   #light {
     background-color: ${LightModeColor.primary};
     .link__sub__group:hover {
@@ -52,14 +52,14 @@ height: 100vh;
   }
 
   .nav__container {
-    padding-top: 30px;
+    padding: 30px 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     position: absolute;
     width: 50%;
-    height: 100%;
+    height: 100vh;
     transition: width 0.5s ease-in-out, background-color 0.2s ease-in-out;
     .width{
       width: 100%;
@@ -103,7 +103,7 @@ height: 100vh;
 
   .nav__profile__group {
     // position: absolute;
-   padding-bottom: 30px;
+  //  padding-bottom: 30px;
     cursor: pointer;
     // left: 15%;
     width: 70%;
