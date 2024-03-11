@@ -4,6 +4,7 @@ import night__sky from "../../../assets/Images/night__sky.jpg";
 import day__sky from "../../../assets/Images/day__sky.jpg";
 
 const NavbarTemplateStyle = styled.div`
+height: 100vh;
   #light {
     background-color: ${LightModeColor.primary};
     .link__sub__group:hover {
@@ -58,7 +59,7 @@ const NavbarTemplateStyle = styled.div`
     align-items: center;
     position: absolute;
     width: 50%;
-    height: 100vh;
+    height: 100%;
     transition: width 0.5s ease-in-out, background-color 0.2s ease-in-out;
     .width{
       width: 100%;

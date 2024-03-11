@@ -29,7 +29,7 @@ const OnboardingTemplate = () => {
       
       <div id={color.mode} className="onboarding__container">
         <div className={`slider ${mobileScreen === "slider" ? "shown" : "hidden"}`} >
-          <p className="skip" onClick={()=> mobileScreenHandler("login")}>Skip</p>
+          {access === "signup" ? null : <p className="skip" onClick={()=> mobileScreenHandler("login")}>Skip</p>}
           <OnboardingSlider slider={()=>mobileScreenHandler("login")}/>
         </div>
         <div className={`login ${mobileScreen === "login" ? "shown" : "hidden"}`} >

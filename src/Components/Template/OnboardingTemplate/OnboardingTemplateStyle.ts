@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { DarkModeColor} from "../../Atom/Colors/Colors";
 
 const OnboardingTemplateStyle = styled.div`
+overflow: hidden;
   .skip,
   .previous {
     position: absolute;
