@@ -54,12 +54,19 @@ const NavbarTemplateStyle = styled.div`
     padding-top: 30px;
     display: flex;
     flex-direction: column;
-    justifty-content: center;
+    justify-content: space-between;
     align-items: center;
     position: absolute;
     width: 50%;
     height: 100vh;
     transition: width 0.5s ease-in-out, background-color 0.2s ease-in-out;
+    .width{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justifty-content: center;
+      align-items: center;
+    }
 
     .nav__link__groups {
       width: 70%;
@@ -85,7 +92,7 @@ const NavbarTemplateStyle = styled.div`
     }
 
     .nav__heading__container {
-      margin-bottom: 20px;
+      // margin-bottom: 20px;
       width: 70%;
       height: 30px;
 
@@ -94,20 +101,21 @@ const NavbarTemplateStyle = styled.div`
   }
 
   .nav__profile__group {
-    position: absolute;
-    bottom: 30px;
+    // position: absolute;
+   padding-bottom: 30px;
     cursor: pointer;
     // left: 15%;
-    // width: 70%;
+    width: 70%;
 
     .nav__profile {
       display: flex;
-      justify-content: space-between;
+      justify-content: start;
       align-items: center;
       gap: 10px;
       transition: bottom 1s ease-in;
       .store__email {
         font-size: 12px;
+        width: 50px;
         text-wrap: wrap;
       }
     }
@@ -194,6 +202,7 @@ const NavbarTemplateStyle = styled.div`
 
     .nav__profile__group {
       gap: 0;
+      width: fit-content;
       .nav__profile {
         gap: 0;
       }

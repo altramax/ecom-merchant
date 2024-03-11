@@ -50,18 +50,18 @@ const DashboardTemplateStyle = styled.div`
       justify-content: start;
       .nav__width {
         transition: width 0.5s ease-in-out;
-        width: 20%;
+        width: 25vw;
       }
       .route__body {
         transition: width 0.5s ease-in-out;
-        width: 80%;
+        width: 75vw;
         padding-left: 2%;
       }
       .expand {
-        width: 95%;
+        width: 95vw;
       }
       .contract {
-        width: 5%;
+        width: 5vw;
       }
     }
   }

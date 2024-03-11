@@ -16,6 +16,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../Config/Config";
 import { stepOne, stepTwo, skipForNow } from "../../../Redux/StepForm";
 
+
 type navtype = {
   widthControl: Function;
   navWidth: boolean;
@@ -52,11 +53,10 @@ const NavbarTemplate = ({ navWidth, widthControl, openWidth }: navtype) => {
     });
   };
 
-  // console.log(auth.user);
+  console.log(auth.user.uid);
 
   return (
     <NavbarTemplateStyle>
-
       <div className="main__nav__container ">
         <div className="hamburger__container">
           <img
@@ -75,32 +75,42 @@ const NavbarTemplate = ({ navWidth, widthControl, openWidth }: navtype) => {
           className={`nav__container ${navWidth === true ? "contract" : null}`}
           onClick={() => openWidth()}
         >
-          <div className="nav__heading__container">
-            <h3 className={`${navWidth === true ? "null" : "slowVisibility"}`}>
-              ONE WearHouse{" "}
-            </h3>
-          </div>
+          <div className="width">
+            <div className="nav__heading__container">
+              <h3
+                className={`${navWidth === true ? "null" : "slowVisibility"}`}
+              >
+                ONE WearHouse{" "}
+              </h3>
+            </div>
 
-          <div className="nav__link__groups">
-            <Link to={"/dashboard"} className="link__sub__group">
-              <img src={dashbordIconlight} alt="dashboard-icon" />
-              <p className={`${navWidth === true ? "null" : "slowVisibility"}`}>
-                Dashboard
-              </p>
-            </Link>
-            <Link to={"/wearhouse"} className="link__sub__group">
-              <img src={addProductsIconlight} alt="addproducts-icon" />
-              <p className={`${navWidth === true ? "null" : "slowVisibility"}`}>
-                WearHouse
-              </p>
-            </Link>
+            <div className="nav__link__groups">
+              <Link to={"/dashboard"} className="link__sub__group">
+                <img src={dashbordIconlight} alt="dashboard-icon" />
+                <p
+                  className={`${navWidth === true ? "null" : "slowVisibility"}`}
+                >
+                  Dashboard
+                </p>
+              </Link>
+              <Link to={"/wearhouse"} className="link__sub__group">
+                <img src={addProductsIconlight} alt="addproducts-icon" />
+                <p
+                  className={`${navWidth === true ? "null" : "slowVisibility"}`}
+                >
+                  WearHouse
+                </p>
+              </Link>
 
-            <Link to={"/orders"} className="link__sub__group">
-              <img src={ordericonColor} alt="" />
-              <p className={`${navWidth === true ? "null" : "slowVisibility"}`}>
-                Orders
-              </p>
-            </Link>
+              <Link to={"/orders"} className="link__sub__group">
+                <img src={ordericonColor} alt="" />
+                <p
+                  className={`${navWidth === true ? "null" : "slowVisibility"}`}
+                >
+                  Orders
+                </p>
+              </Link>
+            </div>
           </div>
 
           <div
@@ -111,9 +121,9 @@ const NavbarTemplate = ({ navWidth, widthControl, openWidth }: navtype) => {
               <Avatar storename="easy" image={trial} />
               {auth.user && (
                 <div
-                  className={`${
+                  className={`nav__profile__text__group ${
                     navWidth === true
-                      ? "nav__profile__text__group"
+                      ? null
                       : "slowVisibility"
                   }`}
                 >
