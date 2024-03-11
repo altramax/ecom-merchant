@@ -8,14 +8,13 @@ const sliderStyle = styled.div`
     justify-content: center;
     align-items: center;
     .img__container{
-        height: 450px;
+        height: 380px;
         display: flex;
         justify-content: center;
         align-items: center;
     }
     img{
         width: 350px;
-        max-height: 650px;
     }
 }
 
@@ -39,7 +38,6 @@ const sliderStyle = styled.div`
         }
         img{
             width: 450px;
-            max-height: 450px;
         }
     }
 }

@@ -38,8 +38,10 @@ const DashboardTemplateStyle = styled.div`
  
 
   .dashboard__template__container {
+  
     .route__body {
-      width: 100%;
+      width: 100vw;
+      height: 100vh;
       padding-left: 10%;
     }
   }

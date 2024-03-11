@@ -92,7 +92,7 @@ const NavbarTemplateStyle = styled.div`
     }
 
     .nav__heading__container {
-      // margin-bottom: 20px;
+      margin-bottom: -10px;
       width: 70%;
       height: 30px;
 

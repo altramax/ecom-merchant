@@ -16,7 +16,7 @@ const OnboardingSliderStyle = styled.div`
     align-items: center;
     height: 100vh;
     .dot__group {
-      margin-top: 30px;
+      margin-top: 20px;
       cursor: pointer;
       display: flex;
       justify-content: center;

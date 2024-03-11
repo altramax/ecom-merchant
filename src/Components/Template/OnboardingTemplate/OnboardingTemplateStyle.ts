@@ -9,7 +9,7 @@ const OnboardingTemplateStyle = styled.div`
     left: 80%;
     z-index: 10;
     cursor: pointer;
-    margin: 20px auto;
+    // margin: 20px auto;
     width: fit-content;
     background-color: #dff3fc;
     padding: 4px 10px;
@@ -40,6 +40,8 @@ const OnboardingTemplateStyle = styled.div`
   }
 
   .onboarding__container {
+    width: 100vw;
+    height: 100vh;
     display: flex;
     .slider {
       width: 100%;
