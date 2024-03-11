@@ -52,7 +52,7 @@ const NavbarTemplateStyle = styled.div`
   }
 
   .nav__container {
-    padding: 30px 0;
+    padding: 30px 0 100px 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
