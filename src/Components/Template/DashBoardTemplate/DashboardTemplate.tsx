@@ -1,5 +1,5 @@
 import DashboardTemplateStyle from "./DashboardTemplateStyle";
-import {useAppSelector } from "../../../Redux/Hooks";
+import { useAppSelector } from "../../../Redux/Hooks";
 import NavbarTemplate from "../NavbarTemplate/NavbarTemplate";
 import PrivateRoute from "../../../Routes/RoutesPath";
 import { useState } from "react";
@@ -8,7 +8,6 @@ import NetworkStatus from "../../Molecule/NetworkStatus/NetworkStatus";
 const DashboardTemplate = () => {
   const color = useAppSelector((state) => state.color);
   const [width, setWidth] = useState<boolean>(true);
-
 
   // useEffect(() => {
   //   handleNetWorkChange();
@@ -38,22 +37,24 @@ const DashboardTemplate = () => {
     setWidth(!width);
   };
 
-  const openWidth = ()=>{
-    setWidth(false)
-  }
-
+  const openWidth = () => {
+    setWidth(false);
+  };
 
   return (
     <DashboardTemplateStyle>
       <div id={color.mode}>
-        <NetworkStatus/>
-     
+        <NetworkStatus />
 
         <div className="dashboard__template__container">
           <div className={`nav__width ${width ? "contract" : null}`}>
-            <NavbarTemplate navWidth={width} widthControl={handleWidth} openWidth={openWidth}/>
+            <NavbarTemplate
+              navWidth={width}
+              widthControl={handleWidth}
+              openWidth={openWidth}
+            />
           </div>
-          <div className={`route__body ${width ? "expand" : null}`} >
+          <div className={`route__body ${width ? "expand" : null}`}>
             <PrivateRoute />
           </div>
         </div>

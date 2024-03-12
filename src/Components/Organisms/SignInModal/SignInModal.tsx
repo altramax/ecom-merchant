@@ -13,6 +13,7 @@ import eyes_open from "../../../assets/Icons/eye_open.svg";
 import Button from "../../Molecule/Button/Button";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../Config/Config";
+import { stepOne, stepTwo, skipForNow } from "../../../Redux/StepForm";
 
 type fieldsType = {
   email: string;
@@ -27,6 +28,9 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
   const color = useAppSelector((state) => state.color);
   const auth = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
+  const alert = useAppSelector((state) => state.alert);
+  const errorMessage = useAppSelector((state) => state.auth);
+
   const navigate = useNavigate();
   const [completedProfile, setCompletedProfile] = useState<any>(null);
   const [eyes, setEyes] = useState<boolean>(false);
@@ -40,6 +44,13 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
     auth.user !== null && StoreDetails();
     completedProfile !== null && loginParameters();
   }, [auth.user, completedProfile]);
+
+
+  useEffect(() => {
+    if (auth.user) {
+      getProfileInformation();
+    }
+  }, [alert.message, errorMessage.message]);
 
   const loginParameters = () => {
     if (
@@ -66,6 +77,15 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
     } else if (!data.exists()) {
       setCompletedProfile("completed");
     }
+  };
+
+  const getProfileInformation = async () => {
+    const docRef = doc(db, "Merchant", auth.user.uid);
+    await getDoc(docRef).then((data: any) => {
+      dispatch(stepOne(data.data().OwnersInformation));
+      dispatch(stepTwo(data.data().businessInformation));
+      dispatch(skipForNow(data.data().skipForNow));
+    });
   };
 
   const onchange = async (name: string, value: string) => {

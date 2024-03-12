@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { LightModeColor, DarkModeColor } from "../../Atom/Colors/Colors";
 
 const DashboardTemplateStyle = styled.div`
-overflow: hidden;
+ overflow: hidden;
   position: fixed;
   width: 100vw;
   height: 100vh;

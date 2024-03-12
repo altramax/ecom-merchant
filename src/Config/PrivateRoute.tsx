@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { Navigate } from "react-router-dom";
-import { useAppDispatch } from "../Redux/Hooks";
+import { useAppDispatch, useAppSelector } from "../Redux/Hooks";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { auth } from "./Config";
@@ -13,16 +13,19 @@ type privateType = {
 
 const PrivateRoute = ({ children }: privateType) => {
   const dispatch = useAppDispatch();
+  const currentUser = useAppSelector((state) => state.auth);
   const [client, setClient] = useState<any>("");
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      setLoading(false);
-      if (user) {
+      
+      if (user && currentUser.user !== null) {
         setClient(user);
-      } else {
+        setLoading(false);
+      } else if (!user || currentUser.user === null) {
         setClient(null);
+        setLoading(false);
         dispatch(clearAuth());
       }
     });

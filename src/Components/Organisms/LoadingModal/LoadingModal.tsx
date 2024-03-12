@@ -24,7 +24,7 @@ const LoadingModal = () => {
     <LoadingModalStyle>
       <div id={color.mode} className="loading__container">
         <div className='loading'></div>
-        <div>{count}%</div>
+        {/* <div>{count}%</div> */}
       </div>
     </LoadingModalStyle>
   );

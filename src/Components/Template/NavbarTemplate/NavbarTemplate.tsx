@@ -1,5 +1,5 @@
 import NavbarTemplateStyle from "./NavbarTemplateStyle";
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import moon from "../../../assets/Icons/moon.svg";
 import sun from "../../../assets/Icons/sun.svg";
 import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
@@ -12,9 +12,6 @@ import ordericonColor from "../../../assets/Icons/cart.png";
 import hamburger from "../../../assets/Icons/hamburger-closed.svg";
 import Avatar from "../../Atom/Avatar/Avatar";
 import trial from "../../../assets/Images/men.jpg";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../../Config/Config";
-import { stepOne, stepTwo, skipForNow } from "../../../Redux/StepForm";
 
 
 type navtype = {
@@ -25,16 +22,10 @@ type navtype = {
 
 const NavbarTemplate = ({ navWidth, widthControl, openWidth }: navtype) => {
   const color = useAppSelector((state) => state.color);
-  const alert = useAppSelector((state) => state.alert);
   const auth = useAppSelector((state) => state.auth);
-  // const stepForm = useAppSelector((state)=> state.stepForm)/
-  const errorMessage = useAppSelector((state) => state.auth);
   const [dropDown, setDropDown] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    getProfileInformation();
-  }, [alert.message, errorMessage.message]);
 
   const themeHandler = (theme: string) => {
     if (theme === "light") {
@@ -43,17 +34,6 @@ const NavbarTemplate = ({ navWidth, widthControl, openWidth }: navtype) => {
       dispatch(darkmode());
     }
   };
-
-  const getProfileInformation = async () => {
-    const docRef = doc(db, "Merchant", auth.user.uid);
-    await getDoc(docRef).then((data: any) => {
-      dispatch(stepOne(data.data().OwnersInformation));
-      dispatch(stepTwo(data.data().businessInformation));
-      dispatch(skipForNow(data.data().skipForNow));
-    });
-  };
-
-  console.log(auth.user.uid);
 
   return (
     <NavbarTemplateStyle>
@@ -122,12 +102,10 @@ const NavbarTemplate = ({ navWidth, widthControl, openWidth }: navtype) => {
               {auth.user && (
                 <div
                   className={`nav__profile__text__group ${
-                    navWidth === true
-                      ? null
-                      : "slowVisibility"
+                    navWidth === true ? null : "slowVisibility"
                   }`}
                 >
-                  <p className="store__name">{auth.user.displayName}</p>
+                  <p className="store__name">{`${auth.user.displayName}`}</p>
                   <p className="store__email">{auth.user.email}</p>
                 </div>
               )}

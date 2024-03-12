@@ -69,7 +69,7 @@ const SignInModalStyle = styled.div`
       }
       .input {
         display: block;
-        padding: 10px 65px 10px 8px;
+        padding: 10px 45px 10px 8px;
         width: 280px;
         height: 40px;
         font-size: 14px;

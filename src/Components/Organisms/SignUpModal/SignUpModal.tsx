@@ -101,7 +101,7 @@ const SignUpModal = ({ signIn }: signupType): JSX.Element => {
     evt: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     evt.preventDefault();
-    if (!storeNameError) {
+    if (!storeNameError || fields.storeName.length >= 2) {
      return await dispatch(createUser(fields));
     }
   };
