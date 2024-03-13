@@ -1,4 +1,4 @@
-import { useEffect,useState } from "react";
+import { useState } from "react";
 import OnboardingStepsStyle from "./OnboardingStepsStyle";
 import OnboardingStepOne from "../OnboardingStepOne/OnboardingStepOne";
 import OnboardingStepTwo from "../OnboardingStepTwo/OnboardingStepTwo";
@@ -13,11 +13,7 @@ const OnboardingSteps = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const auth = useAppSelector((state) => state.auth);
-  const step
 
-  useEffect(()=>{
-   
-  },[])
 
   const changeStep = (evt: string) => {
     setStep(evt);

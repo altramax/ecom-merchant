@@ -105,7 +105,7 @@ const NavbarTemplate = ({ navWidth, widthControl, openWidth }: navtype) => {
                     navWidth === true ? null : "slowVisibility"
                   }`}
                 >
-                  <p className="store__name">{`${auth.user.displayName}`}</p>
+                  <p className="store__name">{auth.user.displayName}</p>
                   <p className="store__email">{auth.user.email}</p>
                 </div>
               )}

@@ -52,7 +52,7 @@ const NavbarTemplateStyle = styled.div`
   }
 
   .nav__container {
-    padding: 30px 0 100px 0;
+    padding: 30px 0 30px 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -114,9 +114,11 @@ const NavbarTemplateStyle = styled.div`
       align-items: center;
       gap: 10px;
       transition: bottom 1s ease-in;
+      .nav__profile__text__group{
+        width: 30px;
+      }
       .store__email {
         font-size: 12px;
-        width: 50px;
         text-wrap: wrap;
       }
     }

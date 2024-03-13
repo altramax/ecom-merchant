@@ -28,9 +28,6 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
   const color = useAppSelector((state) => state.color);
   const auth = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
-  const alert = useAppSelector((state) => state.alert);
-  const errorMessage = useAppSelector((state) => state.auth);
-
   const navigate = useNavigate();
   const [completedProfile, setCompletedProfile] = useState<any>(null);
   const [eyes, setEyes] = useState<boolean>(false);
@@ -41,23 +38,16 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
 
   useEffect(() => {
     window.addEventListener("beforeunload", resetErrorMesageHandler);
-    auth.user !== null && StoreDetails();
+    auth.user !== null && getProfileInformation();
     completedProfile !== null && loginParameters();
   }, [auth.user, completedProfile]);
-
-
-  useEffect(() => {
-    if (auth.user) {
-      getProfileInformation();
-    }
-  }, [alert.message, errorMessage.message]);
 
   const loginParameters = () => {
     if (
       (auth.user !== null &&
         auth.user.emailVerified &&
         completedProfile === "true") ||
-      completedProfile === "completed"
+        completedProfile === "completed"
     ) {
       navigate("/dashboard");
     } else if (
@@ -68,20 +58,11 @@ const SignInModal = ({ signUp }: signinType): JSX.Element => {
       navigate("/onboardingsteps");
     }
   };
-
-  const StoreDetails = async () => {
-    const CollectionRef = doc(db, "Merchant", auth.user.uid);
-    const data = await getDoc(CollectionRef);
-    if (data.exists()) {
-      setCompletedProfile(data.data().skipForNow);
-    } else if (!data.exists()) {
-      setCompletedProfile("completed");
-    }
-  };
-
+  
   const getProfileInformation = async () => {
     const docRef = doc(db, "Merchant", auth.user.uid);
     await getDoc(docRef).then((data: any) => {
+      setCompletedProfile(data.data().skipForNow);
       dispatch(stepOne(data.data().OwnersInformation));
       dispatch(stepTwo(data.data().businessInformation));
       dispatch(skipForNow(data.data().skipForNow));

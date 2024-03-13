@@ -8,16 +8,21 @@ import { useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../src/Config/Config";
 import LoadingModal from "./Components/Organisms/LoadingModal/LoadingModal";
+import { useAppDispatch, useAppSelector } from "./Redux/Hooks";
+import { clearAuth } from "./Redux/AuthSlice";
 
 function App() {
+  const currentUser = useAppSelector((state) => state.auth);
+  const dispatch = useAppDispatch();
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      if (user) {
+      if (user && currentUser.user !== null) {
         setLoading(false);
-      } else if (!user) {
+      } else if (!user || currentUser.user === null) {
         setLoading(false);
+        dispatch(clearAuth());
       }
     });
   }, [auth]);
@@ -26,19 +31,19 @@ function App() {
     <Router>
       <Routes>
         <Route
-          path="/"
+          path='/'
           element={loading ? <LoadingModal /> : <OnboardingTemplate />}
         />
         <Route
-          path="/onboardingsteps"
+          path='/onboardingsteps'
           element={
             <PrivateRoutes>
-              <OnboardingSteps />
+              {loading ? <LoadingModal /> : <OnboardingSteps />}
             </PrivateRoutes>
           }
         />
         <Route
-          path="*"
+          path='*'
           element={
             <PrivateRoutes>
               <DashboardTemplate />
