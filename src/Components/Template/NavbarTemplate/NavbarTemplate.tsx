@@ -1,5 +1,5 @@
 import NavbarTemplateStyle from "./NavbarTemplateStyle";
-import {useState } from "react";
+import { useState } from "react";
 import moon from "../../../assets/Icons/moon.svg";
 import sun from "../../../assets/Icons/sun.svg";
 import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
@@ -13,19 +13,16 @@ import hamburger from "../../../assets/Icons/hamburger-closed.svg";
 import Avatar from "../../Atom/Avatar/Avatar";
 import trial from "../../../assets/Images/men.jpg";
 
-
 type navtype = {
   widthControl: Function;
   navWidth: boolean;
-  openWidth: Function;
 };
 
-const NavbarTemplate = ({ navWidth, widthControl, openWidth }: navtype) => {
+const NavbarTemplate = ({ navWidth, widthControl }: navtype) => {
   const color = useAppSelector((state) => state.color);
   const auth = useAppSelector((state) => state.auth);
   const [dropDown, setDropDown] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-
 
   const themeHandler = (theme: string) => {
     if (theme === "light") {
@@ -37,30 +34,30 @@ const NavbarTemplate = ({ navWidth, widthControl, openWidth }: navtype) => {
 
   return (
     <NavbarTemplateStyle>
-      <div className="main__nav__container ">
-        <div className="hamburger__container">
-          <img
-            src={hamburger}
-            alt="menu"
-            className="hamburger"
-            onClick={() => {
-              widthControl();
-              setDropDown(false);
-            }}
-          />
-        </div>
-
+    
         <div
           id={color.mode}
-          className={`nav__container ${navWidth === true ? "contract" : null}`}
-          onClick={() => openWidth()}
+          className={`nav__container ${navWidth === true ? "contract__nav" : "open__nav"}`}
+        
         >
-          <div className="width">
+          <div className="nav__container__navigations">
             <div className="nav__heading__container">
+              <div className="hamburger__container">
+                <img
+                  src={hamburger}
+                  alt="menu"
+                  className="hamburger"
+                  onClick={() => {
+                    widthControl();
+                    setDropDown(false);
+                  }}
+                />
+              </div>
+
               <h3
                 className={`${navWidth === true ? "null" : "slowVisibility"}`}
               >
-                ONE WearHouse{" "}
+                ONE WearHouse
               </h3>
             </div>
 
@@ -149,7 +146,7 @@ const NavbarTemplate = ({ navWidth, widthControl, openWidth }: navtype) => {
             </div>
           </div>
         </div>
-      </div>
+      
     </NavbarTemplateStyle>
   );
 };

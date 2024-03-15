@@ -22,20 +22,7 @@ const NavbarTemplateStyle = styled.div`
     display: none;
   }
 
-  .hamburger__container {
-    position: absolute;
-    cursor: pointer;
-    width: 7%;
-    // height: 20px;
-    left: 0;
-    z-index: 30;
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    img {
-      width: 20px;
-    }
-  }
+ 
 
   .network__response {
     transform-origin: top center;
@@ -51,6 +38,10 @@ const NavbarTemplateStyle = styled.div`
     border-radius: 6px;
   }
 
+  .open__nav{
+    width: 50%;
+  }
+
   .nav__container {
     padding: 30px 0 30px 0;
     display: flex;
@@ -58,16 +49,10 @@ const NavbarTemplateStyle = styled.div`
     justify-content: space-between;
     align-items: center;
     position: absolute;
-    width: 50%;
     height: 100vh;
     transition: width 0.5s ease-in-out, background-color 0.2s ease-in-out;
-    .width{
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      justifty-content: center;
-      align-items: center;
-    }
+
+
 
     .nav__link__groups {
       width: 70%;
@@ -88,25 +73,41 @@ const NavbarTemplateStyle = styled.div`
       }
     }
 
+
+
     .slowVisibility {
       transition: opacity 1s ease-in-out;
     }
 
+    .nav__container__navigations{
+      width: 80%;
+    }
+
     .nav__heading__container {
+    
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      //  gap: 20px;
+
       margin-bottom: -10px;
-      width: 70%;
-      height: 30px;
+      // height: 30px;
 
       font-size: 14px;
+
+      .hamburger__container {  
+        cursor: pointer;
+       
+        img {
+          width: 20px;
+        }
+      }
     }
   }
 
   .nav__profile__group {
-    // position: absolute;
-  //  padding-bottom: 30px;
     cursor: pointer;
-    // left: 15%;
-    width: 70%;
+    width: 80%;
 
     .nav__profile {
       display: flex;
@@ -177,7 +178,7 @@ const NavbarTemplateStyle = styled.div`
     }
   }
 
-  .contract {
+  .contract__nav{
     width: 7%;
     cursor: pointer;
 
@@ -193,12 +194,16 @@ const NavbarTemplateStyle = styled.div`
       }
     }
 
+    // .nav__container__navigations{
+    //   width: fit-content;
+    // }
+
     .nav__heading__container {
-      gap: 0;
+ 
       h3 {
         opacity: 0;
         width: 0;
-
+          
         height: 30px;
       }
     }
@@ -216,6 +221,15 @@ const NavbarTemplateStyle = styled.div`
     }
   }
 
+
+  @media (min-width: 768px){
+    .open__nav{
+      width: 25%;
+    }
+
+  }
+
+
   @media (min-width: 1080px) {
     .hamburger__container {
       margin-top: 28px;
@@ -225,8 +239,12 @@ const NavbarTemplateStyle = styled.div`
       }
     }
 
+  .open__nav{
+    width: 25%;
+  }
+
     .nav__container {
-      width: 25%;
+      
 
       .nav__heading__container {
         width: 57%;
@@ -252,7 +270,7 @@ const NavbarTemplateStyle = styled.div`
       }
     }
 
-    .contract {
+    .contract__nav{
       width: 5%;
       // .nav__profile__group {
       //   .nav__profile {

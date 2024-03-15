@@ -37,9 +37,6 @@ const DashboardTemplate = () => {
     setWidth(!width);
   };
 
-  const openWidth = () => {
-    setWidth(false);
-  };
 
   return (
     <DashboardTemplateStyle>
@@ -51,7 +48,7 @@ const DashboardTemplate = () => {
             <NavbarTemplate
               navWidth={width}
               widthControl={handleWidth}
-              openWidth={openWidth}
+
             />
           </div>
           <div className={`route__body ${width ? "expand" : null}`}>

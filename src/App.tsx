@@ -14,36 +14,45 @@ import { clearAuth } from "./Redux/AuthSlice";
 function App() {
   const currentUser = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
+  // const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user && currentUser.user !== null) {
         setLoading(false);
+        // setAuthenticated(true);
       } else if (!user || currentUser.user === null) {
+        // setAuthenticated(false);
         setLoading(false);
         dispatch(clearAuth());
       }
     });
-  }, [auth]);
+  }, [currentUser.user]);
 
   return (
     <Router>
       <Routes>
         <Route
-          path='/'
-          element={loading ? <LoadingModal /> : <OnboardingTemplate />}
+          path="/"
+          element={
+            loading ? 
+              <LoadingModal />
+            : 
+              <OnboardingTemplate />
+            
+          }
         />
         <Route
-          path='/onboardingsteps'
+          path="/onboardingsteps"
           element={
             <PrivateRoutes>
-              {loading ? <LoadingModal /> : <OnboardingSteps />}
+              <OnboardingSteps />
             </PrivateRoutes>
           }
         />
         <Route
-          path='*'
+          path="*"
           element={
             <PrivateRoutes>
               <DashboardTemplate />
