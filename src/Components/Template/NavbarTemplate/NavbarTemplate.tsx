@@ -14,11 +14,12 @@ import Avatar from "../../Atom/Avatar/Avatar";
 import trial from "../../../assets/Images/men.jpg";
 
 type navtype = {
-  widthControl: Function;
-  navWidth: boolean;
+  navControlFunction: Function;
+  openNav: boolean;
+  openNavFunction : Function
 };
 
-const NavbarTemplate = ({ navWidth, widthControl }: navtype) => {
+const NavbarTemplate = ({ openNav, navControlFunction, openNavFunction }: navtype) => {
   const color = useAppSelector((state) => state.color);
   const auth = useAppSelector((state) => state.auth);
   const [dropDown, setDropDown] = useState<boolean>(false);
@@ -37,7 +38,7 @@ const NavbarTemplate = ({ navWidth, widthControl }: navtype) => {
     
         <div
           id={color.mode}
-          className={`nav__container ${navWidth === true ? "contract__nav" : "open__nav"}`}
+          className={`nav__container ${!openNav ? "contract__nav" : "open__nav"}`}
         
         >
           <div className="nav__container__navigations">
@@ -48,14 +49,14 @@ const NavbarTemplate = ({ navWidth, widthControl }: navtype) => {
                   alt="menu"
                   className="hamburger"
                   onClick={() => {
-                    widthControl();
+                    navControlFunction();
                     setDropDown(false);
                   }}
                 />
               </div>
 
               <h3
-                className={`${navWidth === true ? "null" : "slowVisibility"}`}
+                className={`${!openNav ? "null" : "slowVisibility"}`}
               >
                 ONE WearHouse
               </h3>
@@ -65,7 +66,7 @@ const NavbarTemplate = ({ navWidth, widthControl }: navtype) => {
               <Link to={"/dashboard"} className="link__sub__group">
                 <img src={dashbordIconlight} alt="dashboard-icon" />
                 <p
-                  className={`${navWidth === true ? "null" : "slowVisibility"}`}
+                  className={`${!openNav ? "null" : "slowVisibility"}`}
                 >
                   Dashboard
                 </p>
@@ -73,7 +74,7 @@ const NavbarTemplate = ({ navWidth, widthControl }: navtype) => {
               <Link to={"/wearhouse"} className="link__sub__group">
                 <img src={addProductsIconlight} alt="addproducts-icon" />
                 <p
-                  className={`${navWidth === true ? "null" : "slowVisibility"}`}
+                  className={`${!openNav ? "null" : "slowVisibility"}`}
                 >
                   WearHouse
                 </p>
@@ -82,7 +83,7 @@ const NavbarTemplate = ({ navWidth, widthControl }: navtype) => {
               <Link to={"/orders"} className="link__sub__group">
                 <img src={ordericonColor} alt="" />
                 <p
-                  className={`${navWidth === true ? "null" : "slowVisibility"}`}
+                  className={`${!openNav ? "null" : "slowVisibility"}`}
                 >
                   Orders
                 </p>
@@ -92,14 +93,14 @@ const NavbarTemplate = ({ navWidth, widthControl }: navtype) => {
 
           <div
             className="nav__profile__group"
-            onClick={() => setDropDown(!dropDown)}
+            
           >
-            <div className="nav__profile">
+            <div className="nav__profile" onClick={() => {openNavFunction() ;setDropDown(!dropDown)}}>
               <Avatar storename="easy" image={trial} />
               {auth.user && (
                 <div
                   className={`nav__profile__text__group ${
-                    navWidth === true ? null : "slowVisibility"
+                    !openNav ? null : "slowVisibility"
                   }`}
                 >
                   <p className="store__name">{auth.user.displayName}</p>
@@ -110,13 +111,13 @@ const NavbarTemplate = ({ navWidth, widthControl }: navtype) => {
 
             <div
               className={`profile__dropDown ${
-                navWidth === true ? "null" : "slowVisibility"
+                !openNav ? "null" : "slowVisibility"
               } ${!dropDown ? "hidden" : null}`}
             >
               <div>
-                <h1>Game</h1>
-                <h1>Game</h1>
-                <h1>Game</h1>
+               <p>Title</p>
+               <p>Title</p>
+               <p>Title</p>
               </div>
               <div className="profile__dropDown__tools">
                 <div className={`theme__button ${color.mode}`}>

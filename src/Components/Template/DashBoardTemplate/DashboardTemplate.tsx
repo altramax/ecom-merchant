@@ -7,7 +7,7 @@ import NetworkStatus from "../../Molecule/NetworkStatus/NetworkStatus";
 
 const DashboardTemplate = () => {
   const color = useAppSelector((state) => state.color);
-  const [width, setWidth] = useState<boolean>(true);
+  const [openNav, setOpenNav] = useState<boolean>(false);
 
   // useEffect(() => {
   //   handleNetWorkChange();
@@ -33,10 +33,13 @@ const DashboardTemplate = () => {
   //   }
   // };
 
-  const handleWidth = () => {
-    setWidth(!width);
+  const handleNav = () => {
+    setOpenNav(!openNav);
   };
 
+  const handleOpenNav = () =>{
+    setOpenNav(true);
+  }
 
   return (
     <DashboardTemplateStyle>
@@ -44,14 +47,14 @@ const DashboardTemplate = () => {
         <NetworkStatus />
 
         <div className="dashboard__template__container">
-          <div className={`nav__width ${width ? "contract" : null}`}>
+          <div className={`nav__width ${openNav ? null : "contract"}`}>
             <NavbarTemplate
-              navWidth={width}
-              widthControl={handleWidth}
-
+              openNav={openNav}
+              navControlFunction={handleNav}
+              openNavFunction = {handleOpenNav}
             />
           </div>
-          <div className={`route__body ${width ? "expand" : null}`}>
+          <div className={`route__body ${openNav ? null : "expand"}`}>
             <PrivateRoute />
           </div>
         </div>

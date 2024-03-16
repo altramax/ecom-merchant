@@ -4,7 +4,6 @@ import night__sky from "../../../assets/Images/night__sky.jpg";
 import day__sky from "../../../assets/Images/day__sky.jpg";
 
 const NavbarTemplateStyle = styled.div`
-
   #light {
     background-color: ${LightModeColor.primary};
     .link__sub__group:hover {
@@ -22,8 +21,6 @@ const NavbarTemplateStyle = styled.div`
     display: none;
   }
 
- 
-
   .network__response {
     transform-origin: top center;
     position: absolute;
@@ -38,7 +35,7 @@ const NavbarTemplateStyle = styled.div`
     border-radius: 6px;
   }
 
-  .open__nav{
+  .open__nav {
     width: 50%;
   }
 
@@ -52,14 +49,11 @@ const NavbarTemplateStyle = styled.div`
     height: 100vh;
     transition: width 0.5s ease-in-out, background-color 0.2s ease-in-out;
 
-
-
     .nav__link__groups {
-      width: 70%;
       .link__sub__group {
         width: 100%;
         border-radius: 3px;
-        padding: 5px 5px;
+        padding: 5px 8px;
         margin: 20px 0;
         display: flex;
         justify-content: start;
@@ -68,38 +62,45 @@ const NavbarTemplateStyle = styled.div`
         font-size: 14px;
 
         img {
-          width: 15px;
+          width: 20px;
         }
       }
     }
-
-
 
     .slowVisibility {
       transition: opacity 1s ease-in-out;
     }
 
-    .nav__container__navigations{
+    .nav__container__navigations {
       width: 80%;
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: start;
     }
 
     .nav__heading__container {
-    
       display: flex;
-      justify-content: space-between;
+      justify-content: start;
       align-items: center;
-      //  gap: 20px;
 
-      margin-bottom: -10px;
-      // height: 30px;
+      // margin-bottom: -10px;
+      height: 50px;
+      gap: 10px;
 
       font-size: 14px;
+      h3 {
+        // height: 50px;
+        margin-right: -10px;
+      }
 
-      .hamburger__container {  
+      .hamburger__container {
         cursor: pointer;
-       
+        padding: 0 8px;
+
         img {
-          width: 20px;
+          width: 25px;
+          display: block;
         }
       }
     }
@@ -115,12 +116,16 @@ const NavbarTemplateStyle = styled.div`
       align-items: center;
       gap: 10px;
       transition: bottom 1s ease-in;
-      .nav__profile__text__group{
-        width: 30px;
-      }
+      // .nav__profile__text__group {
+      //   width: 30px;
+      // }
       .store__email {
-        font-size: 12px;
+        font-size: 8px;
         text-wrap: wrap;
+      }
+      .store__name {
+        font-size: 12px;
+        font-weight: 600;
       }
     }
     .profile__dropDown {
@@ -178,9 +183,8 @@ const NavbarTemplateStyle = styled.div`
     }
   }
 
-  .contract__nav{
-    width: 7%;
-    cursor: pointer;
+  .contract__nav {
+    width: 10%;
 
     .nav__link__groups {
       .link__sub__group {
@@ -194,17 +198,16 @@ const NavbarTemplateStyle = styled.div`
       }
     }
 
-    // .nav__container__navigations{
-    //   width: fit-content;
-    // }
+    .nav__container__navigations {
+      width: fit-content;
+    }
 
     .nav__heading__container {
- 
       h3 {
         opacity: 0;
         width: 0;
-          
-        height: 30px;
+
+        // height: 50px;
       }
     }
 
@@ -221,39 +224,32 @@ const NavbarTemplateStyle = styled.div`
     }
   }
 
+  @media (min-width: 768px) {
+    .open__nav {
+      width: 30%;
+    }
+  }
 
-  @media (min-width: 768px){
-    .open__nav{
+  @media (min-width: 1080px) {
+    .open__nav {
       width: 25%;
     }
 
-  }
-
-
-  @media (min-width: 1080px) {
-    .hamburger__container {
-      margin-top: 28px;
-      width: 5%;
-      img {
-        width: 30px;
-      }
-    }
-
-  .open__nav{
-    width: 25%;
-  }
-
     .nav__container {
-      
-
       .nav__heading__container {
-        width: 57%;
         font-size: 16px;
+        .hamburger__container {
+          padding: 0 12px;
+
+          img {
+            width: 30px;
+          }
+        }
       }
 
       .nav__link__groups {
         .link__sub__group {
-          padding: 8px 20px;
+          padding: 8px 12px;
           font-size: 15px;
 
           img {
@@ -270,7 +266,7 @@ const NavbarTemplateStyle = styled.div`
       }
     }
 
-    .contract__nav{
+    .contract__nav {
       width: 5%;
       // .nav__profile__group {
       //   .nav__profile {
