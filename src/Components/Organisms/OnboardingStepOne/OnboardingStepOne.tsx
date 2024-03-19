@@ -31,6 +31,7 @@ const OnboardingStepOne = ({ next, skip }: OnboardType) => {
     countryAndState: "",
   });
 
+  // Note: set this use effect to stop setting values from controlled to uncontrolled
   useEffect(() => {
     if (stepForm.stepOne !== "") {
       setfields(stepForm.stepOne);

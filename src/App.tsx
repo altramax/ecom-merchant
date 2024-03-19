@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import OnboardingTemplate from "./Components/Template/OnboardingTemplate/OnboardingTemplate";
 import PrivateRoutes from "./Config/PrivateRoute";
+import ConditionalPrivateRoute from "./Config/ConditionalPrivateRoute";
 import DashboardTemplate from "./Components/Template/DashBoardTemplate/DashboardTemplate";
 import OnboardingSteps from "./Components/Organisms/OnboardingSteps/OnboardingSteps";
 import { useEffect, useState } from "react";
@@ -16,6 +17,7 @@ function App() {
   const dispatch = useAppDispatch();
   // const [authenticated, setAuthenticated] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
+  const skipForNow = useAppSelector(state=> state.stepForm.skipForNow)
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -46,9 +48,9 @@ function App() {
         <Route
           path="/onboardingsteps"
           element={
-            <PrivateRoutes>
+            <ConditionalPrivateRoute condition={skipForNow !== "completed"}>
               <OnboardingSteps />
-            </PrivateRoutes>
+            </ConditionalPrivateRoute>
           }
         />
         <Route

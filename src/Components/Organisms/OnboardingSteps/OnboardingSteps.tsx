@@ -14,7 +14,6 @@ const OnboardingSteps = () => {
   const dispatch = useAppDispatch();
   const auth = useAppSelector((state) => state.auth);
 
-
   const changeStep = (evt: string) => {
     setStep(evt);
   };

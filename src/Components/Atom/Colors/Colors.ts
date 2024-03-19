@@ -1,7 +1,7 @@
   export const LightModeColor = {
     background: "#ffffff",
     primary : "#DFF3FC",
-    primaryVariant : "#0097DA",
+    primaryVariant : " #055AD9",
     error: "#ff0000",
     secondary: "#000000"
     // white : "#fff",

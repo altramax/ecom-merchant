@@ -1,7 +1,7 @@
 import OnboardingStepTwostyle from "./OnboardingStepTwoStyle";
 import Button from "../../Molecule/Button/Button";
 import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
-import {stepClear } from "../../../Redux/StepForm";
+import { skipForNow, stepClear, stepTwo } from "../../../Redux/StepForm";
 import { useEffect, useRef, useState } from "react";
 import delete_icon from "../../../assets/Icons/trash.svg";
 import { setDoc, doc } from "firebase/firestore";
@@ -36,7 +36,6 @@ const OnboardingStepTwo = ({ skip }: OnboardType) => {
   });
 
   useEffect(() => {
-   
     if (stepForm.stepTwo !== "") {
       console.log("enter");
       setfields(stepForm.stepTwo);
@@ -64,22 +63,24 @@ const OnboardingStepTwo = ({ skip }: OnboardType) => {
       selectedImage
     ) {
       setError("");
-      await setDoc(doc(db, "Merchant", `${auth.user.uid}`), {
-        businessInformation: stepForm.stepOne,
-        OwnersInformation: {
+      await dispatch(
+        stepTwo({
           ownersName: fields.ownersName,
           ownersAddress: fields.ownersAddress,
           ownersPhonenumber: fields.ownersPhonenumber,
           countryAndState: fields.countryAndState,
           profilePicture: selectedImage,
-        },
-        skipForNow: "completed",
+        })
+      );
+      await dispatch(skipForNow("completed"));
+      await setDoc(doc(db, "Merchant", `${auth.user.uid}`), {
+        businessInformation: stepForm.stepOne,
+        OwnersInformation: stepForm.stepTwo,
+        skipForNow: stepForm.skipForNow,
       });
       navigate("/dashboard");
-      dispatch(stepClear());
     }
   };
-  console.log(stepForm.stepOne, stepForm.stepTwo);
 
   const onchange = async (name: string, value: string) => {
     const fieldsValue: any = Object.assign({}, fields);
@@ -119,67 +120,67 @@ const OnboardingStepTwo = ({ skip }: OnboardType) => {
 
   return (
     <OnboardingStepTwostyle>
-      <form id={color.mode} className='step__form'>
-        <div className='step__one__container'>
-          <div className='step__one__heading'>
+      <form id={color.mode} className="step__form">
+        <div className="step__one__container">
+          <div className="step__one__heading">
             <h1>Business Owners Information</h1>
-            <p className='step__one__heading'>
+            <p className="step__one__heading">
               Kindly ensure that all the informations provide are correct before
               proceeding
             </p>
           </div>
-          <div className='input__groups'>
-            <div className='input__group'>
+          <div className="input__groups">
+            <div className="input__group">
               {/* <title></title> */}
               <input
-                type='text'
-                name='ownersName'
-                placeholder='Owners Name'
+                type="text"
+                name="ownersName"
+                placeholder="Owners Name"
                 value={fields.ownersName}
                 onChange={(evt) => onchange(evt.target.name, evt.target.value)}
               />
             </div>
-            <div className='input__group'>
+            <div className="input__group">
               {/* <title></title> */}
               <input
-                type='text'
-                name='ownersAddress'
+                type="text"
+                name="ownersAddress"
                 value={fields.ownersAddress}
-                placeholder='Owners Address'
+                placeholder="Owners Address"
                 onChange={(evt) => onchange(evt.target.name, evt.target.value)}
               />
               {error.includes("Address") && <small>{error}</small>}
             </div>
           </div>
-          <div className='input__groups'>
-            <div className='input__group'>
+          <div className="input__groups">
+            <div className="input__group">
               {/* <title></title> */}
               <input
-                type='text'
-                name='ownersPhonenumber'
+                type="text"
+                name="ownersPhonenumber"
                 value={fields.ownersPhonenumber}
-                placeholder='Owners Phone Number'
+                placeholder="Owners Phone Number"
                 onChange={(evt) => onchange(evt.target.name, evt.target.value)}
               />
               {error.includes("Phone") && <small>{error}</small>}
             </div>
-            <div className='input__group'>
+            <div className="input__group">
               {/* <title></title> */}
               <input
-                type='text'
-                name='countryAndState'
+                type="text"
+                name="countryAndState"
                 value={fields.countryAndState}
-                placeholder='Country And State'
+                placeholder="Country And State"
                 onChange={(evt) => onchange(evt.target.name, evt.target.value)}
               />
             </div>
           </div>
           <div
-            className='image__upload__groups'
+            className="image__upload__groups"
             onDrop={handleDragDrop}
             onDragOver={handleDragOver}
           >
-            <div className='upload__text' onDragStart={handleDragStart}>
+            <div className="upload__text" onDragStart={handleDragStart}>
               <h3>Profile Picture</h3>
               <p>
                 Drag file here or <span onClick={handlerClick}>Click here</span>{" "}
@@ -190,33 +191,33 @@ const OnboardingStepTwo = ({ skip }: OnboardType) => {
               )}
             </div>
             <input
-              type='file'
-              name='  brandLogo'
-              className=' hidden'
+              type="file"
+              name="  brandLogo"
+              className=" hidden"
               ref={file}
               onChange={fileHandler}
             />
-            <div className='uploaded__image'>
+            <div className="uploaded__image">
               {selectedImage && (
-                <div className='image__delete'>
+                <div className="image__delete">
                   <p>{selectedImage}</p>
-                  <img src={delete_icon} alt='' onClick={deleteFile} />
+                  <img src={delete_icon} alt="" onClick={deleteFile} />
                 </div>
               )}
             </div>
           </div>
-          <div className='buttons__group'>
+          <div className="buttons__group">
             <Button
-              type='button'
-              value='Skip for Now'
+              type="button"
+              value="Skip for Now"
               Click={skip}
-              className='button'
+              className="button"
             />
             <Button
-              type='submit'
-              value='Submit'
+              type="submit"
+              value="Submit"
               Click={(evt: any) => handlerSubmit(evt)}
-              className='button'
+              className="button"
             />
           </div>
         </div>
