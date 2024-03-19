@@ -1,7 +1,7 @@
 import OnboardingStepTwostyle from "./OnboardingStepTwoStyle";
 import Button from "../../Molecule/Button/Button";
 import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
-import { skipForNow, stepClear, stepTwo } from "../../../Redux/StepForm";
+import { skipForNow, stepTwo } from "../../../Redux/StepForm";
 import { useEffect, useRef, useState } from "react";
 import delete_icon from "../../../assets/Icons/trash.svg";
 import { setDoc, doc } from "firebase/firestore";
