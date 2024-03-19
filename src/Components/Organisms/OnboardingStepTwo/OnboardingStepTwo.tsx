@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 
 type OnboardType = {
   skip: Function;
+  back: Function;
 };
 
 type fieldsType = {
@@ -19,7 +20,7 @@ type fieldsType = {
   countryAndState: string;
 };
 
-const OnboardingStepTwo = ({ skip }: OnboardType) => {
+const OnboardingStepTwo = ({ skip, back }: OnboardType) => {
   const dispatch = useAppDispatch();
   const stepForm = useAppSelector((state) => state.stepForm);
   const color = useAppSelector((state) => state.color);
@@ -207,6 +208,12 @@ const OnboardingStepTwo = ({ skip }: OnboardType) => {
             </div>
           </div>
           <div className="buttons__group">
+          <Button
+              type="button"
+              value="Back"
+              Click={back}
+              className="button"
+            />
             <Button
               type="button"
               value="Skip for Now"

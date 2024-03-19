@@ -194,15 +194,15 @@ const OnboardingStepOne = ({ next, skip }: OnboardType) => {
           </div>
           <div className='buttons__group'>
             <Button
-              type='submit'
-              value='Next'
-              Click={(evt: any) => handlerSubmit(evt)}
-              className='button'
-            />
-            <Button
               type='button'
               value='Skip for Now'
               Click={skip}
+              className='button'
+            />
+            <Button
+              type='submit'
+              value='Next'
+              Click={(evt: any) => handlerSubmit(evt)}
               className='button'
             />
           </div>

@@ -56,6 +56,10 @@ const OnboardingStepTwostyle = styled.div`
     }
   
   
+    .step__one__container::-webkit-scrollbar{
+      display: none;
+  }
+  
   
   .step__form{
   display: flex;
@@ -65,18 +69,21 @@ const OnboardingStepTwostyle = styled.div`
   }
   
   .step__one__container{
-     width: 90vw;
-  //    margin-top: 50px;
-     padding: 10px;
+     width: 80vw;
+     height: 600px;
+     padding: 40px 20px;
      border-radius: 10px;
+     position: relative;
+     overflow: auto;
      .step__one__heading{
          text-align: center;
      h1{
-         font-size: 30px;
+         font-size: 23px;
+         margin-bottom: 10px;
      }
      p{
-         width: 80%;
-         margin: auto;
+         margin:0 auto 20px auto;
+         font-size: 12px;
      }
      }
      .hidden{
@@ -84,20 +91,15 @@ const OnboardingStepTwostyle = styled.div`
      }
   
      .input__groups{
-      //    margin: 20px auto 0 auto;
-         width: 100%;
          display: flex;
-      //    gap: 20px;
+         flex-direction: column;
          justify-content: center;
          align-items: center;
-         flex-wrap: wrap;
-         align-items: center;
-       
      }
   
   
      .input__group{
-        margin-top: 20px;
+        margin: 20px 0;
          small{
              position: absolute;
              display: block;
@@ -106,16 +108,17 @@ const OnboardingStepTwostyle = styled.div`
              font-weight: 500;
          }
          input{
-          width: 300px;
+          width: 250px;
           padding: 10px;
           border: none;
           border-bottom: 1px solid; 
+          font-size: 13px;
          }
      }
   
      .image__upload__groups{
-      margin: 40px auto 0 auto;
-      width: 300px;
+      padding: 10px 20px 20px 20px;
+      margin: 30px auto 0 auto;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -138,13 +141,17 @@ const OnboardingStepTwostyle = styled.div`
           text-align: center;
           line-height: 140%;
           width: 100%;
-          padding: 5px;
+          // padding: 5px;
          h3{
+          font-size: 15px;
           text-decoration: underline;
+         }
+         p{
+          font-size: 11px;
          }
          }
          .uploaded__image{
-          height: 90px;
+          height: 50px;
           .image__delete{
               display: flex;
               justify-content: center;
@@ -162,14 +169,14 @@ const OnboardingStepTwostyle = styled.div`
          }
      }
      .buttons__group{
-      margin-top: 40px;
+      margin: 40px 0 0 0;
       display: flex;
       width: 100%;
       justify-content: center;
-      gap: 80px;
+      gap: 20px;
       .button{
           width: fit-content;
-          width: 150px;
+          padding: 5px 20px;
           height: 40px;
           border: none;
           border-radius: 4px;
@@ -182,36 +189,39 @@ const OnboardingStepTwostyle = styled.div`
   @media (min-width: 768px){
      
   .step__one__container{
-     width: 90vw;
+      height: fit-content;
+     width: 600px;
      padding: 30px;
      
-  
-     .step__one__heading{
-     
+     .step__one__heading{ 
      h1{
-         font-size: 40px;
+         font-size: 30px;
      }
      p{
          width: 60%;
-     }
-     }
-  
-     .input__groups{
-      gap: 40px;
-     }
-  
-     .image__upload__groups{
-      width: 610px;
+         margin-bottom: 0;
      }
   }
   
-  @media (min-width: 1080px){
+     .input__groups{
+      flex-direction: row;
+      gap: 30px;
+     }
+  
+     .image__upload__groups{
+      
+  
+     }
+     .buttons__group{
+      margin-top: 20px;
+     }
+  }
+  
+  @media (min-width: 1280px){
      .step__one__container{
-      width: 60vw;
+      width: 600px;
          
-     
          .step__one__heading{
-       
          p{
              width: 60%;
          }
@@ -221,13 +231,15 @@ const OnboardingStepTwostyle = styled.div`
           }
           .input__groups{
              gap: 50px;
-             margin-top: 20px;
   
          }
          .image__upload__groups{
-          width: 670px;
+    
+          padding: 10px 20px 20px 20px;
+        
          }
+        
   }
-`;
+  `;
 
 export default OnboardingStepTwostyle;

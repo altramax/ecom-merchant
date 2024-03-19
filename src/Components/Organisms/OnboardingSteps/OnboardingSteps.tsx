@@ -9,7 +9,7 @@ import { updateDoc, doc } from "firebase/firestore";
 import { db } from "../../../Config/Config";
 
 const OnboardingSteps = () => {
-  const [step, setStep] = useState("stepone");
+  const [step, setStep] = useState("stepOne");
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const auth = useAppSelector((state) => state.auth);
@@ -27,13 +27,13 @@ const OnboardingSteps = () => {
 
   return (
     <OnboardingStepsStyle>
-      {step === "stepone" && (
+      {step === "stepOne" && (
         <OnboardingStepOne
           next={() => changeStep("stepTwo")}
           skip={skipHandler}
         />
       )}
-      {step === "stepTwo" && <OnboardingStepTwo skip={skipHandler} />}
+      {step === "stepTwo" && <OnboardingStepTwo skip={skipHandler} back={()=>changeStep("stepOne")}/>}
     </OnboardingStepsStyle>
   );
 };
