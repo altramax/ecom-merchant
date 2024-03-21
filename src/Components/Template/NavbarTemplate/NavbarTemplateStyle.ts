@@ -39,12 +39,12 @@ const NavbarTemplateStyle = styled.div`
     padding: 30px 0 30px 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    // justify-content: space-between;
     align-items: center;
     position: absolute;
     // height: 100vh;
-    height: 100svh;
-    height: 100lvh;
+    // height: 100svh;
+    // height: 100lvh;
     height: 100dvh;
     transition: width 0.5s ease-in-out, background-color 0.2s ease-in-out;
 
@@ -109,7 +109,7 @@ const NavbarTemplateStyle = styled.div`
   .nav__profile__group {
     cursor: pointer;
     width: 80%;
-
+ margin-top: auto;
     .nav__profile {
       display: flex;
       justify-content: start;
