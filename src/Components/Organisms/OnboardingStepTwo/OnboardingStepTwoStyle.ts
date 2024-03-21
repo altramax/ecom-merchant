@@ -61,13 +61,6 @@ const OnboardingStepTwostyle = styled.div`
   }
   
   
-  .step__form{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  }
-  
   .step__one__container{
      width: 80vw;
      height: 600px;

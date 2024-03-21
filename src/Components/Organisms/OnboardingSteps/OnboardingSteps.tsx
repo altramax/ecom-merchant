@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
 import { skipForNow } from "../../../Redux/StepForm";
 import { updateDoc, doc } from "firebase/firestore";
 import { db } from "../../../Config/Config";
+import NetworkStatus from "../../Molecule/NetworkStatus/NetworkStatus";
 
 const OnboardingSteps = () => {
   const [step, setStep] = useState("stepOne");
@@ -27,6 +28,7 @@ const OnboardingSteps = () => {
 
   return (
     <OnboardingStepsStyle>
+      <NetworkStatus/>
       {step === "stepOne" && (
         <OnboardingStepOne
           next={() => changeStep("stepTwo")}

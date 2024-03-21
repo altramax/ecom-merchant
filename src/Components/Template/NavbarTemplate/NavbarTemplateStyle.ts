@@ -83,11 +83,17 @@ const NavbarTemplateStyle = styled.div`
       gap: 10px;
 
       font-size: 14px;
-      h3 {
+      .logo__container{
+        cursor: pointer;
+        .light__logo, .dark__logo{
+         width: 30px;
+         height: 30px;
+        }
       }
+      
 
       .hamburger__container {
-        cursor: pointer;
+     
         // padding: 0 8px;
 
         img {
@@ -230,6 +236,10 @@ const NavbarTemplateStyle = styled.div`
         opacity: 0;
         width: 0;
       }
+      // .logo__container{
+      //   opacity: 0;
+      //   width: 0;
+      // }
     }
 
     .nav__profile__group {
@@ -274,6 +284,13 @@ const NavbarTemplateStyle = styled.div`
           img {
             width: 30px;
           }
+        }
+        .logo__container{
+          .light__logo, .dark__logo{
+           width: 40px;
+           height: 40px;
+          }
+    
         }
       }
 

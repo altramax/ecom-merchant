@@ -13,15 +13,12 @@ const OnboardingStepOnestyle = styled.div`
     span{
         color:${LightModeColor.primaryVariant};
     }
-   }
-
+   } 
    .buttons__group{
     button{
         background-color: ${LightModeColor.primary}
     }
    }
-
-
   }
 
   #dark {
@@ -51,17 +48,8 @@ const OnboardingStepOnestyle = styled.div`
        }  
   }
 
-
   .step__one__container::-webkit-scrollbar{
     display: none;
-}
-
-
-.step__form{
-display: flex;
-justify-content: center;
-align-items: center;
-height: 100vh;
 }
 
 .step__one__container{

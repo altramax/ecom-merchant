@@ -3,8 +3,8 @@ import styled from "styled-components";
 const AvatarStyle = styled.div`
 
   .avatar__img {
-    width: 25px;
-    height: 25px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     // display: block;
   }
@@ -25,8 +25,8 @@ const AvatarStyle = styled.div`
 
   @media (min-width: 1080px){
     .avatar__img{
-        width: 50px;
-        height: 50px;
+        width: 40px;
+        height: 40px;
     }
 
     .avatar__username{

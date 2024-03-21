@@ -10,11 +10,22 @@ const DashboardStyle = styled.div`
         margin-bottom: 20px;
       }
       .dashboard__container__header__displayarea {
-        border: 1px dotted;
+        border: 1px solid ;
         border-radius: 8px;
+        height: 350px;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .welcome__image{
+          img{
+            width: 100%;
+          }
+          width: 100px;
+          height: 100px;;
+        }
       }
       .profile__information__reminder{
-        padding: 20px 10px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -57,7 +68,7 @@ const DashboardStyle = styled.div`
         color: ${LightModeColor.primaryVariant}
         }
         .dashboard__container__header__displayarea {
-            border-color: ${LightModeColor.primary}
+            border-color: ${LightModeColor.primaryVariant}
         }
         .displayarea__navigation{
 
@@ -84,7 +95,9 @@ const DashboardStyle = styled.div`
   @media (min-width: 768px) {
     .dashboard__container {
       .dashboard__container__header {
-        .dashboard__container__header__displayarea {}
+        .dashboard__container__header__displayarea {
+          height: 180px;
+        }
         .profile__information__reminder{
           padding: 20px;
 
