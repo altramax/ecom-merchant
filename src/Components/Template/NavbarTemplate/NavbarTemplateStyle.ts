@@ -42,8 +42,10 @@ const NavbarTemplateStyle = styled.div`
     justify-content: space-between;
     align-items: center;
     position: absolute;
-    height: 100vh;
-    max-height: -webkit-fill-available;
+    // height: 100vh;
+    height: 100svh;
+    height: 100dvh;
+    height: 100lvh;
     transition: width 0.5s ease-in-out, background-color 0.2s ease-in-out;
 
     .nav__link__groups {
@@ -84,17 +86,16 @@ const NavbarTemplateStyle = styled.div`
       gap: 10px;
 
       font-size: 14px;
-      .logo__container{
+      .logo__container {
         cursor: pointer;
-        .light__logo, .dark__logo{
-         width: 30px;
-         height: 30px;
+        .light__logo,
+        .dark__logo {
+          width: 30px;
+          height: 30px;
         }
       }
-      
 
       .hamburger__container {
-     
         // padding: 0 8px;
 
         img {
@@ -276,7 +277,6 @@ const NavbarTemplateStyle = styled.div`
     }
 
     .nav__container {
-      height: 100vh;
       position: relative;
       .nav__heading__container {
         font-size: 16px;
@@ -287,12 +287,12 @@ const NavbarTemplateStyle = styled.div`
             width: 30px;
           }
         }
-        .logo__container{
-          .light__logo, .dark__logo{
-           width: 40px;
-           height: 40px;
+        .logo__container {
+          .light__logo,
+          .dark__logo {
+            width: 40px;
+            height: 40px;
           }
-    
         }
       }
 
