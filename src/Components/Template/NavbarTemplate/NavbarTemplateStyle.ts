@@ -44,8 +44,8 @@ const NavbarTemplateStyle = styled.div`
     position: absolute;
     // height: 100vh;
     height: 100svh;
-    height: 100dvh;
     height: 100lvh;
+    height: 100dvh;
     transition: width 0.5s ease-in-out, background-color 0.2s ease-in-out;
 
     .nav__link__groups {
