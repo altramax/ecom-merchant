@@ -42,7 +42,8 @@ const NavbarTemplateStyle = styled.div`
     justify-content: space-between;
     align-items: center;
     position: absolute;
-    height: 100%;
+    height: 100vh;
+    max-height: -webkit-fill-available;
     transition: width 0.5s ease-in-out, background-color 0.2s ease-in-out;
 
     .nav__link__groups {
