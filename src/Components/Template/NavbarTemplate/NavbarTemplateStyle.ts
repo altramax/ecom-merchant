@@ -42,7 +42,7 @@ const NavbarTemplateStyle = styled.div`
     justify-content: space-between;
     align-items: center;
     position: absolute;
-    height: 100vh;
+    height: 100%;
     transition: width 0.5s ease-in-out, background-color 0.2s ease-in-out;
 
     .nav__link__groups {
@@ -275,6 +275,7 @@ const NavbarTemplateStyle = styled.div`
     }
 
     .nav__container {
+      height: 100vh;
       position: relative;
       .nav__heading__container {
         font-size: 16px;

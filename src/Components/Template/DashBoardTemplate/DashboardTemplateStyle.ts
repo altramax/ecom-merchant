@@ -4,7 +4,7 @@ const DashboardTemplateStyle = styled.div`
   overflow: hidden;
   position: fixed;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
 
   #light {
     .bot {
