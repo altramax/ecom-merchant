@@ -41,10 +41,7 @@ const NavbarTemplateStyle = styled.div`
     flex-direction: column;
     // justify-content: space-between;
     align-items: center;
-    position: absolute;
-    // height: 100vh;
-    // height: 100svh;
-    // height: 100lvh;
+    position: fixed;
     height: 100dvh;
     transition: width 0.5s ease-in-out, background-color 0.2s ease-in-out;
 

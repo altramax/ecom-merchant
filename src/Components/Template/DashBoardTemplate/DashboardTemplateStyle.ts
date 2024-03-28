@@ -1,10 +1,6 @@
 import styled from "styled-components";
 
 const DashboardTemplateStyle = styled.div`
-  overflow: hidden;
-  position: fixed;
-  width: 100vw;
-  height: 100%;
 
   #light {
     .bot {
@@ -32,6 +28,9 @@ const DashboardTemplateStyle = styled.div`
       width: 100vw;
       height: 100vh;
     }
+    .nav__width{
+      position: fixed;
+    }
     .expand {
       width: 90vw;
       margin-left: auto;
@@ -49,11 +48,11 @@ const DashboardTemplateStyle = styled.div`
       }
       .route__body {
         transition: width 0.5s ease-in-out;
-        width: 80vw;
+        width: 94vw;
+        margin-left: auto;
       }
       .expand {
         width: 94vw;
-        margin-left: auto;
       }
       .contract {
         width: 6vw;
@@ -67,14 +66,17 @@ const DashboardTemplateStyle = styled.div`
       justify-content: space-between;
       .nav__width {
         transition: width 0.5s ease-in-out;
-        width: 20vw;
+        width: 19vw;
+        
       }
       .route__body {
         transition: width 0.5s ease-in-out;
-        width: 80vw;
+        width: 81vw;
+        margin-left: auto;
       }
       .expand {
         width: 95vw;
+
       }
       .contract {
         width: 5vw;
