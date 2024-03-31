@@ -1,6 +1,8 @@
 import LoadingModalStyle from "./LoadingModalstyles";
 import { useAppSelector } from "../../../Redux/Hooks";
 // import { useEffect, useState } from "react";
+import logo_light from "../../../assets/Icons/light-logo.png";
+import logo_dark from "../../../assets/Icons/dark-logo.png";
 
 const LoadingModal = () => {
   const color = useAppSelector((state) => state.color);
@@ -23,7 +25,14 @@ const LoadingModal = () => {
   return (
     <LoadingModalStyle>
       <div id={color.mode} className="loading__container">
-        <div className='loading'></div>
+        <div>
+          {color.mode === "light" ? (
+            <img src={logo_light} alt="" className="logo-img" />
+          ) : (
+            <img src={logo_dark} alt="" className="logo-img" />
+          )}
+        </div>
+        <div className="loading"></div>
         {/* <div>{count}%</div> */}
       </div>
     </LoadingModalStyle>

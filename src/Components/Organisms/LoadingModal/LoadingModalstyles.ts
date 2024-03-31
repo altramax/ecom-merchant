@@ -13,11 +13,14 @@ const LoadingModalStyle = styled.div`
     justify-content: center;
     align-items: center;
     align-content: center;
+    .logo-img {
+      width: 10vmax;
+    }
   }
 
   .loading {
-    width: 8vmax;
-    height: 8vmax;
+    width: 6vmax;
+    height: 6vmax;
     border-right: 4px solid;
     border-radius: 100%;
     animation: spinRight 800ms linear infinite;
