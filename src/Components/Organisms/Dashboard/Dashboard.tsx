@@ -1,9 +1,9 @@
 import DashboardStyle from "./DashboardStyle";
 import { useAppSelector } from "../../../Redux/Hooks";
-import graph__image from "../../../assets/Images/graph image.png";
-import arrowright from "../../../assets/Icons/arrow-right.svg";
-import { useNavigate } from "react-router-dom";
-import welcome_image from "../../../assets/Icons/welcome.png";
+// import graph__image from "../../../assets/Images/graph image.png";
+// import arrowright from "../../../assets/Icons/arrow-right.svg";
+// import { useNavigate } from "react-router-dom";
+// import welcome_image from "../../../assets/Icons/welcome.png";
 import Chart from "../../Molecule/Chart/Chart";
 import InformationBox from "../../Molecule/InformationBox/InformationBox";
 import info_icon from "../../../assets/Icons/profile-icon.svg";
