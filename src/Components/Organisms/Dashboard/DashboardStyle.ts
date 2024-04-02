@@ -18,27 +18,32 @@ const DashboardStyle = styled.div`
       margin-top: 20px;
       padding: 10px;
       border: 1px solid;
+    }
 
-
+    .dashboard__container__columntwo {
+      .dashboard__notification__panel,
+      .dashboard__topproducts__panel {
+        border: 1px solid;
+        h3 {
+          text-align: center;
+        }
+      }
     }
   }
 
   @media (min-width: 768px) {
-    .box__sub__container{
-      width: 30%; 
+    .box__sub__container {
+      width: 30%;
     }
     .dashboard__chartgroup {
-      
-
     }
-
   }
 
   @media (min-width: 1080px) {
     .dashboard__container {
       display: grid;
       gap: 20px;
-      grid-template-columns: 70% 25%;
+      grid-template-columns: 70% 28%;
 
       .dashboard__header {
       }

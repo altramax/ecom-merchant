@@ -7,14 +7,43 @@ import { useAppSelector } from "../../../Redux/Hooks";
 import Chart from "../../Molecule/Chart/Chart";
 import InformationBox from "../../Molecule/InformationBox/InformationBox";
 import info_icon from "../../../assets/Icons/profile-icon.svg";
+import Notification from "../Notification/Notification";
+import { useState } from "react";
 
 const Dashboard = () => {
   const user = useAppSelector((state) => state.auth.user);
   const color = useAppSelector((state) => state.color);
+  const [openNotification, setOpenNotification] = useState<boolean>(false);
+  const [selectedId, setSelectedId] = useState<string>("");
+
   // const navigate = useNavigate();
   // const profileInformationStatus = useAppSelector(
   //   (state) => state.stepForm.skipForNow
   // );
+
+  
+  const handlerOpenNotification = () => {
+    setOpenNotification(!openNotification);
+  };
+
+  const notificationData1 = {
+    id: "1",
+    title: "Notification Test",
+    body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero ipsa voluptates ullam praesentium facere repudiandae animi odit dolor est, sunt voluptate iusto! Quisquam consequuntur ducimus distinctio, minima aperiam dolorem sint atque a cum asperiores voluptas error sequi suscipit nulla, vel modi amet, quidem libero. Nobis nemo praesentium nihil voluptatibus eius.",
+    openModal: openNotification,
+    selectedId: selectedId,
+    closeModal: handlerOpenNotification
+  };
+
+  const notificationData2 = {
+    id: "2",
+    title: "Notification Test 2",
+    body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero ipsa voluptates ullam praesentium facere repudiandae animi odit dolor est, sunt voluptate iusto! Quisquam consequuntur ducimus distinctio, minima aperiam dolorem sint atque a cum asperiores voluptas error sequi suscipit nulla, vel modi amet, quidem libero. Nobis nemo praesentium nihil voluptatibus eius.",
+    openModal: openNotification,
+    selectedId: selectedId,
+    closeModal: handlerOpenNotification
+  };
+
 
   return (
     <DashboardStyle>
@@ -53,7 +82,26 @@ const Dashboard = () => {
           </div>
           <div className="dashboard__container__columntwo">
             <div className="dashboard__notification__panel">
-              <h1>Notification</h1>
+              <h3>Notifications</h3>
+              <div
+                onClick={() => {
+                  setSelectedId(notificationData1.id);
+                  handlerOpenNotification();
+                }}
+              >
+                <Notification {...notificationData1} />
+              </div>
+              <div
+                onClick={() => {
+                  setSelectedId(notificationData2.id);
+                  handlerOpenNotification();
+                }}
+              >
+                <Notification {...notificationData2} />
+              </div>
+            </div>
+            <div className="dashboard__topproducts__panel">
+              <h3>Top Selling Products</h3>
             </div>
           </div>
         </div>

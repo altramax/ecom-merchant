@@ -39,7 +39,7 @@ const Chart = () => {
     datasets: [
       {
         fill: true,
-        label: "My First Dataset",
+        label: "Business Revenue",
         data: [65, 59, 80, 81, 65, 59, 80, 81],
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
