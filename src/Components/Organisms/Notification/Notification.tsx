@@ -6,20 +6,16 @@ type notificationType = {
   id: string;
   title: string;
   body: string;
-  openModal: boolean;
-  selectedId: string;
-  closeModal: Function;
 };
 
 const Notification = ({
   id,
   title,
-  body,
-  openModal,
-  selectedId,
-  closeModal,
+  body
 }: notificationType) => {
   const [read, setRead] = useState<boolean | null>(null);
+  const [openModal, setOpenModal] = useState<boolean>(false);
+
 
   useEffect(() => {
     handlerRead();
@@ -31,13 +27,18 @@ const Notification = ({
     }
   };
 
+  const handlerModal = (evt: boolean) => {
+    setOpenModal(evt);
+  };
+
+
   return (
     <NotificationStyle>
       <div className="notification__container" key={id}>
-        {openModal && selectedId === id ? (
+        {openModal ? (
           <div className="notification__modal">
             <div className="img__container">
-              <img src={close} alt="close modal" onClick={() => closeModal} />
+              <img src={close} alt="close modal" onClick={()=> handlerModal(false)} />
             </div>
             <div>
               <h4>{title}</h4>
@@ -45,8 +46,8 @@ const Notification = ({
             </div>
           </div>
         ) : (
-          <div className="notification__bar">
-            {read === true && selectedId === id ? null : (
+          <div className="notification__bar" onClick={()=> handlerModal(true)} >
+            {read === true ? null : (
               <div className="red__dot"></div>
             )}
             <div>

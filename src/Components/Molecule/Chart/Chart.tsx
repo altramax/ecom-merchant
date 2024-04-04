@@ -60,7 +60,7 @@ const Chart = () => {
           "rgb(201, 203, 207)",
         ],
         borderWidth: 1,
-        tension: 0.5,
+        tension: 0.3,
       },
     ],
   };

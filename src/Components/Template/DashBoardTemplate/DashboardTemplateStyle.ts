@@ -24,6 +24,7 @@ const DashboardTemplateStyle = styled.div`
   }
 
   .dashboard__template__container {
+
     .route__body {
       width: 100vw;
       height: 100vh;
@@ -75,7 +76,7 @@ const DashboardTemplateStyle = styled.div`
         margin-left: auto;
       }
       .expand {
-        width: 95vw;
+        width: 94vw;
 
       }
       .contract {

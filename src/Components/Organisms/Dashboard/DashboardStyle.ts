@@ -4,6 +4,7 @@ import styled from "styled-components";
 const DashboardStyle = styled.div`
   // width: 100%;
   // transition: width 0.5s ease-in-out;
+
   .dashboard__container {
     padding: 40px 20px 20px 20px;
     .dashboard__header {
@@ -13,23 +14,92 @@ const DashboardStyle = styled.div`
         justify-content: space-between;
       }
     }
+  }
 
-    .dashboard__chartgroup {
-      margin-top: 20px;
-      padding: 10px;
-      border: 1px solid;
-    }
-
-    .dashboard__container__columntwo {
-      .dashboard__notification__panel,
-      .dashboard__topproducts__panel {
+    .dashbord__container__columnone {
+      .dashboard__chartgroup {
+        margin: 25px 0;
+        padding: 10px;
         border: 1px solid;
-        h3 {
-          text-align: center;
+      }
+    
+
+    .dashboard__salesreport {
+      height: 400px;
+    
+      overflow: auto;
+      border-radius: 10px;
+      padding: 20px 10px 10px 10px;
+      border: 1px solid;
+      margin: 25px 0;
+      .salesreport__header {
+        position: sticky;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        .report__header__group {
+          width: 100%;
+          text-align: start;
+          p {
+            font-size: 10px;
+          }
+          h3 {
+            background-color: #fff;
+            top: 0;
+            margin-bottom: 5px;
+          }
+        }
+
+        .download__group {
+          border: 1px solid;
+          padding: 3px 7px;
+          border-radius: 5px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 5px;
+          font-size: 14px;
+          img {
+            width: 20px;
+          }
+        }
+        input {
+          outline: none;
+          // border-radius: 5px;
+          width: 90%;
+          margin: 10px;
+          padding: 5px;
         }
       }
     }
   }
+
+  .dashboard__container__columntwo {
+    .dashboard__notification__panel::-webkit-scrollbar {
+      display: none;
+    }
+    .dashboard__notification__panel,
+    .dashboard__topproducts__panel {
+      height: 300px;
+      overflow: auto;
+      border-radius: 10px;
+      padding: 10px;
+      border: 1px solid;
+      margin: 25px 0;
+      h3 {
+        background-color: #fff;
+        text-align: center;
+        position: sticky;
+        top: 0;
+      }
+    }
+    .notification__entry {
+      margin: 5px 0;
+    }
+  }
+
+
 
   @media (min-width: 768px) {
     .box__sub__container {
@@ -41,13 +111,33 @@ const DashboardStyle = styled.div`
 
   @media (min-width: 1080px) {
     .dashboard__container {
+      padding: 40px 25px 20px 25px;
       display: grid;
-      gap: 20px;
+      gap: 25px;
       grid-template-columns: 70% 28%;
+    }
+.dashbord__container__columnone{
 
-      .dashboard__header {
+
+
+      .dashboard__salesreport{
+
+        .salesreport__header {
+          
+          
+          .report__header__group {
+            width: fit-content;
+          }
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          input{
+            width: 50%;
+          }
+        }
       }
     }
+  }
   }
 `;
 

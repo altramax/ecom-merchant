@@ -1,22 +1,24 @@
 import styled from "styled-components";
 
-const NotificationStyle = styled.div`
-  .notification__container {
-    .notification__bar {
+const TopSellingProductsStyles = styled.div`
+  .topproduct__container {
+    .topproduct__bar {
       cursor: pointer;
       border: 1px solid;
       border-radius: 5px;
       padding: 5px 10px;
       display: flex;
-      justify-content: start;
-      align-items: start;
+      justify-content: space-between;
+      align-items: center;
       gap: 5px;
-      .red__dot {
-        width: 5px;
-        height: 5px;
-        border-radius: 50%;
-        background-color: red;
-        margin-top: 7px;
+      .topproduct__info__group {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 7px;
+      }
+      .product__img {
+        width: 40px;
       }
       p {
         font-size: 13px;
@@ -31,16 +33,14 @@ const NotificationStyle = styled.div`
       top: 0;
       width: 100vw;
       min-height: 100vh;
-      z-index: 10;
-   
+
       .img__container {
         width: 100%;
         img {
           cursor: pointer;
           width: 30px;
           display: block;
-          margin-left:auto;
-
+          margin-left: auto;
         }
       }
       h4 {
@@ -60,4 +60,4 @@ const NotificationStyle = styled.div`
     }
   }
 `;
-export default NotificationStyle;
+export default TopSellingProductsStyles;

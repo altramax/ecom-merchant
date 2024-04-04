@@ -1,5 +1,5 @@
 import DashboardStyle from "./DashboardStyle";
-import { useAppSelector } from "../../../Redux/Hooks";
+import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
 // import graph__image from "../../../assets/Images/graph image.png";
 // import arrowright from "../../../assets/Icons/arrow-right.svg";
 // import { useNavigate } from "react-router-dom";
@@ -8,42 +8,42 @@ import Chart from "../../Molecule/Chart/Chart";
 import InformationBox from "../../Molecule/InformationBox/InformationBox";
 import info_icon from "../../../assets/Icons/profile-icon.svg";
 import Notification from "../Notification/Notification";
-import { useState } from "react";
+import TopSellingProducts from "../TopSellingProducts/TopSellingProducts";
+import close from "../../../assets/Icons/cancle.svg";
+import { useEffect } from "react";
+import { getProducts } from "../../../Redux/AllProductsSlice";
+import download from "../../../assets/Icons/download-icon.png";
+import SalesReport from "../SalesReport/SalesReport";
+// import { useState } from "react";
 
 const Dashboard = () => {
   const user = useAppSelector((state) => state.auth.user);
   const color = useAppSelector((state) => state.color);
-  const [openNotification, setOpenNotification] = useState<boolean>(false);
-  const [selectedId, setSelectedId] = useState<string>("");
+  const products = useAppSelector((state) => state.allProducts);
+  const dispatch = useAppDispatch();
 
   // const navigate = useNavigate();
   // const profileInformationStatus = useAppSelector(
   //   (state) => state.stepForm.skipForNow
   // );
 
-  
-  const handlerOpenNotification = () => {
-    setOpenNotification(!openNotification);
-  };
+  useEffect(() => {
+    dispatch(getProducts());
+  }, []);
 
   const notificationData1 = {
     id: "1",
     title: "Notification Test",
     body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero ipsa voluptates ullam praesentium facere repudiandae animi odit dolor est, sunt voluptate iusto! Quisquam consequuntur ducimus distinctio, minima aperiam dolorem sint atque a cum asperiores voluptas error sequi suscipit nulla, vel modi amet, quidem libero. Nobis nemo praesentium nihil voluptatibus eius.",
-    openModal: openNotification,
-    selectedId: selectedId,
-    closeModal: handlerOpenNotification
   };
 
-  const notificationData2 = {
-    id: "2",
-    title: "Notification Test 2",
-    body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero ipsa voluptates ullam praesentium facere repudiandae animi odit dolor est, sunt voluptate iusto! Quisquam consequuntur ducimus distinctio, minima aperiam dolorem sint atque a cum asperiores voluptas error sequi suscipit nulla, vel modi amet, quidem libero. Nobis nemo praesentium nihil voluptatibus eius.",
-    openModal: openNotification,
-    selectedId: selectedId,
-    closeModal: handlerOpenNotification
-  };
+  // const notificationData2 = {
+  //   id: "2",
+  //   title: "Notification Test 2",
+  //   body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero ipsa voluptates ullam praesentium facere repudiandae animi odit dolor est, sunt voluptate iusto! Quisquam consequuntur ducimus distinctio, minima aperiam dolorem sint atque a cum asperiores voluptas error sequi suscipit nulla, vel modi amet, quidem libero. Nobis nemo praesentium nihil voluptatibus eius.",
+  // };
 
+  // console.log(products.products);
 
   return (
     <DashboardStyle>
@@ -79,29 +79,58 @@ const Dashboard = () => {
             <div className="dashboard__chartgroup">
               <Chart />
             </div>
+            <div className="dashboard__salesreport">
+              <div className="salesreport__header">
+                <div className="report__header__group">
+                  <h3>Sales Report</h3>
+                  <p>300 Items in record</p>
+                </div>
+                <input type="text" className="sales__searchbar" />
+                <div className="download__group">
+                  <img src={download} alt="" className="download" />
+                  <span>Export as CSV</span>
+                </div>
+              </div>
+              {products.products !== null &&
+                products.products.map((item: any) => (
+                  <SalesReport {...item} cancle={`${close}`} key={item.id} />
+                ))}
+            </div>
           </div>
           <div className="dashboard__container__columntwo">
             <div className="dashboard__notification__panel">
               <h3>Notifications</h3>
-              <div
-                onClick={() => {
-                  setSelectedId(notificationData1.id);
-                  handlerOpenNotification();
-                }}
-              >
+              <div className="notification__entry">
                 <Notification {...notificationData1} />
               </div>
-              <div
-                onClick={() => {
-                  setSelectedId(notificationData2.id);
-                  handlerOpenNotification();
-                }}
-              >
-                <Notification {...notificationData2} />
+              <div className="notification__entry">
+                <Notification {...notificationData1} />
+              </div>
+              <div className="notification__entry">
+                <Notification {...notificationData1} />
+              </div>
+              <div className="notification__entry">
+                <Notification {...notificationData1} />
+              </div>
+              <div className="notification__entry">
+                <Notification {...notificationData1} />
+              </div>
+              <div className="notification__entry">
+                <Notification {...notificationData1} />
               </div>
             </div>
             <div className="dashboard__topproducts__panel">
               <h3>Top Selling Products</h3>
+              <div>
+                {products.products !== null &&
+                  products.products.map((item: any) => (
+                    <TopSellingProducts
+                      {...item}
+                      cancle={`${close}`}
+                      key={item.id}
+                    />
+                  ))}
+              </div>
             </div>
           </div>
         </div>
