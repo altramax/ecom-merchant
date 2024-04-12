@@ -9,12 +9,12 @@
    }
 
    export const DarkModeColor = {
-    background: "#000000",
+    background: "#161a21",
     primary: "#BB86FC",
     primaryVariant: "#3700B3",
     error: "#ff0000",
     secondary: "#ffffff",
-    backgroundVariant: "#1f1f1f",
+    backgroundVariant: "#36454f",
     backgroundVariant2: "#121212",
     backgroundvariant3: "#3C3C3C"
     //  white: "#fff",

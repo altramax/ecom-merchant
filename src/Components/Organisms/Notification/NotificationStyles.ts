@@ -1,12 +1,30 @@
 import styled from "styled-components";
+import { DarkModeColor } from "../../Atom/Colors/Colors";
 
 const NotificationStyle = styled.div`
+
+#dark{
+  .notification__bar {
+    border-color: ${DarkModeColor.secondary};
+    h4, p{
+      color: ${DarkModeColor.secondary};
+    }
+  }
+  .notification__modal{
+    background-color: ${DarkModeColor.background};
+    color: ${DarkModeColor.secondary};
+  }
+}
+
+
+
   .notification__container {
     .notification__bar {
       cursor: pointer;
-      border: 1px solid;
-      border-radius: 5px;
-      padding: 5px 10px;
+  
+      border-top: 1px solid;
+      // border-radius: 5px;
+      padding:10px;
       display: flex;
       justify-content: start;
       align-items: start;
@@ -26,7 +44,7 @@ const NotificationStyle = styled.div`
     .notification__modal {
       padding: 50px;
       background-color: #fff;
-      position: absolute;
+      position: fixed;
       left: 0;
       top: 0;
       width: 100vw;

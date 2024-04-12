@@ -8,7 +8,7 @@ import { useAppSelector } from "../../../Redux/Hooks";
 import Button from "../../Molecule/Button/Button";
 import customercare_nightmode from "../../../assets/Icons/customerCare-nightmode.jpg";
 import community_nightmode from "../../../assets/Icons/community-nightmode.jpg";
-import market_nightmode from "../../../assets/Icons/market-nightmode.jpg"
+import market_nightmode from "../../../assets/Icons/market-nightmode.png"
 
 type sliderControl = {
   slider: any;
@@ -16,7 +16,6 @@ type sliderControl = {
 
 const OnboardingSlider = ({ slider }: sliderControl) => {
   const [selected, setSelected] = useState<number>(0);
-  // const dispatch = useAppDispatch();
   const color = useAppSelector((state: any) => state.color);
 
   const fields = [

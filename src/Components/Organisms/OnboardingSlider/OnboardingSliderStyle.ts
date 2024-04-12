@@ -74,7 +74,7 @@ const OnboardingSliderStyle = styled.div`
   #dark {
     color: #fff;
     .slider__group{
-      background-color: ${DarkModeColor.backgroundvariant3}
+      background-color: ${DarkModeColor.background}
     }
     .dot__group{
       .dot {

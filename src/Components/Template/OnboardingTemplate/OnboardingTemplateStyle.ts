@@ -61,7 +61,7 @@ overflow: hidden;
 
   #dark {
       .slider {
-        background-color: ${DarkModeColor.backgroundvariant3};
+        background-color: ${DarkModeColor.background};
       }
   }
 

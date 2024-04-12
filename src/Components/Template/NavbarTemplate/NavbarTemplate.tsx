@@ -72,7 +72,7 @@ const NavbarTemplate = ({
               )}
             </div>
             <h3 className={`${!openNav ? "null" : "slowVisibility"}`}>
-          WearHouse
+            WearHouse
             </h3>
           </div>
 

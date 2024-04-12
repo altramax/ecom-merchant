@@ -1,37 +1,70 @@
 import SalesReportStyle from "./SalesReportStyle";
 import { useState } from "react";
+import { useAppSelector } from "../../../Redux/Hooks";
+import SalesDetails from "../SalesDetails/SalesDetails";
 
-import ProductDetails from "../ProductDetails/ProductDetails";
-
-type topProductType = {
-  image: string;
-  name: string;
-  price: number;
-
-  description: string;
-  rating: any;
-  category: string;
-  id: number;
-};
-
-const SalesReport = ({
-  image,
-  name,
-  price,
-  description,
-  rating,
-  category,
-  id,
-}: topProductType) => {
+const SalesReport = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
+  const products = useAppSelector((state) => state.allProducts);
+  const color = useAppSelector((state) => state.color);
+  const [selectedItem, setSelectedItem] = useState<any>();
 
-  const handlerModal = (evt: boolean) => {
-    setOpenModal(evt);
+  const showModal = () => {
+    setOpenModal(true);
+  };
+
+  const closeModal = () => {
+    setOpenModal(false);
+  };
+
+  const renderSalesModal = () => {
+    if (openModal) {
+      return <SalesDetails {...selectedItem} cancle={closeModal}/>;
+    }
   };
 
   return (
     <SalesReportStyle>
-      <div className="topproduct__container" key={id}>
+      <>
+        {renderSalesModal()}
+        <div className="salesreport__bar__container" id={color.mode}>
+          <table>
+            <thead>
+              <tr>
+                <th className="start">Order No.</th>
+                {/* <th>Date</th> */}
+                <th>No. of Items</th>
+                <th>Total Price</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {products.products !== null &&
+                products.products.map((item: any) => {
+                  return (
+                    <tr
+                      key={item.id}
+                      onClick={() => {
+                        setSelectedItem(item);
+                        showModal();
+                      }}
+                    >
+                      <td className="start">1jdkdn21234jj</td>
+                      {/* <td>6/12/24</td> */}
+                      <td>5</td>
+                      <td>{item.price}</td>
+                      <td>
+                        <div className="pending">Pending</div>
+                      </td>
+                    </tr>
+                  );
+                })}
+            </tbody>
+          </table>
+        </div>
+      </>
+
+      {/* <div className="topproduct__container" key={id}>
         {openModal ? (
           <ProductDetails
             image={image}
@@ -54,7 +87,7 @@ const SalesReport = ({
             <p>₦{price}</p>
           </div>
         )}
-      </div>
+      </div> */}
     </SalesReportStyle>
   );
 };

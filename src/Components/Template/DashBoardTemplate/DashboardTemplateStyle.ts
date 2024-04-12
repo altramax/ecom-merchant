@@ -2,6 +2,11 @@ import styled from "styled-components";
 
 const DashboardTemplateStyle = styled.div`
 
+#dark::-webkit-scrollbar{
+  display: none;
+}
+
+
   #light {
     .bot {
       transition: 0.7s ease-in;
@@ -23,6 +28,7 @@ const DashboardTemplateStyle = styled.div`
     margin: 50px;
   }
 
+  
   .dashboard__template__container {
 
     .route__body {
@@ -41,6 +47,19 @@ const DashboardTemplateStyle = styled.div`
       width: 10vw;
     }
   }
+
+
+
+  .dashboard__template__container{
+
+    .route__body::-webkit-scrollbar {
+      display: none;
+    }
+    .expand::-webkit-scrollbar{
+      display: none;
+    }
+  }
+
 
   @media (min-width: 768px) {
     .dashboard__template__container {

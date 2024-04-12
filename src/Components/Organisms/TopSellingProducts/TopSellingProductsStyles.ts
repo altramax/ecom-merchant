@@ -1,16 +1,24 @@
 import styled from "styled-components";
+import { DarkModeColor} from "../../Atom/Colors/Colors";
 
 const TopSellingProductsStyles = styled.div`
+
+#dark{
+  .topproduct__bar{
+    border-color: ${DarkModeColor.secondary};
+    color: ${DarkModeColor.secondary};
+  }
+}
   .topproduct__container {
     .topproduct__bar {
       cursor: pointer;
-      border: 1px solid;
-      border-radius: 5px;
+      border-top: 1px solid;
       padding: 5px 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 5px;
+      margin: 5px 0;
       .topproduct__info__group {
         display: flex;
         justify-content: space-between;
@@ -20,8 +28,11 @@ const TopSellingProductsStyles = styled.div`
       .product__img {
         width: 40px;
       }
+      .product__name{
+        font-size: 12px;
+      }
       p {
-        font-size: 13px;
+        font-size: 10px;
       }
     }
 

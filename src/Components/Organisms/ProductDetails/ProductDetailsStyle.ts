@@ -1,10 +1,24 @@
 import styled from "styled-components";
+import { DarkModeColor, LightModeColor } from "../../Atom/Colors/Colors";
 
 const ProductDetailsStyle = styled.div`
+  #dark {
+    background-color: ${DarkModeColor.background};
+    color: ${DarkModeColor.secondary};
+  }
+
+  #light {
+    background-color: ${LightModeColor.background};
+    color: ${LightModeColor.secondary};
+  }
+
+  .modal__container::-webkit-scrollbar{
+    display: none;
+  }
+
   .modal__container {
-    background-color: #fff;
     width: 100%;
-    height: 30rem;
+    height: 450px;
     overflow-y: scroll;
     color: #000000;
     z-index: 3;
@@ -12,43 +26,48 @@ const ProductDetailsStyle = styled.div`
     bottom: 0;
     left: 0;
 
-   
-      .cancleIcon {
-        width: 100%;
-        cursor: pointer;
-        .cancleIcon__img {
-          width: 40px;
-          margin: auto;
-          display: block;
-    
-        }
+    .cancleIcon {
+      width: 100%;
+      cursor: pointer;
+      margin: 10px 0;
+      .cancleIcon__img {
+        width: 40px;
+        margin: auto;
+        display: block;
       }
-    
+    }
+    .modalFlex {
+      padding: 20px;
+      h2 {
+        font-size: 20px;
+      }
+    }
+
+    .modalImageGroup {
+      h2 {
+        margin-bottom: 10px;
+      }
+    }
 
     .modalImage {
       display: flex;
+      justify-content: center;
       img {
-        width: 15rem;
-        height: 16rem;
-        margin: auto;
-      }
-    }
-    .modalImageGroup {
-      padding: 1rem;
-    }
-    .descriptionGroup {
-      padding: 1rem;
-      h3 {
-        margin: 1rem 0;
-      }
-      h2 {
-        margin-right: auto;
-        text-decoration: underline;
+        width: 200px;
+        margin-bottom: 15px;
       }
     }
 
-    h3 {
-      padding: 1rem 1rem 0 0;
+    .descriptionGroup {
+      margin: auto;
+      h3 {
+        text-align: start;
+        margin-right: auto;
+        span{
+          font-weight: 300;
+          font-size: 15px;
+        }
+      }
     }
   }
 
@@ -65,7 +84,7 @@ const ProductDetailsStyle = styled.div`
 
   @media (min-width: 768px) {
     .modalFlex {
-      width: 80%;
+      width: 90%;
       display: flex;
       justify-content: space-between;
       align-items: start;
@@ -73,11 +92,25 @@ const ProductDetailsStyle = styled.div`
       .descriptionGroup,
       .modalImageGroup {
         width: 50%;
+        text-align: center;
+        .modalImage {
+          display: block;
+        }
+        h3{
+          width: 80%;
+          margin: auto;
+        }
       }
-      .modalImage {
-        display: block;
+      .descriptionGroup{
+        text-align: start;
+        margin: 0;
       }
     }
+  }
+
+  @media (min-width: 1080px){
+    .modalFlex {
+      width: 80%;}
   }
 `;
 export default ProductDetailsStyle;

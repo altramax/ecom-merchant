@@ -11,9 +11,22 @@ const NavbarTemplateStyle = styled.div`
     }
   }
   #dark {
-    background-color: ${DarkModeColor.primary};
+    background-color: ${DarkModeColor.background};
+    .link__sub__group {
+      p {
+        color: ${DarkModeColor.secondary};
+      }
+    }
     .link__sub__group:hover {
-      background-color: ${DarkModeColor.backgroundVariant};
+      background-color: ${DarkModeColor.backgroundVariant2};
+    }
+    .nav__heading__container {
+      // color: #fff;
+      h3 {
+        color: #fff;
+      }
+      // .logo__container {
+      // }
     }
   }
 
@@ -106,7 +119,7 @@ const NavbarTemplateStyle = styled.div`
   .nav__profile__group {
     cursor: pointer;
     width: 80%;
- margin-top: auto;
+    margin-top: auto;
     .nav__profile {
       display: flex;
       justify-content: start;

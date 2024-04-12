@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { LightModeColor, DarkModeColor } from "../../Atom/Colors/Colors";
-// import { lightmode } from "../../../Redux/ColorSlice";
 
 const SignInModalStyle = styled.div`
   .test-img {
