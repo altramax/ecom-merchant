@@ -1,7 +1,8 @@
   export const LightModeColor = {
     background: "#ffffff",
     primary : "#DFF3FC",
-    primaryVariant : " #055AD9",
+    primaryVariant : "#7B8B8A",
+    backgroundVariant: "#ECF7FD",
     error: "#ff0000",
     secondary: "#000000"
     // white : "#fff",
@@ -14,11 +15,12 @@
     primaryVariant: "#3700B3",
     error: "#ff0000",
     secondary: "#ffffff",
-    backgroundVariant: "#36454f",
+    backgroundVariant: "#060606",
     backgroundVariant2: "#121212",
-    backgroundvariant3: "#3C3C3C"
+   
     //  white: "#fff",
     //  darkblue: "#000",
     //  shallow: "#067A8F"
    }
     
+  //  

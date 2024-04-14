@@ -1,13 +1,27 @@
 import styled from "styled-components";
+import { LightModeColor, DarkModeColor } from "../../Atom/Colors/Colors";
 
 const DashboardTemplateStyle = styled.div`
+  //  ::-webkit-scrollbar {
+  //   display: none;
+  // }
 
-#dark::-webkit-scrollbar{
-  display: none;
-}
+  // .route__body ::-webkit-scrollbar {
+  //   display: none;
+  // }
+  // .expand ::-webkit-scrollbar {
+  //   display: none;
+  // }
+
+  // .dashboard__template__container ::-webkit-scrollbar {
+  //   display: none;
+  // }
 
 
   #light {
+    .dashboard__template__container {
+      background-color: ${LightModeColor.backgroundVariant};
+    }
     .bot {
       transition: 0.7s ease-in;
       background-color: blue;
@@ -15,6 +29,9 @@ const DashboardTemplateStyle = styled.div`
   }
 
   #dark {
+    .dashboard__template__container {
+      background-color: ${DarkModeColor.backgroundVariant};
+    }
     .bot {
       transition: 0.7s ease-in;
 
@@ -28,35 +45,22 @@ const DashboardTemplateStyle = styled.div`
     margin: 50px;
   }
 
-  
   .dashboard__template__container {
+    .route__body, .expand {
+      width: 86.5vw;
+      min-height: 100vh;
+      margin-left: auto;
 
-    .route__body {
-      width: 100vw;
-      height: 100vh;
     }
-    .nav__width{
+    .nav__width {
+
+      z-index: 2;
       position: fixed;
     }
-    .expand {
-      width: 90vw;
-      margin-left: auto;
-    }
+
 
     .contract {
       width: 10vw;
-    }
-  }
-
-
-
-  .dashboard__template__container{
-
-    .route__body::-webkit-scrollbar {
-      display: none;
-    }
-    .expand::-webkit-scrollbar{
-      display: none;
     }
   }
 
@@ -66,14 +70,12 @@ const DashboardTemplateStyle = styled.div`
       .nav__width {
         width: 25vw;
       }
-      .route__body {
+      .route__body,.expand  {
         transition: width 0.5s ease-in-out;
-        width: 94vw;
-        margin-left: auto;
+        width: 92vw;
+  
       }
-      .expand {
-        width: 94vw;
-      }
+
       .contract {
         width: 6vw;
       }
@@ -87,16 +89,14 @@ const DashboardTemplateStyle = styled.div`
       .nav__width {
         transition: width 0.5s ease-in-out;
         width: 19vw;
-        
       }
-      .route__body {
+      .route__body{
         transition: width 0.5s ease-in-out;
         width: 81vw;
         margin-left: auto;
       }
       .expand {
-        width: 94vw;
-
+        width: 95vw;
       }
       .contract {
         width: 5vw;

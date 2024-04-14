@@ -49,7 +49,7 @@ const InformationBoxStyle = styled.div`
       flex-direction: row;
       width: 100%;
       gap: 30px;
-
+      border: none;
       img {
         margin-bottom: 0;
       }

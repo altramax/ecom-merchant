@@ -2,10 +2,11 @@ import SalesReportStyle from "./SalesReportStyle";
 import { useState } from "react";
 import { useAppSelector } from "../../../Redux/Hooks";
 import SalesDetails from "../SalesDetails/SalesDetails";
+import EmptyState from "../../Molecule/EmptyState/EmptyState";
 
 const SalesReport = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const products = useAppSelector((state) => state.allProducts);
+  const products = useAppSelector((state) => state.allProducts.products)
   const color = useAppSelector((state) => state.color);
   const [selectedItem, setSelectedItem] = useState<any>();
 
@@ -19,7 +20,7 @@ const SalesReport = () => {
 
   const renderSalesModal = () => {
     if (openModal) {
-      return <SalesDetails {...selectedItem} cancle={closeModal}/>;
+      return <SalesDetails {...selectedItem} cancle={closeModal} />;
     }
   };
 
@@ -38,9 +39,9 @@ const SalesReport = () => {
                 <th>Status</th>
               </tr>
             </thead>
-            <tbody>
-              {products.products !== null &&
-                products.products.map((item: any) => {
+            {products !== null && (
+              <tbody>
+                {products.map((item: any) => {
                   return (
                     <tr
                       key={item.id}
@@ -59,8 +60,18 @@ const SalesReport = () => {
                     </tr>
                   );
                 })}
-            </tbody>
+              </tbody>
+            )}
           </table>
+
+          {products === null && (
+            <div>
+              <EmptyState
+                header="No Sales Record Found"
+                text="Sales Records will appear here as soon as orders begin"
+              />
+            </div>
+          )}
         </div>
       </>
 

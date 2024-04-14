@@ -6,8 +6,28 @@ import day__sky from "../../../assets/Images/day__sky.jpg";
 const NavbarTemplateStyle = styled.div`
   #light {
     background-color: ${LightModeColor.primary};
+    .link__sub__group {
+      p {
+        color: ${LightModeColor.secondary};
+      }
+    }
     .link__sub__group:hover {
-      background-color: ${LightModeColor.secondary};
+      background-color: ${LightModeColor.primaryVariant};
+    }
+    .nav__heading__container {
+   
+      h3 {
+        color: ${LightModeColor.secondary};
+      }
+     
+    }
+    .nav__profile {
+      color: ${LightModeColor.secondary};
+      .logout__group {
+      }
+    }
+    .logout {
+      color: ${LightModeColor.secondary};
     }
   }
   #dark {
@@ -21,12 +41,19 @@ const NavbarTemplateStyle = styled.div`
       background-color: ${DarkModeColor.backgroundVariant2};
     }
     .nav__heading__container {
-      // color: #fff;
+   
       h3 {
-        color: #fff;
+        color: ${DarkModeColor.secondary};
       }
-      // .logo__container {
-      // }
+     
+    }
+    .nav__profile {
+      color: ${DarkModeColor.secondary};
+      .logout__group {
+      }
+    }
+    .logout {
+      color: ${DarkModeColor.secondary};
     }
   }
 
@@ -49,6 +76,7 @@ const NavbarTemplateStyle = styled.div`
   }
 
   .nav__container {
+    
     padding: 30px 0 30px 0;
     display: flex;
     flex-direction: column;
@@ -56,7 +84,7 @@ const NavbarTemplateStyle = styled.div`
     align-items: center;
     position: fixed;
     height: 100dvh;
-    transition: width 0.5s ease-in-out, background-color 0.2s ease-in-out;
+    transition: width 0.5s ease-in-out;
 
     .nav__link__groups {
       .link__sub__group {
@@ -93,16 +121,23 @@ const NavbarTemplateStyle = styled.div`
       justify-content: start;
       align-items: center;
       height: 50px;
-      gap: 10px;
+      gap: 3px;
 
       font-size: 14px;
       .logo__container {
         cursor: pointer;
         .light__logo,
-        .dark__logo {
+        .dark__logo{
           width: 30px;
           height: 30px;
         }
+        // .arrow {
+        //   position: absolute;
+        //   margin-left: -10px;
+        //   margin-top: 15px;
+        //   width: 20px;
+        //   height: 20px;
+        // }
       }
 
       .hamburger__container {
@@ -118,7 +153,7 @@ const NavbarTemplateStyle = styled.div`
 
   .nav__profile__group {
     cursor: pointer;
-    width: 80%;
+    width: fit-content;
     margin-top: auto;
     .nav__profile {
       display: flex;
@@ -134,40 +169,24 @@ const NavbarTemplateStyle = styled.div`
         font-size: 12px;
         font-weight: 600;
       }
-      .arrowdown,
-      .fliparrow {
-        opacity: 1;
-        width: 10px;
-        margin-left: auto;
-        transition: opacity 1s ease;
-      }
-      .arrowdown {
-        transition: transform 0.5s ease;
-        transform: rotate(360deg);
-      }
-      .fliparrow {
-        transform: rotate(180deg);
-        transition: transform 0.5s ease;
-      }
     }
-    .profile__dropDown {
-      margin-top: 10px;
-      .link {
-        display: block;
-        text-decoration: none;
-        padding: 10px 0;
-      }
-    }
+  }
 
-    .profile__dropDown__tools {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+  .logout__group {
+    transition: width 0.5s ease-in-out;
+    margin-top: 20px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 10px;
+    img {
+      width: 20px;
     }
-    .hide__dropdown {
-      opacity: 0;
-      width: 0;
-      height: 0;
+    .logout {
+      padding: 5px 11px 5px 0;
+      background: none;
+      border: none;
+      cursor: pointer;
     }
   }
 
@@ -178,7 +197,7 @@ const NavbarTemplateStyle = styled.div`
     width: 70px;
     transition: background-image 1s ease-in;
     border-radius: 100px;
-
+    margin: 10px auto 0 auto;
     cursor: pointer;
 
     .moon {
@@ -216,14 +235,6 @@ const NavbarTemplateStyle = styled.div`
     }
   }
 
-  .logout {
-    padding: 5px 11px 5px 0;
-    margin-top: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-
   .contract__nav {
     width: 10%;
 
@@ -248,16 +259,13 @@ const NavbarTemplateStyle = styled.div`
         opacity: 0;
         width: 0;
       }
-      // .logo__container{
-      //   opacity: 0;
-      //   width: 0;
-      // }
     }
 
     .nav__profile__group {
       gap: 0;
       width: fit-content;
       .nav__profile {
+        justify-content: center;
         gap: 0;
         .arrowdown {
           transition: opacity 1s ease;
@@ -270,14 +278,32 @@ const NavbarTemplateStyle = styled.div`
         width: 0;
       }
     }
+    .logout__group {
+      justify-content: center;
+      gap: 0;
+      .logout {
+        opacity: 0;
+        width: 0;
+        padding: 0;
+      }
+    }
+    .theme__button {
+      width: 30px;
+    }
   }
 
   @media (min-width: 768px) {
     .open__nav {
       width: 25%;
     }
+    .nav__heading__container{
+      gap: 10px;
+    }
     .contract__nav {
       width: 6%;
+      .theme__button {
+        width: 40px;
+      }
     }
   }
 
@@ -323,6 +349,18 @@ const NavbarTemplateStyle = styled.div`
 
     .contract__nav {
       width: 100%;
+      .theme__button {
+        width: 50px;
+      }
+    }
+    .logout__group {
+      img {
+        width: 30px;
+      }
+      .logout {
+        font-size: 15px;
+        // font-weight: 500px;
+      }
     }
   }
 `;
