@@ -7,8 +7,8 @@ type topProductType = {
   image: string;
   title: string;
   price: number;
-  description: string;
-  category: string;
+  // description: string;
+  // category: string;
   id: number;
 };
 
@@ -16,8 +16,8 @@ const TopSellingProducts = ({
   image,
   title,
   price,
-  description,
-  category,
+  // description,
+  // category,
   id,
 }: topProductType) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
@@ -33,12 +33,12 @@ const TopSellingProducts = ({
       <div className="topproduct__container" key={id} id={color.mode}>
         {openModal ? (
           <ProductDetails
-            image={image}
+            // image={image}
             cancle={() => handlerModal(false)}
-            description={description}
-            category={category}
-            title={title}
-            price={price}
+            // description={description}
+            // category={category}
+            // title={title}
+            // price={price}
           />
         ) : (
           <div className="topproduct__bar" onClick={() => handlerModal(true)}>

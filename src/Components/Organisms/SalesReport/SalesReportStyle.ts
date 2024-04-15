@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { DarkModeColor } from "../../Atom/Colors/Colors";
+import { DarkModeColor, LightModeColor } from "../../Atom/Colors/Colors";
 
 const SalesReportStyles = styled.div`
   #dark {
@@ -10,6 +10,20 @@ const SalesReportStyles = styled.div`
       tbody {
         tr:hover {
           background-color: ${DarkModeColor.backgroundVariant};
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+
+  #light {
+    table {
+      th {
+        background-color: ${LightModeColor.background};
+      }
+      tbody {
+        tr:hover {
+          background-color: ${LightModeColor.backgroundVariant};
           border-radius: 50%;
         }
       }

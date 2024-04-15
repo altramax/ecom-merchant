@@ -33,7 +33,7 @@ const NavbarTemplate = ({
 }: // openNavFunction,
 navtype) => {
   const color = useAppSelector((state) => state.color);
-  const auth = useAppSelector((state) => state.auth);
+  // const auth = useAppSelector((state) => state.auth);
   // const [dropDown, setDropDown] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 

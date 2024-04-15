@@ -8,8 +8,15 @@ const SalesDetailsStyle = styled.div`
   }
 
   #light {
-    background-color: ${LightModeColor.background};
+    background-color: ${LightModeColor.primary};  
     color: ${LightModeColor.secondary};
+    .sales__details__container__sub{
+      background-color: ${LightModeColor.background};
+      .sales__details__items{
+        background-color: ${LightModeColor.background};
+        border-color: ${LightModeColor.primary}
+      }
+    }
   }
 
   // .modal__container::-webkit-scrollbar{
@@ -31,7 +38,7 @@ const SalesDetailsStyle = styled.div`
   
   .sales__details__container__sub{
     overflow: scroll;
-    border: 1px solid #808080;
+
     border-radius: 10px;
     width: 90%;
     padding: 20px 0px 10px 0px;

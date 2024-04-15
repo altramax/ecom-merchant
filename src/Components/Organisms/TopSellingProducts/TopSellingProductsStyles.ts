@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { DarkModeColor} from "../../Atom/Colors/Colors";
+import { DarkModeColor, LightModeColor} from "../../Atom/Colors/Colors";
 
 const TopSellingProductsStyles = styled.div`
 
@@ -9,10 +9,23 @@ const TopSellingProductsStyles = styled.div`
     color: ${DarkModeColor.secondary};
   }
 }
+
+#light{
+  .topproduct__container{
+  
+  }
+  .topproduct__bar{
+    background-color: ${LightModeColor.background};
+    border-color: ${LightModeColor.primary};
+    color: ${LightModeColor.secondary};
+  }
+}
+
   .topproduct__container {
     .topproduct__bar {
       cursor: pointer;
       border-top: 1px solid;
+      // border: none;
       padding: 5px 10px;
       display: flex;
       justify-content: space-between;

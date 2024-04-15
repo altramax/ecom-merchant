@@ -1,5 +1,5 @@
 import DashboardStyle from "./DashboardStyle";
-import {  useAppSelector } from "../../../Redux/Hooks";
+import { useAppSelector } from "../../../Redux/Hooks";
 
 import Chart from "../../Molecule/Chart/Chart";
 import InformationBox from "../../Molecule/InformationBox/InformationBox";
@@ -18,7 +18,7 @@ import EmptyState from "../../Molecule/EmptyState/EmptyState";
 const Dashboard = () => {
   const user = useAppSelector((state) => state.auth.user);
   const color = useAppSelector((state) => state.color);
-  const products = useAppSelector((state) => state.allProducts.products)
+  const products = useAppSelector((state) => state.allProducts.products);
   // const dispatch = useAppDispatch();
 
   // useEffect(() => {
@@ -84,7 +84,9 @@ const Dashboard = () => {
           </div>
           <div className="dashboard__container__columntwo">
             <div className="dashboard__notification__panel">
-              <h3>Notifications</h3>
+              <div className="dashboard__notification__panel__header">
+                <h3>Notifications</h3>
+              </div>
               <div className="notification__entry">
                 <Notification {...notificationData1} />
               </div>
@@ -105,7 +107,9 @@ const Dashboard = () => {
               </div>
             </div>
             <div className="dashboard__topproducts__panel">
-              <h3>Top Selling Products</h3>
+              <div className="dashboard__topproducts__panel__header">
+                <h3>Top Selling Products</h3>
+              </div>
               <div>
                 {products !== null ? (
                   products.map((item: any) => (

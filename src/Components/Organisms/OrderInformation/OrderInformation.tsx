@@ -3,16 +3,19 @@ import OrderInformationStyle from "./OrderInformationStyles";
 import OrderHistory from "../OrderHistory/OrderHistory";
 import Courier from "../Courier/Courier";
 import Receiver from "../Receiver/Receiver";
+import { useAppSelector } from "../../../Redux/Hooks";
+
 
 const OrderInformation = () => {
   const [view, setView] = useState<string>("order history");
+  const color = useAppSelector(state=>state.color)
 
   const viewHandler = (evt: string) => {
     setView(evt);
   };
   return (
     <OrderInformationStyle>
-      <div className="order__information__container">
+      <div id={color.mode} className="order__information__container">
         <div className="order__information__header">
           <h4
             className="header__titles"

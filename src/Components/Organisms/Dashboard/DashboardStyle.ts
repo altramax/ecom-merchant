@@ -33,10 +33,13 @@ const DashboardStyle = styled.div`
       }
     }
     .dashboard__notification__panel, .dashboard__topproducts__panel {
-   h3{
-    color: ${LightModeColor.secondary};
-    background-color: ${LightModeColor.background}
-   }
+     .dashboard__topproducts__panel__header, .dashboard__notification__panel__header{
+        h3{
+         color: ${LightModeColor.secondary};
+         background-color: ${LightModeColor.background}
+        }
+
+      }
     }
     .dashboard__salesreport {
       .salesreport__header{
@@ -44,7 +47,7 @@ const DashboardStyle = styled.div`
       }
       color:  ${LightModeColor.secondary};
       input{
-        background-color:  #0D0E0E;
+        background-color:  ${LightModeColor.backgroundVariant};
       }
     }
   }
@@ -68,10 +71,14 @@ const DashboardStyle = styled.div`
       }
     }
     .dashboard__notification__panel, .dashboard__topproducts__panel {
-   h3{
-    color: ${DarkModeColor.secondary};
-    background-color: ${DarkModeColor.background}
-   }
+      .dashboard__topproducts__panel__header, .dashboard__notification__panel__header{
+        h3{
+          color: ${DarkModeColor.secondary};
+          background-color: ${DarkModeColor.background}
+         }
+
+      }
+
     }
     .dashboard__salesreport {
       .salesreport__header{
@@ -188,11 +195,14 @@ const DashboardStyle = styled.div`
       padding: 0 20px 10px 20px;
       border: 1px solid;
       margin: 25px 0;
-      h3 {
-        text-align: center;
+      .dashboard__topproducts__panel__header, .dashboard__notification__panel__header{
         position: sticky;
         top: 0;
-        padding: 20px 0;
+
+        h3 {
+          text-align: center;
+          padding: 15px 0 10px 0;
+        }
       }
     }
     .notification__entry {
