@@ -4,6 +4,7 @@ import { LightModeColor, DarkModeColor } from "../../Atom/Colors/Colors";
 const OnboardingStepTwostyle = styled.div`
 
 #light {
+    background-color: ${LightModeColor.background};
     .step__one__container{
       box-shadow: 1px 1px 20px ${LightModeColor.secondary};
      }
@@ -15,6 +16,9 @@ const OnboardingStepTwostyle = styled.div`
       span{
           color:${LightModeColor.primaryVariant};
       }
+      small{
+        color:${LightModeColor.error}; 
+    }
      }
   
      .buttons__group{
@@ -46,6 +50,9 @@ const OnboardingStepTwostyle = styled.div`
               span{
                   color:${DarkModeColor.primaryVariant};
               }
+              small{
+                color:${DarkModeColor.error}; 
+            }
           }
       
          .buttons__group{

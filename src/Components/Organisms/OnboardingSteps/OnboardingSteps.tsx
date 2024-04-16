@@ -14,6 +14,7 @@ const OnboardingSteps = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const auth = useAppSelector((state) => state.auth);
+  const color = useAppSelector(state=> state.color)
 
   const changeStep = (evt: string) => {
     setStep(evt);
@@ -25,9 +26,11 @@ const OnboardingSteps = () => {
     dispatch(skipForNow("true"));
     navigate("/dashboard");
   };
-
+console.log(color.mode);
   return (
     <OnboardingStepsStyle>
+      <div id={color.mode} className="onboarding__steps__container">
+
       <NetworkStatus/>
       {step === "stepOne" && (
         <OnboardingStepOne
@@ -36,6 +39,7 @@ const OnboardingSteps = () => {
         />
       )}
       {step === "stepTwo" && <OnboardingStepTwo skip={skipHandler} back={()=>changeStep("stepOne")}/>}
+      </div>
     </OnboardingStepsStyle>
   );
 };

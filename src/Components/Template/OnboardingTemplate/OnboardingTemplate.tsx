@@ -16,6 +16,7 @@ const OnboardingTemplate = () => {
   const profileCompleted = useAppSelector((state) => state.stepForm.skipForNow);
   const navigate = useNavigate();
 
+
   useEffect(() => {
     if (user !== null && profileCompleted === false) {
       navigate("/onboardingsteps");

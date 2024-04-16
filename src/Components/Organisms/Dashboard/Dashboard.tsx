@@ -1,5 +1,5 @@
 import DashboardStyle from "./DashboardStyle";
-import { useAppSelector } from "../../../Redux/Hooks";
+import { useAppSelector, useAppDispatch} from "../../../Redux/Hooks";
 
 import Chart from "../../Molecule/Chart/Chart";
 import InformationBox from "../../Molecule/InformationBox/InformationBox";
@@ -11,19 +11,19 @@ import SalesReport from "../SalesReport/SalesReport";
 import revenue from "../../../assets/Icons/revenue icon.png";
 import orders from "../../../assets/Icons/orders.png";
 import customer from "../../../assets/Icons/customer.png";
-// import { useEffect } from "react";
-// import { getProducts } from "../../../Redux/AllProductsSlice";
+import { useEffect } from "react";
+import { getProducts } from "../../../Redux/AllProductsSlice";
 import EmptyState from "../../Molecule/EmptyState/EmptyState";
 
 const Dashboard = () => {
   const user = useAppSelector((state) => state.auth.user);
   const color = useAppSelector((state) => state.color);
   const products = useAppSelector((state) => state.allProducts.products);
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getProducts());
-  // }, []);
+  useEffect(() => {
+    dispatch(getProducts());
+  }, []);
 
   const notificationData1 = {
     id: "1",

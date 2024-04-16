@@ -20,6 +20,7 @@ import dark_logo from "../../../assets/Icons/dark-logo.png";
 import logoutDark from "../../../assets/Icons/logoutDark.svg";
 import logoutLight from "../../../assets/Icons/logoutLight.svg";
 // import settingIcon from "../../../assets/Icons/settings.svg";
+import { purgeStoredState } from "redux-persist";
 
 type navtype = {
   navControlFunction: Function;
@@ -33,17 +34,24 @@ const NavbarTemplate = ({
 }: // openNavFunction,
 navtype) => {
   const color = useAppSelector((state) => state.color);
-  // const auth = useAppSelector((state) => state.auth);
+  const stepForm = useAppSelector((state) => state.stepForm);
   // const [dropDown, setDropDown] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
-  const themeHandler = (theme: string) => {
-    if (theme === "light") {
-      dispatch(lightmode());
-    } else if (theme === "dark") {
+  const themeHandler = () => {
+    if (color.mode === "light") {
       dispatch(darkmode());
+    } else if (color.mode === "dark") {
+      dispatch(lightmode());
     }
+    console.log(stepForm);
   };
+
+  const logoutHandler = async () => {
+    purgeStoredState(stepForm)
+   await dispatch(logOut())
+  };
+
 
   return (
     <NavbarTemplateStyle>
@@ -125,23 +133,11 @@ navtype) => {
             )}
           </div> */}
 
-          <div className={`theme__button ${color.mode}`}>
-            <div
-              className="img__container sun"
-              onClick={() => {
-                // modeHandler("dark");
-                themeHandler("dark");
-              }}
-            >
+          <div className={`theme__button ${color.mode}`} onClick={themeHandler}>
+            <div className="img__container sun">
               <img src={sun} alt="" />
             </div>
-            <div
-              className="img__container moon"
-              onClick={() => {
-                // modeHandler("light");
-                themeHandler("light");
-              }}
-            >
+            <div className="img__container moon">
               <img src={moon} alt="" />
             </div>
           </div>
@@ -158,7 +154,7 @@ navtype) => {
               type="button"
               value="LogOut"
               className={`logout ${!openNav ? "null" : "slowVisibility"}`}
-              Click={() => dispatch(logOut())}
+              Click={logoutHandler}
             />
           </div>
         </div>

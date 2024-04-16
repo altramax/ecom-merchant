@@ -13,7 +13,7 @@
     background: "#161a21",
     primary: "#BB86FC",
     primaryVariant: "#3700B3",
-    error: "#ff0000",
+    error: "#800000",
     secondary: "#ffffff",
     backgroundVariant: "#060606",
     backgroundVariant2: "#121212",

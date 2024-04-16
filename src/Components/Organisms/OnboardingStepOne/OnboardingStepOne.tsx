@@ -85,7 +85,6 @@ const OnboardingStepOne = ({ next, skip }: OnboardType) => {
   const fileHandler = (evt: any) => {
     const files = evt.target.files;
     setSelectedImage(files[0].name);
-    console.log(files[0]);
   };
 
   const deleteFile = () => {
