@@ -1,17 +1,32 @@
 import DashboardTemplateStyle from "./DashboardTemplateStyle";
-import { useAppSelector } from "../../../Redux/Hooks";
+import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
 import NavbarTemplate from "../NavbarTemplate/NavbarTemplate";
 import PrivateRoute from "../../../Routes/RoutesPath";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import NetworkStatus from "../../Molecule/NetworkStatus/NetworkStatus";
+import toast, { Toaster } from "react-hot-toast";
+import { successful } from "../../../Redux/AlertSlice";
+import { clearErrors } from "../../../Redux/AlertSlice";
+import { getProducts} from "../../../Redux/AllProductsSlice";
 
 const DashboardTemplate = () => {
   const color = useAppSelector((state) => state.color);
   const [openNav, setOpenNav] = useState<boolean>(false);
+  const message = useAppSelector((state) => state.alert.message);
+  const dispatch = useAppDispatch();
 
   // useEffect(() => {
   //   handleNetWorkChange();
   // }, [alert.message, errorMessage.message, cart.cartCount]);
+
+  useEffect(() => {
+    handlerToast();
+  }, [message]);
+
+  useEffect(() => {
+    dispatch(getProducts())
+  }, [message]);
+  
 
   // const modeHandler = (mod : string) =>{
   //   setMode(mod)
@@ -33,25 +48,35 @@ const DashboardTemplate = () => {
   //   }
   // };
 
+  const handlerToast = () => {
+    if (message !== "") {
+      toast.success(message,{position : "top-right"})
+      console.log("check");
+      setTimeout(() => {
+        dispatch(clearErrors());
+      }, 5000);
+    }
+  };
+
   const handleNav = () => {
     setOpenNav(!openNav);
   };
 
-  const handleOpenNav = () =>{
+  const handleOpenNav = () => {
     setOpenNav(true);
-  }
+  };
 
   return (
     <DashboardTemplateStyle>
       <div id={color.mode}>
         <NetworkStatus />
-
+        <Toaster />
         <div className="dashboard__template__container">
           <div className={`nav__width ${openNav ? null : "contract"}`}>
             <NavbarTemplate
               openNav={openNav}
               navControlFunction={handleNav}
-              openNavFunction = {handleOpenNav}
+              openNavFunction={handleOpenNav}
             />
           </div>
           <div className={`route__body ${openNav ? null : "expand"}`}>

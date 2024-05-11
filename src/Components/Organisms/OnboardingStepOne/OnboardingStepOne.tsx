@@ -31,6 +31,7 @@ const OnboardingStepOne = ({ next, skip }: OnboardType) => {
     countryAndState: "",
   });
 
+
   // Note: set this use effect to stop setting values from controlled to uncontrolled
   useEffect(() => {
     if (stepForm.stepOne !== "") {
@@ -39,10 +40,10 @@ const OnboardingStepOne = ({ next, skip }: OnboardType) => {
     }
   }, []);
 
+
   const handlerSubmit = async (evt: any) => {
     evt.preventDefault();
     const numberValidation = new RegExp(/[^\d]/g);
-
     if (fields.storeAddress === "" || fields.storeAddress.length <= 1) {
       setError("Incorrect Address");
     } else if (

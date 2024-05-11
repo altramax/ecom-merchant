@@ -11,8 +11,9 @@ const InformationBoxStyle = styled.div`
     justify-content: center;
     align-items: center;
     padding: 10px;
-    border: 1px solid;
+    border: none;
     border-radius: 10px;
+
     // .img__container{
     //  display: flex;
     //  justify-content: center;

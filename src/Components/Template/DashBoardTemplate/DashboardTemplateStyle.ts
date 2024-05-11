@@ -53,7 +53,6 @@ const DashboardTemplateStyle = styled.div`
 
     }
     .nav__width {
-
       z-index: 2;
       position: fixed;
     }

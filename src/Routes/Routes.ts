@@ -1,6 +1,7 @@
 import Dashboard from "../Components/Organisms/Dashboard/Dashboard";
-import WearHouse from "../Components/Template/WearHouseTemplate/WearHouse";
+import WearHouse from "../Components/Template/WearHouseTemplate/WearHouseTemplate";
 import UserProfile from "../Components/Template/UserProfileTemplate/UserProfileTemplate";
+import ProductDetailsTemplate from "../Components/Template/ProductDetailsTemplate/ProductDetailsTemplate";
 
 const PrivateRoutes = [
   {
@@ -27,7 +28,14 @@ const PrivateRoutes = [
       },
     ],
   },
- 
+  {
+    element: [
+      {
+        path: "/wearhouse/details",
+        component: ProductDetailsTemplate,
+      },
+    ],
+  },
 ];
 
 export default PrivateRoutes;

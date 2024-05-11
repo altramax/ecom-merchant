@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { DarkModeColor, LightModeColor } from "../../Atom/Colors/Colors";
 
-const ProductDetailsStyle = styled.div`
+const ProductDetailsModalStyle = styled.div`
   #dark {
     background-color: ${DarkModeColor.background};
     color: ${DarkModeColor.secondary};
@@ -151,7 +151,7 @@ const ProductDetailsStyle = styled.div`
     }
   }
 `;
-export default ProductDetailsStyle;
+export default ProductDetailsModalStyle;
 
 // .modalFlex {
 //   padding: 20px;

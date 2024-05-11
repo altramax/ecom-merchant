@@ -1,11 +1,9 @@
 import DashboardStyle from "./DashboardStyle";
-import { useAppSelector, useAppDispatch} from "../../../Redux/Hooks";
-
+import { useAppSelector, useAppDispatch } from "../../../Redux/Hooks";
 import Chart from "../../Molecule/Chart/Chart";
 import InformationBox from "../../Molecule/InformationBox/InformationBox";
 import Notification from "../Notification/Notification";
 import TopSellingProducts from "../TopSellingProducts/TopSellingProducts";
-
 import download from "../../../assets/Icons/download-icon.png";
 import SalesReport from "../SalesReport/SalesReport";
 import revenue from "../../../assets/Icons/revenue icon.png";

@@ -1,6 +1,6 @@
 import TopSellingProductsStyles from "./TopSellingProductsStyles";
 import { useState } from "react";
-import ProductDetails from "../ProductDetails/ProductDetails";
+import ProductDetails from "../ProductDetailsModal/ProductDetailsModal";
 import { useAppSelector } from "../../../Redux/Hooks";
 
 type topProductType = {

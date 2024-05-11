@@ -1,4 +1,4 @@
-import ProductDetailsStyle from "./ProductDetailsStyle";
+import ProductDetailsStyle from "./ProductDetailsModalStyle";
 import arrow_dark from "../../../assets/Icons/arrowDownLongDark.svg";
 import arrow_light from "../../../assets/Icons/arrowDownLongLight.svg";
 import { useAppSelector } from "../../../Redux/Hooks";
@@ -16,7 +16,7 @@ type propsType = {
   // price: number;
 };
 
-const ProductDetails = ({
+const ProductDetailsModal = ({
   // image,
   cancle,
   // description,
@@ -101,7 +101,7 @@ const ProductDetails = ({
     </ProductDetailsStyle>
   );
 };
-export default ProductDetails;
+export default ProductDetailsModal;
 
 {
   /* <div className="cancleIcon" onClick={cancle}>

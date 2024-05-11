@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import OnboardingTemplate from "./Components/Template/OnboardingTemplate/OnboardingTemplate";
+import OnboardingTemplate from "./Redux/OnboardingTemplate";
 import PrivateRoutes from "./Config/PrivateRoute";
 import ConditionalPrivateRoute from "./Config/ConditionalPrivateRoute";
 import DashboardTemplate from "./Components/Template/DashBoardTemplate/DashboardTemplate";
@@ -29,12 +29,14 @@ function App() {
     });
   }, [currentUser.user]);
 
-  const appHeight = () => {
-    const doc = document.documentElement;
-    doc.style.setProperty("--app-height", `${window.innerHeight}px`);
-  };
-  window.addEventListener("resize", appHeight);
-  appHeight();
+  // const appHeight = () => {
+  //   const doc = document.documentElement;
+  //   doc.style.setProperty("--app-height", `${window.innerHeight}px`);
+  // };
+  // window.addEventListener("resize", appHeight);
+  // appHeight();
+
+ 
 
   return (
     <Router>
@@ -61,6 +63,7 @@ function App() {
         />
       </Routes>
     </Router>
+
   );
 }
 

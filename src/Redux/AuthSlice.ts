@@ -8,7 +8,8 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth, googleprovider} from "../Config/Config";
-import { successful } from "./AlertSlice";
+
+import {successful,failed} from "./AlertSlice";
 
 // Define a type for the slice state
 interface valueState {
@@ -54,9 +55,11 @@ export const createUser = createAsyncThunk(
 
 export const userLogin = createAsyncThunk(
   "email/signin",
-  async (arg: propsType) => {
+  async (arg: propsType , {dispatch}) => {
     const { email, password } = arg;
     const user = await signInWithEmailAndPassword(auth, email, password);
+    dispatch(successful())
+    console.log("successful");
     return user;
   }
 );

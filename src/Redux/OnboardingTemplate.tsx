@@ -1,10 +1,10 @@
-import OnboardingTemplateStyle from "./OnboardingTemplateStyle";
-import OnboardingSlider from "../../Organisms/OnboardingSlider/OnboardingSlider";
-import SignInModal from "../../Organisms/SignInModal/SignInModal";
-import SignUpModal from "../../Organisms/SignUpModal/SignUpModal";
+import OnboardingTemplateStyle from "../Components/Template/OnboardingTemplate/OnboardingTemplateStyle";
+import OnboardingSlider from "../Components/Organisms/OnboardingSlider/OnboardingSlider";
+import SignInModal from "../Components/Organisms/SignInModal/SignInModal";
+import SignUpModal from "../Components/Organisms/SignUpModal/SignUpModal";
 import { useState } from "react";
-import NetworkStatus from "../../Molecule/NetworkStatus/NetworkStatus";
-import { useAppSelector } from "../../../Redux/Hooks";
+import NetworkStatus from "../Components/Molecule/NetworkStatus/NetworkStatus";
+import { useAppSelector } from "./Hooks";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 

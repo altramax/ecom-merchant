@@ -16,7 +16,7 @@ const AlertSlice = createSlice({
       state.message = "Request Successful";
     },
     failed: (state) => {
-      state.message = "Invalid Request";
+      state.message = "Request Failed";
     },
     networkError: (state) => {
       state.message = "NetWork Error";
