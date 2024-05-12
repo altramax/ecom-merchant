@@ -9,7 +9,7 @@ import {
 } from "firebase/auth";
 import { auth, googleprovider} from "../Config/Config";
 
-import {successful,failed} from "./AlertSlice";
+import {successful} from "./AlertSlice";
 
 // Define a type for the slice state
 interface valueState {

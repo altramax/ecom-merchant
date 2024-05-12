@@ -5,7 +5,6 @@ import PrivateRoute from "../../../Routes/RoutesPath";
 import { useEffect, useState } from "react";
 import NetworkStatus from "../../Molecule/NetworkStatus/NetworkStatus";
 import toast, { Toaster } from "react-hot-toast";
-import { successful } from "../../../Redux/AlertSlice";
 import { clearErrors } from "../../../Redux/AlertSlice";
 import { getProducts} from "../../../Redux/AllProductsSlice";
 

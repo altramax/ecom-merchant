@@ -1,6 +1,7 @@
 import ProductDetailsTemplateStyle from "./ProductDetailsTemplateStyles";
 
 const ProductDetailsTemplate = (): JSX.Element => {
+
   return (
     <ProductDetailsTemplateStyle>
       <div>
