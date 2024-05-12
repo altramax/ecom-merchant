@@ -14,9 +14,9 @@ const DashboardTemplate = () => {
   const message = useAppSelector((state) => state.alert.message);
   const dispatch = useAppDispatch();
 
-  // useEffect(() => {
-  //   handleNetWorkChange();
-  // }, [alert.message, errorMessage.message, cart.cartCount]);
+  useEffect(() => {
+    handleNetWorkChange();
+  }, [alert.message, errorMessage.message, cart.cartCount]);
 
   useEffect(() => {
     handlerToast();
