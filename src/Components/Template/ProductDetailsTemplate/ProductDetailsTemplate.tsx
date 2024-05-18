@@ -1,15 +1,10 @@
 import ProductDetailsTemplateStyle from "./ProductDetailsTemplateStyles";
 
-const ProductDetailsTemplate = (): JSX.Element => {
-
+const ProductDetailsTemplate = () => {
   return (
     <ProductDetailsTemplateStyle>
       <div>
-        <h1>ProductDetailsTemplate</h1>
-        <h1>ProductDetailsTemplate</h1>
-        <h1>ProductDetailsTemplate</h1>
-
-        <h1>ProductDetailsTemplate</h1>
+        
       </div>
     </ProductDetailsTemplateStyle>
   );

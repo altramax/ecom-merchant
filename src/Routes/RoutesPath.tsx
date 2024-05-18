@@ -7,8 +7,8 @@ const PrivateRoutesPath = (): JSX.Element => {
     <Routes>
       {routes.map(
         (route) =>
-          route.elements &&
-          route.elements.map((route, i) => (
+          route.element &&
+          route.element.map((route, i) => (
             <Route
               key={i}
               path={route.path}

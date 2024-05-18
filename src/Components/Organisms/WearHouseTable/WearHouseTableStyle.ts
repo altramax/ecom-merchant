@@ -17,8 +17,12 @@ const WearHouseStyles = styled.div`
   }
 
   #light {
-    table {
+
       background-color: ${LightModeColor.background};
+    
+
+    table {
+      border-radius: 30px;
       thead,
       th {
         background-color: ${LightModeColor.background};
@@ -34,7 +38,7 @@ const WearHouseStyles = styled.div`
   }
 
   .WearHouseTable__bar__container {
-    border-radius: 30px;
+   
     
   }
 

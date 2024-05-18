@@ -53,8 +53,8 @@ const WearHouseTable = () => {
           {products === null && (
             <div>
               <EmptyState
-                header="No Sales Record Found"
-                text="Sales Records will appear here as soon as orders begin"
+                header="No Product Found"
+                text="Click add Products to start"
               />
             </div>
           )}

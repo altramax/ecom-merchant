@@ -7,12 +7,35 @@ import customer from "../../../assets/Icons/customer.png";
 import searchIcon from "../../../assets/Icons/search.svg";
 import WearHouseTable from "../../Organisms/WearHouseTable/WearHouseTable";
 import Button from "../../Molecule/Button/Button";
+import { useAppSelector } from "../../../Redux/Hooks";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import UploadImg from "../../Organisms/UploadImage/UploadImg";
+
+
 
 const ProductsTemplate = () => {
+  const color = useAppSelector(state=>state.color)
+  const [addProduct, setAddProduct] = useState(false)
+  const navigate = useNavigate();
+
+  // const openAddProduct = () =>{
+  // setAddProduct(true)
+  // }
+  // const closeAddProduct = (evt:any) =>{
+  //   evt.preventDefault()
+  //   setAddProduct(false)
+  //   }
+
+    const goToAddProducts = ()=>{
+      navigate("/wearhouse/addproducts")
+    }
+
+
   return (
     <WearHouseTemplateStyle>
-      {/* <ProductsTable/> */}
-      <div className="wearhouse__container">
+
+      <div className="wearhouse__container" id={color.mode}>
         <div>
           <div className="wearhouse__header">
             <div className="dashboard__header__boxes">
@@ -56,7 +79,7 @@ const ProductsTemplate = () => {
             /> */}
             </div>
             <Button
-              Click={() => {}}
+              Click={goToAddProducts}
               value="Add Products"
               type="button"
               className="add__products__button"

@@ -1,7 +1,21 @@
 import styled from "styled-components";
 import headerImg from "../../../assets/Images/header (2).jpg";
+import { LightModeColor } from "../../Atom/Colors/Colors";
 
 const WearHouseTemplateStyle = styled.div`
+
+#light{
+  .add__products__button{
+    background-color: ${LightModeColor.background};
+    color: ${LightModeColor.secondary}
+  }
+  .add__products__button:hover{
+    background-color: ${LightModeColor.primary};
+  }
+  
+}
+
+
   .wearhouse__container {
     padding: 40px 0 0 0;
     width: 90%;
@@ -69,6 +83,7 @@ const WearHouseTemplateStyle = styled.div`
   }
 
   .add__products__button {
+    cursor: pointer;
     padding: 8px 15px;
     font-weight: 500;
     border: none;
