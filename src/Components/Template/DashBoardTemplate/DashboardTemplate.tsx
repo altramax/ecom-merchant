@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import NetworkStatus from "../../Molecule/NetworkStatus/NetworkStatus";
 import toast, { Toaster } from "react-hot-toast";
 import { clearErrors } from "../../../Redux/AlertSlice";
-import { getProducts} from "../../../Redux/AllProductsSlice";
+import { getAllProducts} from "../../../Redux/ProductsSlice";
 
 const DashboardTemplate = () => {
   const color = useAppSelector((state) => state.color);
@@ -23,7 +23,7 @@ const DashboardTemplate = () => {
   }, [message]);
 
   useEffect(() => {
-    dispatch(getProducts())
+    dispatch(getAllProducts())
   }, [message]);
   
 

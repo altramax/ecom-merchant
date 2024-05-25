@@ -10,7 +10,7 @@ import {
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: [ "allProducts"],
+  blacklist: [ "allProducts", "imageUpload"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

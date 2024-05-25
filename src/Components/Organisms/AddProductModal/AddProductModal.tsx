@@ -3,10 +3,20 @@ import Button from "../../Molecule/Button/Button";
 import AddProductModalStyle from "./AddProductModalStyle";
 import productIcon from "../../../assets/Icons/add-product.svg";
 import circle from "../../../assets/Icons/circle in circle.svg";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import plus_circle from "../../../assets/Icons/plus-circle.svg";
 import naira from "../../../assets/Icons/naira.svg";
 import Select from "react-select";
+import LoadingIcon from "../../../assets/Icons/loading.svg";
+import { addProducts } from "../../../Redux/ProductsSlice";
+import { v4 as uuidv4 } from "uuid";
+import {
+  clearImageSlice,
+  deleteImage,
+  uploadImage,
+} from "../../../Redux/UploadImageSlice";
+import deleteIcon from "../../../assets/Icons/trash.svg";
+import SuccessModal from "../SuccessModal/SuccessModal";
 
 type addProductType = {
   close: Function;
@@ -14,12 +24,15 @@ type addProductType = {
 
 const AddProductModal = ({ close }: addProductType) => {
   const dispatch = useAppDispatch();
+  const imagesArray = useAppSelector((state) => state.imageUpload.images);
+  const imagesLoading = useAppSelector((state) => state.imageUpload.loading);
   const color = useAppSelector((state) => state.color);
   const [newCategory, setNewCategory] = useState("");
   const pickImage = useRef<any>();
-  const pickImage2 = useRef<any>();
-  const [selectedImage, setSelectedImage] = useState("one");
+  let date = new Date;
+  const [selectedImage, setSelectedImage] = useState<any>("");
   const [currentImage, setCurrentImage] = useState<string>();
+  const [successModal, setSuccessModal] = useState(false);
   const [sizes, setSizes] = useState<Record<string, boolean>>({
     xs: false,
     s: false,
@@ -32,12 +45,6 @@ const AddProductModal = ({ close }: addProductType) => {
     female: false,
     unisex: false,
   });
-  const [imageFields, setImageFields] = useState({
-    one: "",
-    two: "",
-    three: "",
-    four: "",
-  });
   const [fields, setFields] = useState({
     name: "",
     description: "",
@@ -49,30 +56,23 @@ const AddProductModal = ({ close }: addProductType) => {
     images: [],
   });
 
+  useEffect(() => {
+    setCurrentImage(imagesArray.find((image: any) => image.url !== "")?.url);
+  }, [imagesArray]);
+
   const handlerImageselect = async (evt: any) => {
-    let img = URL.createObjectURL(evt.target.files[0]);
-    if (evt.target.files && selectedImage === "one") {
-      setImageFields((prev) => ({
-        ...prev,
-        one: img,
-      }));
-    } else if (evt.target.files && selectedImage === "two") {
-      setImageFields((prev) => ({
-        ...prev,
-        two: img,
-      }));
-    } else if (evt.target.files && selectedImage === "three") {
-      setImageFields((prev) => ({
-        ...prev,
-        three: img,
-      }));
-    } else if (evt.target.files && selectedImage === "four") {
-      setImageFields((prev) => ({
-        ...prev,
-        four: img,
-      }));
+    let file = evt.target.files;
+    if (file) {
+      dispatch(uploadImage({ file: file[0], position: selectedImage }));
+      pickImage.current.value = "";
     }
-    setCurrentImage(img);
+  };
+
+  const handlerImageDelete = async (evt: any) => {
+    if (currentImage === evt.url) {
+      setCurrentImage(imagesArray.find((image: any) => image.url !== "").url);
+    }
+    dispatch(deleteImage(evt));
   };
 
   const openImages = () => {
@@ -99,7 +99,6 @@ const AddProductModal = ({ close }: addProductType) => {
     await setGender(fieldsValues);
   };
 
-  console.log(sizes);
   const customStyles = {
     option: (styles: any, state: any) => ({
       ...styles,
@@ -157,11 +156,37 @@ const AddProductModal = ({ close }: addProductType) => {
     setNewCategory(evt.target.value);
   };
 
-  const submitHandler = (evt: any) => {
-    evt.preventDefault();
+  const showSuccessModal = () => {
+    setSuccessModal(true);
   };
 
-  // console.log(pickImage.current?.value);
+  const hideSuccessModal = () => {
+    setSuccessModal(false);
+  };
+
+  const submitHandler = async (evt: any) => {
+    evt.preventDefault();
+
+    const productData = {
+      id: `${uuidv4()}`,
+      name: fields.name,
+      description: fields.description,
+      price: fields.price,
+      quantity: fields.quantity,
+      discount: fields.discount,
+      nameOfDiscount: fields.nameOfDiscount,
+      category: `${
+        fields.category === "Others" ? newCategory : fields.category
+      }`,
+      images: imagesArray,
+      sizes: sizes,
+      gender: gender,
+      dateCreated: date.toLocaleString(),
+    };
+      await dispatch(addProducts(productData));
+      dispatch(clearImageSlice());
+      showSuccessModal();
+  };
 
   return (
     <AddProductModalStyle>
@@ -188,6 +213,7 @@ const AddProductModal = ({ close }: addProductType) => {
                   onChange={(evt: any) => {
                     handlerChange(evt.target.name, evt.target.value);
                   }}
+                  required
                 />
               </div>
               <div className="input__container">
@@ -199,11 +225,12 @@ const AddProductModal = ({ close }: addProductType) => {
                   onChange={(evt: any) => {
                     handlerChange(evt.target.name, evt.target.value);
                   }}
+                  required
                 />
               </div>
               <div className="flex">
                 <div className="size__container">
-                  <p>Size</p>
+                  <p>Sizes</p>
                   <small>Pick Available Size</small>
                   <div className="small__boxes__container">
                     <input
@@ -235,7 +262,7 @@ const AddProductModal = ({ close }: addProductType) => {
                       readOnly
                       value={"M"}
                       name="m"
-                      className={`small__box small_width ${
+                      className={`small__box small_width  ${
                         sizes.m && "selected"
                       }`}
                       onClick={(evt: any) => {
@@ -248,7 +275,7 @@ const AddProductModal = ({ close }: addProductType) => {
                       readOnly
                       value={"XL"}
                       name="xl"
-                      className={`small__box small_width ${
+                      className={`small__box small_width  ${
                         sizes.xl && "selected"
                       }`}
                       onClick={(evt: any) => {
@@ -275,25 +302,22 @@ const AddProductModal = ({ close }: addProductType) => {
                   <div className="small__boxes__container">
                     <div
                       className={`small__box large_width ${
-                        gender.male && "selected"
-                      }`}
+                        gender.male ? "selected" : "deselected"
+                      } `}
+                      onClick={(evt: any) => {
+                        handlerGenderChange(evt.target.name);
+                      }}
                     >
                       <img src={circle} alt="" />
-                      <input
-                        type="text"
-                        readOnly
-                        value={"Male"}
-                        name="male"
-                        className={` ${gender.male && "selected"}`}
-                        onClick={(evt: any) => {
-                          handlerGenderChange(evt.target.name);
-                        }}
-                      />
+                      <input type="text" readOnly value={"Male"} name="male" />
                     </div>
                     <div
                       className={`small__box large_width ${
-                        gender.female && "selected"
+                        gender.female ? "selected" : "deselected"
                       }`}
+                      onClick={(evt: any) => {
+                        handlerGenderChange(evt.target.name);
+                      }}
                     >
                       <img src={circle} alt="" />
                       <input
@@ -301,16 +325,15 @@ const AddProductModal = ({ close }: addProductType) => {
                         readOnly
                         value={"Female"}
                         name="female"
-                        className={`${gender.female && "selected"}`}
-                        onClick={(evt: any) => {
-                          handlerGenderChange(evt.target.name);
-                        }}
                       />
                     </div>
                     <div
                       className={`small__box large_width ${
-                        gender.unisex && "selected"
+                        gender.unisex ? "selected" : "deselected"
                       }`}
+                      onClick={(evt: any) => {
+                        handlerGenderChange(evt.target.name);
+                      }}
                     >
                       <img src={circle} alt="" />
                       <input
@@ -318,20 +341,8 @@ const AddProductModal = ({ close }: addProductType) => {
                         readOnly
                         value={"Unisex"}
                         name="unisex"
-                        className={`${gender.unisex && "selected"}`}
-                        onClick={(evt: any) => {
-                          handlerGenderChange(evt.target.name);
-                        }}
                       />
                     </div>
-                    {/* <div className="small__box">
-                      <img src={circle} alt="" />
-                      Women
-                    </div>
-                    <div className="small__box">
-                      <img src={circle} alt="" />
-                      Unisex
-                    </div> */}
                   </div>
                 </div>
               </div>
@@ -342,12 +353,13 @@ const AddProductModal = ({ close }: addProductType) => {
                 <div className="input__container">
                   <label htmlFor="input">Price</label>
                   <input
-                    type="text"
+                    type="number"
                     name="price"
                     id="paddingleft"
                     onChange={(evt: any) => {
                       handlerChange(evt.target.name, evt.target.value);
                     }}
+                    required
                   />
                   <img src={naira} alt="nairaIcon" className="image" />
                 </div>
@@ -355,11 +367,12 @@ const AddProductModal = ({ close }: addProductType) => {
                 <div className="input__container">
                   <label htmlFor="input">Quantity</label>
                   <input
-                    type="text"
+                    type="number"
                     name="quantity"
                     onChange={(evt: any) => {
                       handlerChange(evt.target.name, evt.target.value);
                     }}
+                    required
                   />
                 </div>
               </div>
@@ -368,7 +381,7 @@ const AddProductModal = ({ close }: addProductType) => {
                 <div className="input__container">
                   <label htmlFor="input">Discount</label>
                   <input
-                    type="text"
+                    type="number"
                     name="discount"
                     id="paddingleft"
                     onChange={(evt: any) => {
@@ -386,100 +399,24 @@ const AddProductModal = ({ close }: addProductType) => {
                     onChange={(evt: any) => {
                       handlerChange(evt.target.name, evt.target.value);
                     }}
+                    required={fields.discount > 0 ? true : false}
                   />
                 </div>
               </div>
             </div>
           </div>
           <div className="grid__container__two">
-            <div className="images__container">
-              <h2>Upload Images</h2>
-              <div className="main__images">
-                <img src={currentImage} ref={pickImage2} />
-              </div>
-              <div className="sub__images">
-                <input
-                  type="file"
-                  className="hidden"
-                  ref={pickImage}
-                  onChange={handlerImageselect}
-                />
-                <div
-                  className={`sub__image ${
-                    imageFields.one === "" && "add__icon__img"
-                  }`}
-                >
-                  <img
-                    src={imageFields.one === "" ? plus_circle : imageFields.one}
-                    alt="product Image"
-                    className={`img`}
-                    onClick={() => {
-                      openImages();
-                      setSelectedImage("one");
-                    }}
-                  />
-                </div>
-                <div
-                  className={`sub__image ${
-                    imageFields.two === "" && "add__icon__img"
-                  }`}
-                >
-                  <img
-                    src={imageFields.two === "" ? plus_circle : imageFields.two}
-                    alt="product Image"
-                    className={`img`}
-                    onClick={() => {
-                      openImages();
-                      setSelectedImage("two");
-                    }}
-                  />
-                </div>
-                <div
-                  className={`sub__image ${
-                    imageFields.three === "" && "add__icon__img"
-                  }`}
-                >
-                  <img
-                    src={
-                      imageFields.three === "" ? plus_circle : imageFields.three
-                    }
-                    alt="product Image"
-                    className={`img`}
-                    onClick={() => {
-                      openImages();
-                      setSelectedImage("three");
-                    }}
-                  />
-                </div>
-                <div
-                  className={`sub__image ${
-                    imageFields.four === "" && "add__icon__img"
-                  }`}
-                >
-                  <img
-                    src={
-                      imageFields.four === "" ? plus_circle : imageFields.four
-                    }
-                    alt="product Image"
-                    className={`img`}
-                    onClick={() => {
-                      openImages();
-                      setSelectedImage("four");
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
             <div className="Price__information">
               <h2>Category</h2>
 
               <div className="input__container">
-                <label htmlFor="input">Product Category</label>
+                <label htmlFor="input">Product Category</label>{" "}
                 <Select
                   options={options}
                   styles={customStyles}
                   onChange={selectValueHandler}
                   placeholder="Select a Category"
+                  required
                 />
                 {fields.category === "Others" && (
                   <input
@@ -493,9 +430,72 @@ const AddProductModal = ({ close }: addProductType) => {
                 )}
               </div>
             </div>
+            <div className="images__container">
+              <h2>Upload Images</h2>
+              <div className="main__images">
+                <img src={currentImage} />
+              </div>
+              <div className="sub__images__container">
+                <input
+                  type="file"
+                  className="hidden"
+                  ref={pickImage}
+                  onChange={handlerImageselect}
+                />
+                {imagesArray?.map((entry: any, i: string) => {
+                  return (
+                    <div
+                      className={`sub__image ${
+                        entry.url === "" && "add__icon__img"
+                      }`}
+                      key={i}
+                    >
+                      {entry.url !== "" && (
+                        <img
+                          src={deleteIcon}
+                          alt=""
+                          className="small_img absolute"
+                          onClick={() =>
+                            handlerImageDelete({
+                              name: entry.name,
+                              position: i,
+                            })
+                          }
+                        />
+                      )}
+                      {entry.url === "" && (
+                        <img
+                          src={`${
+                            imagesLoading[i] ? LoadingIcon : plus_circle
+                          }`}
+                          alt="product Image"
+                          className={`img ${
+                            imagesLoading[i] ? "loading__icon" : ""
+                          }`}
+                          onClick={() => {
+                            openImages();
+                            setSelectedImage(i);
+                          }}
+                        />
+                      )}
+                      {entry.url !== "" && (
+                        <img
+                          src={entry.url}
+                          alt="product Image"
+                          className={`img`}
+                          onClick={() => {
+                            setCurrentImage(entry.url);
+                          }}
+                        />
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
             <div className="button__group">
               <Button
-                type="submit"
+                type="button"
                 className="button"
                 value="Save to Draft"
                 Click={close}
@@ -510,6 +510,13 @@ const AddProductModal = ({ close }: addProductType) => {
           </div>
         </div>
       </form>
+      {successModal && (
+        <SuccessModal
+          title="Product Added Successfully"
+          handleClose={hideSuccessModal}
+          relocate={"/wearhouse"}
+        />
+      )}
     </AddProductModalStyle>
   );
 };

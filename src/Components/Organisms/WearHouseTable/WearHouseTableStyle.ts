@@ -53,19 +53,21 @@ const WearHouseStyles = styled.div`
     th {
       margin-bottom: 10px;
       border-collapse: no-collapse;
-      padding: 25px 10px;
+      padding: 25px;
       border-bottom: 1px solid;
+      text-align: start;
     }
     td {
       font-size: 14px;
     }
     td {
-      text-align: center;
-      padding: 20px 10px;
+      text-align: start;
+      padding: 20px 25px;
     }
     tr {
       cursor: pointer;
       border: 1px solid;
+      
     }
     tbody {
     }

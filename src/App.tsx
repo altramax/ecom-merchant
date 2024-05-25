@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import OnboardingTemplate from "./Redux/OnboardingTemplate";
+import OnboardingTemplate from "./Components/Template/OnboardingTemplate/OnboardingTemplate";
 import PrivateRoutes from "./Config/PrivateRoute";
 import ConditionalPrivateRoute from "./Config/ConditionalPrivateRoute";
 import DashboardTemplate from "./Components/Template/DashBoardTemplate/DashboardTemplate";

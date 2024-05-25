@@ -18,7 +18,7 @@ type propsType = {
 
 const SalesDetails = (details: propsType): JSX.Element => {
   const color = useAppSelector((state) => state.color);
-  const products = useAppSelector((state) => state.allProducts);
+  const products = useAppSelector((state) => state.products);
 
 
   return (

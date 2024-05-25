@@ -10,7 +10,6 @@ import Button from "../../Molecule/Button/Button";
 import { useAppSelector } from "../../../Redux/Hooks";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import UploadImg from "../../Organisms/UploadImage/UploadImg";
 
 
 
@@ -18,14 +17,6 @@ const ProductsTemplate = () => {
   const color = useAppSelector(state=>state.color)
   const [addProduct, setAddProduct] = useState(false)
   const navigate = useNavigate();
-
-  // const openAddProduct = () =>{
-  // setAddProduct(true)
-  // }
-  // const closeAddProduct = (evt:any) =>{
-  //   evt.preventDefault()
-  //   setAddProduct(false)
-  //   }
 
     const goToAddProducts = ()=>{
       navigate("/wearhouse/addproducts")
@@ -61,9 +52,6 @@ const ProductsTemplate = () => {
                 />
               </div>
             </div>
-            {/* <div className="header__img__container">
-            <img src={headerImg} alt="header Image" />
-          </div> */}
           </div>
           <div className="filter__addProducts__container">
             <div className="search__filter__group">

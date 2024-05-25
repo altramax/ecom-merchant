@@ -6,7 +6,7 @@ import EmptyState from "../../Molecule/EmptyState/EmptyState";
 
 const SalesReport = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
-  const products = useAppSelector((state) => state.allProducts.products)
+  const products = useAppSelector((state) => state.products.products)
   const color = useAppSelector((state) => state.color);
   const [selectedItem, setSelectedItem] = useState<any>();
 

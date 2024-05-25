@@ -10,17 +10,17 @@ import revenue from "../../../assets/Icons/revenue icon.png";
 import orders from "../../../assets/Icons/orders.png";
 import customer from "../../../assets/Icons/customer.png";
 import { useEffect } from "react";
-import { getProducts } from "../../../Redux/AllProductsSlice";
+import { getAllProducts } from "../../../Redux/ProductsSlice";
 import EmptyState from "../../Molecule/EmptyState/EmptyState";
 
 const Dashboard = () => {
   const user = useAppSelector((state) => state.auth.user);
   const color = useAppSelector((state) => state.color);
-  const products = useAppSelector((state) => state.allProducts.products);
+  const products = useAppSelector((state) => state.products.products);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(getProducts());
+    dispatch(getAllProducts());
   }, []);
 
   const notificationData1 = {

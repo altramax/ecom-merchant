@@ -1,23 +1,55 @@
 import WearHouseTableStyle from "./WearHouseTableStyle";
-// import { useState } from "react";
-import { useAppSelector } from "../../../Redux/Hooks";
+import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
 import EmptyState from "../../Molecule/EmptyState/EmptyState";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getAllProducts } from "../../../Redux/ProductsSlice";
+import ProductDetailsModal from "../ProductDetailsModal/ProductDetailsModal";
 
 const WearHouseTable = () => {
-  // const [openModal, setOpenModal] = useState<boolean>(false);
-  const products = useAppSelector((state) => state.allProducts.products);
+  const dispatch = useAppDispatch();
+  const products = useAppSelector((state) => state.products.products);
   const color = useAppSelector((state) => state.color);
-  // const [selectedItem, setSelectedItem] = useState<any>();
-  const navigate = useNavigate()
+  const [modal, setModal] = useState(false);
+  const [selectedId, setSelectedId] = useState("")
+  const navigate = useNavigate();
+  const entry = products?.map((items: any) => {
+    return items.items;
+  });
+
+  useEffect(() => {
+    dispatch(getAllProducts());
+  }, []);
 
   const navigateToProductDetails = () => {
-   navigate("/wearhouse/details")
+    openModal();
+    // navigate("/wearhouse/details");
+  };
+
+  const formateDate = (evt: any) => {
+    const options: object = { year: "numeric", month: "long", day: "numeric" };
+    const date = new Date(evt);
+    return date.toLocaleString("en-US", options);
+  };
+
+  const openModal = () => {
+    setModal(true);
+  };
+
+  const closeModal = () => {
+    setModal(false);
+  };
+
+  const renderModal = () => {
+    if (modal) {
+      return <ProductDetailsModal cancle={closeModal} id={selectedId}/>;
+    }
   };
 
   return (
     <WearHouseTableStyle>
       <>
+        {renderModal()}
         <div className="WearHouseTable__bar__container" id={color.mode}>
           <table>
             <thead>
@@ -28,63 +60,47 @@ const WearHouseTable = () => {
                 <th>Date Added</th>
               </tr>
             </thead>
-            {products !== null && (
-              <tbody>
-                {products.map((item: any) => {
-                  return (
-                    <tr
-                      key={item.id}
-                      onClick={() => {
-                        // setSelectedItem(item);
-                        navigateToProductDetails()
-                      }}
-                    >
-                      <td>Shoe</td>
-                      <td>5</td>
-                      <td>#3,000</td>
-                      <td> 4/9/24</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            )}
+            <tbody>
+              {entry?.map((item: any, i: any) => {
+                return (
+                  item.length > 0 &&
+                  item.map((product: any) => {
+                    console.log(product);
+                    return (
+                      <tr
+                        key={i}
+                        onClick={() => {
+                          navigateToProductDetails();
+                          setSelectedId(product.id)
+                        }}
+                      >
+                        <td>{product.name}</td>
+                        <td>{product.quantity}</td>
+                        {product.price && (
+                          <td>{`₦${Number(product.price).toLocaleString()}`}</td>
+                        )}
+                        {product.dateCreated && (
+                          <td>
+                            {formateDate(product.dateCreated.split(",")[0])}
+                          </td>
+                        )}
+                      </tr>
+                    );
+                  })
+                );
+              })}
+            </tbody>
           </table>
 
-          {products === null && (
-            <div>
-              <EmptyState
-                header="No Product Found"
-                text="Click add Products to start"
-              />
-            </div>
-          )}
+          {/* {products === null && <div>
+                  <EmptyState
+                    header="No Product Found"
+                    text="Click add Products to start"
+                  />
+                </div>
+              )} */}
         </div>
       </>
-
-      {/* <div className="topproduct__container" key={id}>
-        {openModal ? (
-          <ProductDetails
-            image={image}
-            cancle={() => handlerModal(false)}
-            price={price}
-            name={name}
-            description={description}
-            rating={rating}
-            category={category}
-          />
-        ) : (
-          <div className="topproduct__bar" onClick={() => handlerModal(true)}>
-            <div className="topproduct__info__group">
-              <img src={image} alt="product Image" className="product__img" />
-              <div>
-                <h4>{name}</h4>
-                <p>{id}</p>
-              </div>
-            </div>
-            <p>₦{price}</p>
-          </div>
-        )}
-      </div> */}
     </WearHouseTableStyle>
   );
 };

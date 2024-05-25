@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { LightModeColor } from "../../Atom/Colors/Colors";
+import { LightModeColor, DarkModeColor } from "../../Atom/Colors/Colors";
 
 const AddProductModalStyle = styled.div`
   form::-webkit-scrollbar {
@@ -14,11 +14,74 @@ const AddProductModalStyle = styled.div`
     .main__images {
       background-color: ${LightModeColor.backgroundVariant3};
     }
-    .selected {
-      background-color: #99f3fc;
 
-      color: ${LightModeColor.secondary};
+    .general__information,
+    .Price__information {
+      background-color: ${LightModeColor.background};
     }
+
+    input,
+    textarea {
+      background-color: ${LightModeColor.backgroundVariant3};
+    }
+
+    .deselected {
+      background-color: ${LightModeColor.backgroundVariant3};
+      input {
+        background-color: ${LightModeColor.backgroundVariant3};
+      }
+    }
+
+    .selected {
+      background-color: ${LightModeColor.buttonbackground};
+      color: ${LightModeColor.secondary};
+      input {
+        background-color: ${LightModeColor.buttonbackground};
+      }
+    }
+
+    .button {
+      background-color: ${LightModeColor.buttonbackground};
+    }
+  }
+
+  #dark {
+    background-color: ${DarkModeColor.backgroundVariant};
+    .images__container {
+      background-color: ${DarkModeColor.background};
+    }
+    .main__images {
+      background-color: ${DarkModeColor.backgroundVariant2};
+    }
+
+    .general__information,
+    .Price__information {
+      background-color: $DarkModeColorr.background;
+    }
+  }
+
+  input,
+  textarea {
+    background-color: ${DarkModeColor.backgroundVariant2};
+  }
+
+  .deselected {
+    background-color: ${DarkModeColor.backgroundVariant2};
+    input {
+      background-color: ${DarkModeColor.backgroundVariant2};
+    }
+  }
+
+  .selected {
+    background-color: ${DarkModeColor.primaryVariant};
+    color: ${DarkModeColor.secondary};
+    input {
+      background-color: ${DarkModeColor.primaryVariant};
+    }
+  }
+
+  .button {
+    background-color: ${DarkModeColor.primaryVariant};
   }
 
   form {
@@ -27,6 +90,19 @@ const AddProductModalStyle = styled.div`
     -ms-overflow-style: none;
     scrollbar-width: none;
     overflow: auto;
+  }
+
+  .loading__icon {
+    animation: swing 1s infinite;
+  }
+
+  @keyframes swing {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 
   .addProduct__header {
@@ -52,12 +128,16 @@ const AddProductModalStyle = styled.div`
       }
       input {
         padding: 10px 10px;
-        outline: none;
         border-radius: 8px;
+        font-size: 14px;
+        border: none;
       }
       textarea {
         resize: none;
         border-radius: 10px;
+        padding: 10px;
+        font-size: 14px;
+        border: none;
       }
     }
     .size__container {
@@ -84,7 +164,7 @@ const AddProductModalStyle = styled.div`
         cursor: pointer;
         border-radius: 5px;
         margin-top: 10px;
-        background-color: #fff;
+
         padding: 8px;
         font-size: 15px;
         text-align: center;
@@ -99,7 +179,6 @@ const AddProductModalStyle = styled.div`
           border: none;
           outline: none;
           cursor: pointer;
-
         }
       }
       .small_width {
@@ -135,7 +214,7 @@ const AddProductModalStyle = styled.div`
         max-height: 330px;
       }
     }
-    .sub__images {
+    .sub__images__container {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -149,26 +228,38 @@ const AddProductModalStyle = styled.div`
         display: flex;
         justify-content: center;
         align-items: center;
-        cursor: pointer;
       }
       .img {
         // padding: 5px;
         width: 100%;
         height: 80px;
         border-radius: 10px;
+        cursor: pointer;
+      }
+      .small_img {
+        width: 15px;
       }
       .add__icon__img {
         border: 1px dashed;
-        img {
+        .img {
           width: 30px;
         }
+        .loading__icon {
+          width: 50px;
+        }
+      }
+      .absolute {
+        position: absolute;
+        margin-bottom: 90px;
+        margin-left: 60px;
+        cursor: pointer;
       }
     }
     #paddingleft {
       padding-left: 30px;
     }
     .margin {
-      margin-top: 10px;
+      margin-top: 20px;
     }
   }
 
@@ -182,7 +273,6 @@ const AddProductModalStyle = styled.div`
   .Price__information {
     padding: 20px;
     border-radius: 10px;
-    background-color: #808080;
     margin-top: 30px;
     .image {
       width: 15px;
@@ -191,17 +281,15 @@ const AddProductModalStyle = styled.div`
     }
   }
 
-  .general__information {
-  }
-
   .button__group {
+    margin-top: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 
   .button {
-    margin-top: 30px;
+    margin-top: 10px;
     padding: 10px 20px;
     border-radius: 5px;
     border: none;
@@ -240,7 +328,6 @@ const AddProductModalStyle = styled.div`
     }
     .button__group {
       justify-content: end;
-
       gap: 40px;
     }
   }
