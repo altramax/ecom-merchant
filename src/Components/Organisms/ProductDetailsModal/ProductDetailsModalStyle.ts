@@ -147,6 +147,7 @@ const ProductDetailsModalStyle = styled.div`
 
   .main__images {
     width: 80%;
+    height: 420px;
     // border: 1px solid;
     border-radius: 10px;
     display: flex;
@@ -170,6 +171,7 @@ const ProductDetailsModalStyle = styled.div`
     .sub__image {
       border-radius: 10px;
       width: 70px;
+      height: 83.5px;
       display: flex;
       justify-content: center;
       align-items: center;

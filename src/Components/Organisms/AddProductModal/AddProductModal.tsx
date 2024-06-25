@@ -49,7 +49,7 @@ const AddProductModal = ({ close }: addProductType) => {
     name: "",
     description: "",
     price: 0,
-    quantity: 0,
+    availableQuantity: 0,
     discount: 0,
     nameOfDiscount: "",
     category: "",
@@ -172,7 +172,7 @@ const AddProductModal = ({ close }: addProductType) => {
       name: fields.name,
       description: fields.description,
       price: fields.price,
-      quantity: fields.quantity,
+      availableQuantity: fields.availableQuantity,
       discount: fields.discount,
       nameOfDiscount: fields.nameOfDiscount,
       category: `${
@@ -368,7 +368,7 @@ const AddProductModal = ({ close }: addProductType) => {
                   <label htmlFor="input">Quantity</label>
                   <input
                     type="number"
-                    name="quantity"
+                    name="availableQuantity"
                     onChange={(evt: any) => {
                       handlerChange(evt.target.name, evt.target.value);
                     }}

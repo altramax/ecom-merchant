@@ -28,6 +28,7 @@ const ProductsTemplate = () => {
 
       <div className="wearhouse__container" id={color.mode}>
         <div>
+          <h2 className="heading">WearHouse</h2>
           <div className="wearhouse__header">
             <div className="dashboard__header__boxes">
               <div className="box__sub__container">

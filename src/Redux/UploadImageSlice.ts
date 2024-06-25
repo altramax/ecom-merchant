@@ -63,7 +63,7 @@ export const uploadImage = createAsyncThunk(
         () => {
           getDownloadURL(uploadTask.snapshot.ref)
             .then((downloadURL) => {
-              console.log(downloadURL);
+              // console.log(downloadURL);
               resolve(downloadURL);
             })
             .catch(reject);

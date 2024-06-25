@@ -26,6 +26,9 @@ const WearHouseTemplateStyle = styled.div`
     // align-items: center;
     height: 100vh;
   }
+  .heading{
+    margin-bottom: 20px;
+  }
   .wearhouse__header {
     // width: 90%;
     // position: fixed;

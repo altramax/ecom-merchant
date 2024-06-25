@@ -20,11 +20,13 @@ const initialState: productsType = {
 
 export const getAllProducts = createAsyncThunk("getAllProducts", async () => {
   const querySnapshot = await getDocs(collection(db, "Products"));
-  // querySnapshot.forEach((doc) => {
-  //   // doc.data() is never undefined for query doc snapshots
-  //   console.log(doc.id, " => ", doc.data());
-  // });
-  return querySnapshot;
+
+  let results: any = [];
+
+  querySnapshot.forEach((doc) => {
+    results.push(doc.data());
+  });
+  return results;
 });
 
 export const getProductCategory = createAsyncThunk(
@@ -46,7 +48,6 @@ export const getProductCategory = createAsyncThunk(
 export const addProducts = createAsyncThunk(
   "addProducts",
   async (product: any) => {
-    console.log(product);
     const productRef = doc(db, "Products", `${product.category}`);
 
     return await updateDoc(productRef, {
@@ -73,8 +74,9 @@ export const ProductsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getAllProducts.fulfilled, (state, action) => {
       let results: any = [];
-      action.payload.forEach((doc) => {
-        results.push(doc.data());
+
+      action.payload?.forEach((products: any) => {
+        products?.items?.filter((item: any) => item && results.push(item));
       });
       state.products = results;
     });
@@ -91,7 +93,6 @@ export const ProductsSlice = createSlice({
     });
 
     builder.addCase(addProducts.fulfilled, (state, action) => {
-      console.log("enter", action);
       state.products = action.payload;
     });
     builder.addCase(addProducts.rejected, (state) => {

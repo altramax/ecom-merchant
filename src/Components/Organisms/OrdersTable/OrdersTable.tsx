@@ -1,4 +1,4 @@
-import WearHouseTableStyle from "./WearHouseTableStyle";
+import OrdersTableStyle from "./OrdersTableStyles";
 import { useAppDispatch, useAppSelector } from "../../../Redux/Hooks";
 import EmptyState from "../../Molecule/EmptyState/EmptyState";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { getAllProducts } from "../../../Redux/ProductsSlice";
 import ProductDetailsModal from "../ProductDetailsModal/ProductDetailsModal";
 
-const WearHouseTable = () => {
+const OrdersTable = () => {
   const dispatch = useAppDispatch();
   const products = useAppSelector((state) => state.products.products);
   const color = useAppSelector((state) => state.color);
@@ -43,10 +43,10 @@ const WearHouseTable = () => {
   };
 
   return (
-    <WearHouseTableStyle>
+    <OrdersTableStyle>
       <>
         {renderModal()}
-        <div className="WearHouseTable__bar__container" id={color.mode}>
+        <div className="ordersTable__bar__container" id={color.mode}>
           <table>
             <thead>
               <tr>
@@ -91,8 +91,8 @@ const WearHouseTable = () => {
             ))}
         </div>
       </>
-    </WearHouseTableStyle>
+    </OrdersTableStyle>
   );
 };
 
-export default WearHouseTable;
+export default OrdersTable;
